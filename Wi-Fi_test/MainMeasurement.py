@@ -8,13 +8,12 @@
 ***
 *******************************************************************
 *** Revision :
-*** V1.0 : 池戸陸, 2022.06.02
+*** V1.1 : 池戸陸, 2022.07.01
 """
 
 import urllib.request
 import time
 #import ManagementDownload
-
 
 """
 *******************************************************************
@@ -42,7 +41,7 @@ class MainMeasurement:
     *******************************************************************
     """
 
-    def InstantSpeedMeasurement(FileSize,MeasurementTime):
+    def InstantSpeedMeasurement(FileSize, MeasurementTime):
         return  FileSize / MeasurementTime
 
     """
@@ -56,52 +55,87 @@ class MainMeasurement:
     *******************************************************************
     """
 
-    def AverageSpeedMeasurement(InstantSpeed,FileGetNum):
+    def AverageSpeedMeasurement(InstantSpeed, FileGetNum):
         return sum(InstantSpeed) / FileGetNum
+
+    """
+    *******************************************************************
+    ***  Func Name		    : StabilityEvaluation
+    ***  Designer		    : 池戸 陸
+    ***  Date		        : 2022.07.01
+    ***  Function			: 安定性の評価値を定める
+    ***  Return      	    : 評価値
+    ***
+    *******************************************************************
+    """
+    def StabilityEvaluation(ev, stability):
+        k = 0
+        if(ev <= 4):
+            k = 1
+        elif(ev <= 8):
+            k = 2
+        elif(ev <= 12):
+            k = 3
+        elif(ev <= 16):
+            k = 4
+        elif(ev <= 20):
+            k = 5
+        return k
 
     """
     *******************************************************************
     ***  Func Name		    : StabilityCalculation
     ***  Designer		    : 池戸 陸
-    ***  Date		        : 2022.06.12
+    ***  Date		        : 2022.07.01
     ***  Function			: 安定性を計算する
     ***  Return      	    : 安定性
     ***
     *******************************************************************
-    """
+    """ 
 
-    
-    def StabilityCalculation(InstantSpeed,AverageSpeed):
-        #評価値を計算する
-        
-
-        stability = 0
+    def StabilityCalculation(InstantSpeed, FileGetNum):
+        #stability[0] = メール,LINE , [1] = ネット検索 , [2] = SNS , [3] = 動画視聴 , [4] = オンラインゲーム
+        stability = [0,0,0,0,0]
+        mail_ev = 0
+        net_ev = 0
+        sns_ev = 0
+        movie_ev = 0
+        game_ev = 0
+        for i in range(FileGetNum):
+            if InstantSpeed[i] >= 0.125:
+                mail_ev += 1
+                if InstantSpeed[i] >= 1:
+                    mail_ev += 1
+                    net_ev += 1
+                    if InstantSpeed[i] >= 3:
+                        sns_ev += 1
+                        if InstantSpeed[i] >= 5:
+                            movie_ev += 1
+                            if InstantSpeed[i] >= 10:
+                                net_ev += 1
+                                sns_ev += 1
+                                if InstantSpeed[i] >= 30:
+                                    game_ev += 1
+                                    movie_ev += 1
+                                    if InstantSpeed[i] >= 100:
+                                        game_ev += 1
+        stability[0] = MainMeasurement.StabilityEvaluation(mail_ev,stability[0])
+        stability[1] = MainMeasurement.StabilityEvaluation(net_ev,stability[1])
+        stability[2] = MainMeasurement.StabilityEvaluation(sns_ev,stability[2])
+        stability[3] = MainMeasurement.StabilityEvaluation(movie_ev,stability[3])
+        stability[4] = MainMeasurement.StabilityEvaluation(game_ev,stability[4])
         return stability
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    """
+    *******************************************************************
+    ***  Func Name		    : Measurement
+    ***  Designer		    : 池戸 陸
+    ***  Date		        : 2022.07.01
+    ***  Function			: メイン処理を行う
+    ***  Return      	    : 瞬間速度、平均速度、安定性
+    ***
+    *******************************************************************
+    """ 
 
     def Measurement():
         FileSize = 7 * 8 #単位はMbps
@@ -109,21 +143,20 @@ class MainMeasurement:
         InstantSpeed = []
 
         #ManagementDownload()
+        url = "https://al86-hs.github.io/DownloadTest/test7M" #単体テスト用
+        data = urllib.request.urlopen(url).read() #単体テスト用
         for i in range(FileGetNum):
             #if ManagementDownload() == 1:
                 #return -1
-            url = "https://al86-hs.github.io/DownloadTest/test7M"
             InstantTime = time.time()
-            data = urllib.request.urlopen(url).read()
+            data = urllib.request.urlopen(url).read() #単体テスト用
             MeasurementTime = time.time() - InstantTime
             InstantSpeed.append(MainMeasurement.InstantSpeedMeasurement(FileSize,MeasurementTime))
 
         AverageSpeed = MainMeasurement.AverageSpeedMeasurement(InstantSpeed,FileGetNum)
-        #Stability = StabilityCalculation(InstantSpeed,AverageSpeed)
-        print(InstantSpeed,end = "Mbps\n")
-        print(AverageSpeed,end = "Mbps\n")
+        Stability = MainMeasurement.StabilityCalculation(InstantSpeed,FileGetNum)
+        print(InstantSpeed,end = "Mbps\n") #単体テスト用
+        print(AverageSpeed,end = "Mbps\n") #単体テスト用
+        print(Stability) #単体テスト用
 
-       #return InstantSpeed,AverageSpeed,Stability
-
-MainMeasurement.Measurement()
-
+        return InstantSpeed,AverageSpeed,Stability
