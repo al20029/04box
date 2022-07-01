@@ -11,9 +11,8 @@
 *** V1.1 : 池戸陸, 2022.07.01
 """
 
-import urllib.request
 import time
-#import ManagementDownload
+from ManagementDownload import *
 
 """
 *******************************************************************
@@ -142,21 +141,23 @@ class MainMeasurement:
         FileGetNum = 10
         InstantSpeed = []
 
-        #ManagementDownload()
-        url = "https://al86-hs.github.io/DownloadTest/test7M" #単体テスト用
-        data = urllib.request.urlopen(url).read() #単体テスト用
+        ManagementDownload.Donwload()
         for i in range(FileGetNum):
-            #if ManagementDownload() == 1:
-                #return -1
             InstantTime = time.time()
-            data = urllib.request.urlopen(url).read() #単体テスト用
+            ManagementDownload.Donwload()
+            if ManagementDownload.Donwload() == 2: #1がtrueで2がfalse
+                return -1
             MeasurementTime = time.time() - InstantTime
             InstantSpeed.append(MainMeasurement.InstantSpeedMeasurement(FileSize,MeasurementTime))
 
         AverageSpeed = MainMeasurement.AverageSpeedMeasurement(InstantSpeed,FileGetNum)
         Stability = MainMeasurement.StabilityCalculation(InstantSpeed,FileGetNum)
-        print(InstantSpeed,end = "Mbps\n") #単体テスト用
-        print(AverageSpeed,end = "Mbps\n") #単体テスト用
-        print(Stability) #単体テスト用
+        print(InstantSpeed,end = "Mbps\n") #テスト用後で消す
+        print(AverageSpeed,end = "Mbps\n") #テスト用後で消す
+        print(Stability) #テスト用後で消す
 
         return InstantSpeed,AverageSpeed,Stability
+#InstantSpeedが10個の瞬間速度のリスト
+#AverageSpeedが平均速度
+#Stabilityがメール、ネット、sns、動画視聴、オンラインゲームの5項目を1~5段階に数値化したリスト
+#ManagementDownloadとの結合テスト完了
