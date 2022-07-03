@@ -52,7 +52,7 @@ class DisplayStartWindow:
         chk1 = tkinter.Label(frm,text = 'Wi-Fi速度計測システム', font = ('MSゴシック',35))
         chk1.place(x = 15, y = 85)
         bln = tkinter.BooleanVar()
-        bln.set(Data.Data.checkbox)
+        #bln.set(Data.Data.checkbox)
         if bln.get():
             print('チェックされています')
         else:

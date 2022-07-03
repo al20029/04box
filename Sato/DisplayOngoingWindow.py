@@ -3,14 +3,14 @@ import tkinter
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import numpy as np
-from Data import Data 
+#from Data import Data 
 from UpdateGraph import UpdateGraph
 import time
 i = 1
 y = []
 count = 0
 class DisplayOngoingWindow:
-    def OngoingWindow():
+    def OngoingWindow(Data):
         # click時のイベント
         def btn_click():
             nonlocal Stop
