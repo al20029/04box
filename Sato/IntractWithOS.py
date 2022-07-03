@@ -31,7 +31,7 @@ class IntractWithOS:
         # while 1:
         #利用可能なネットワークの検索
         subprocess.run('chcp 437', shell=True)
-        
+
         with open('out_network.txt', 'w') as nfp:
             subprocess.run('netsh wlan show network', encoding='utf-8', stdout=nfp, shell=True)
 
