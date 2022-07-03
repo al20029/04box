@@ -53,7 +53,7 @@ class IntractWithOS:
         subprocess.run('del out_profiles.txt', shell=True)
 
         for s in Result_profiles:
-            if 'All User Profile' in s:
+            if '' in s:
                 List_profiles.append(s[27:])
 
         #接続可能なネットワーク検索
@@ -71,7 +71,10 @@ class IntractWithOS:
         #     if get == True:
         #         IntractWithOS.GetWi_Fi()
         #     tki.destroy()
-                
+        
+        print(List_network)
+        print(CanConnectWiFiName)
+        print(List_profiles)
         return CanConnectWiFiName
 
     """
@@ -92,3 +95,5 @@ class IntractWithOS:
         while Result_change == None:
             Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
         # return Result_change
+
+    GetWiFi()
