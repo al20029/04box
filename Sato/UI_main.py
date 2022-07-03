@@ -38,7 +38,7 @@ import Data
 
 class UIMainProcess:
     def Always():
-        get = DisplayStartWindow.StartWindow(IntractWithOS.GetWiFi())
+        get = DisplayStartWindow.StartWindow(InteractWithOS.GetWiFi())
         if get == True:
             MainMeasurement.Measurement()
             get = DisplayOngoingWindow.OngoingWindow()
@@ -47,7 +47,7 @@ class UIMainProcess:
 
 
     def Regular():
-        for s in IntractWithOS.GetWiFi():
+        for s in InteractWithOS.GetWiFi():
             print(s)
         get = DisplayRegularStartWindow.RegularStartWindow()
         # get = True
