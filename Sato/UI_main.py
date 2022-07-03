@@ -33,13 +33,17 @@ class UIMainProcess:
         list = []
         while len(list) == 0:
             list = InteractWithOS.GetWiFi()
+        print(1)
         get = DisplayStartWindow.StartWindow(list)
+        print(2)
         if get == True:
             a = Data()
             MainMeasurement.Measurement(a)
+            print(3)
             get = DisplayOngoingWindow.OngoingWindow(a)
-            while DisplayFinishWindow.FinishWindow(list) :
-                get = DisplayOngoingWindow.OngoingWindow()
+            print(4)
+            while DisplayFinishWindow.FinishWindow(list,a) :
+                get = DisplayOngoingWindow.OngoingWindow(a)
 
 
 

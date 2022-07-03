@@ -20,7 +20,7 @@ import numpy as np
 from ToolTip import *
 
 class DisplayFinishWindow:
-    def FinishWindow(CanConnectWiFiname):
+    def FinishWindow(CanConnectWiFiname,a):
         # クリック時のイベント
         def btn_click():
             InteractWithOS.ChangeWiFi(combobox.get())
@@ -48,10 +48,10 @@ class DisplayFinishWindow:
         # グラフ表示
         fig = plt.Figure() #描画の用意
         x=np.arange(0,10,1) #x軸のデータ
-        y=x
+        y=a.ListInstantSpeed
         ax = fig.add_subplot(111)
         ax.set_ylabel("speed / Mbps")#y軸のラベル
-        ax.set_ylim(0,10)
+        ax.set_ylim(0,a.MaxSpeed*1.1)
         ax.set_xlabel("x / mm")#x軸のラベル
         ax.plot(x, y) #データの描画
         canvas = FigureCanvasTkAgg(fig, master=frm)
