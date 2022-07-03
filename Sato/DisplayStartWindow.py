@@ -12,9 +12,13 @@
 """
 
 from ast import Break
+import subprocess
+import time
+from InteractWithOS import InteractWithOS
 import tkinter
 import tkinter.ttk as ttk
 from ToolTip import *
+import Data
 
 """
 *******************************************************************
@@ -30,6 +34,14 @@ from ToolTip import *
 class DisplayStartWindow:
     def StartWindow(CanConnectWiFiname):
         def btn_click():
+            InteractWithOS.ChangeWiFi(combobox.get())
+
+            #WiFi変更が完了するまで待機 
+            # Result_change = str()
+            # while Result_change == None:
+            #     Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
+            time.sleep(1)
+
             nonlocal Start
             Start = True
             frm.destroy()
@@ -40,7 +52,11 @@ class DisplayStartWindow:
         chk1 = tkinter.Label(frm,text = 'Wi-Fi速度計測システム', font = ('MSゴシック',35))
         chk1.place(x = 15, y = 85)
         bln = tkinter.BooleanVar()
-        bln.set(True)
+        bln.set(Data.Data.checkbox)
+        if bln.get():
+            print('チェックされています')
+        else:
+            print('チェックされていません')
         chk2 = tkinter.Checkbutton(frm, variable = bln, text = '定期計測を利用する', font = ('MSゴシック',10))
         chk2.place(x = 270, y = 30)
         chk3 = tkinter.Label(frm, text = '?', font = ('MSゴシック',10))
@@ -52,6 +68,7 @@ class DisplayStartWindow:
         list = CanConnectWiFiname
 
         combobox = ttk.Combobox(frm, height=3, width = 40, values = list, state = "readonly")
+        combobox.current(0)
         combobox.place(x = 50, y = 200)
 
         btn = tkinter.Button(frm, text='計測開始',width = 18,height = 2, command = btn_click, bg='#808080', font = ('MSゴシック', 10))

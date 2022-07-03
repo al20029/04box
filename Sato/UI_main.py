@@ -9,10 +9,6 @@
 ******************************************************
 """
 
-# import window
-# import window2
-# import window3
-# from typing import List
 from DisplayStartWindow import DisplayStartWindow
 from DisplayFinishWindow import DisplayFinishWindow
 from DisplayOngoingWindow import DisplayOngoingWindow
@@ -20,11 +16,7 @@ from DisplayRegularStartWindow import DisplayRegularStartWindow
 from DisplayRegularFinishWindow import DisplayRegularFinishWindow
 from InteractWithOS import InteractWithOS
 from MainMeasurement import MainMeasurement
-import Data
 
-# window.test()
-# window2.test()
-# window3.test()
 
 """
 ******************************************************
@@ -38,12 +30,16 @@ import Data
 
 class UIMainProcess:
     def Always():
-        get = DisplayStartWindow.StartWindow(InteractWithOS.GetWiFi())
+        list = []
+        while len(list) == 0:
+            list = InteractWithOS.GetWiFi()
+        get = DisplayStartWindow.StartWindow(list)
         if get == True:
             MainMeasurement.Measurement()
             get = DisplayOngoingWindow.OngoingWindow()
-        #if get == False:
-        DisplayFinishWindow.FinishWindow()
+            while DisplayFinishWindow.FinishWindow(list) :
+                get = DisplayOngoingWindow.OngoingWindow()
+
 
 
     def Regular():

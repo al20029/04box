@@ -10,21 +10,27 @@
 """
 
 import tkinter
-from tkinter import messagebox
-from tracemalloc import start
+import tkinter.ttk as ttk
+import subprocess
+import time
+from InteractWithOS import InteractWithOS
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import numpy as np
+from ToolTip import *
 
 class DisplayFinishWindow:
-
-    def FinishWindow():
+    def FinishWindow(CanConnectWiFiname):
         # クリック時のイベント
         def btn_click():
-            # messagebox.showinfo("メッセージ","計測開始します")
-            # nonlocal btn
-            # btn = True
-            # return btn
+            InteractWithOS.ChangeWiFi(combobox.get())
+            
+            #WiFi変更が完了するまで待機 
+            # Result_change = str()
+            # while Result_change == None:
+            #     Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
+            time.sleep(1)
+
             nonlocal Start
             Start = True
             frm.destroy()
@@ -53,8 +59,12 @@ class DisplayFinishWindow:
         canvas.get_tk_widget().place(x=10,y=62,width=360,height=230)
 
         # Wi-Fi名プルタブ配置
-        pulltub = tkinter.Label(text="(Wi-Fi名)", font=("MSゴシック", "13"))
-        pulltub.place(x=170, y=305)
+        list = CanConnectWiFiname
+        combobox = ttk.Combobox(frm, height=3, width = 30, values = list, state = "readonly")
+        combobox.current(0)
+        combobox.place(x = 140, y = 305)
+        # pulltub = tkinter.Label(text="(Wi-Fi名)", font=("MSゴシック", "13"))
+        # pulltub.place(x=170, y=305)
 
         # ボタンの作成
         btn = tkinter.Button(frm, text='計測開始', width = 10, height = 2, command = btn_click, font=("MSゴシック", "10"))
