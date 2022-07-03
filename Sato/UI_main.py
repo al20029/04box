@@ -18,7 +18,7 @@ from DisplayFinishWindow import DisplayFinishWindow
 from DisplayOngoingWindow import DisplayOngoingWindow
 from DisplayRegularStartWindow import DisplayRegularStartWindow
 from DisplayRegularFinishWindow import DisplayRegularFinishWindow
-from IntractWithOS import IntractWithOS
+from InteractWithOS import IntractWithOS
 from MainMeasurement import MainMeasurement
 import Data
 
