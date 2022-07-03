@@ -9,7 +9,6 @@
 ******************************************************
 """
 
-from itertools import count
 import tkinter
 from tkinter import messagebox
 from ManagementDownload import ManagementDownload
@@ -39,7 +38,8 @@ class DisplayRegularStartWindow:
             if count > 0:
                 tki.after(1000, Repeat_Download)
             else:
-                tki.destroy()
+                # tki.destroy()
+                tki.quit()
 
         # click時のイベント
         def btn_click():
@@ -47,7 +47,6 @@ class DisplayRegularStartWindow:
             Y_N = messagebox.askyesno("確認中", "停止しますか")
             if Y_N == True:   
                 Stop = True
-                messagebox.showinfo("メッセージ", "計測を終了しました")
                 # tki.quit()
                 tki.destroy()
 

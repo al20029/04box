@@ -9,20 +9,12 @@
 ******************************************************
 """
 
-# import window
-# import window2
-# import window3
-# from typing import List
 from DisplayStartWindow import DisplayStartWindow
 from DisplayFinishWindow import DisplayFinishWindow
 from DisplayOngoingWindow import DisplayOngoingWindow
 from DisplayRegularStartWindow import DisplayRegularStartWindow
 from DisplayRegularFinishWindow import DisplayRegularFinishWindow
-from IntractWithOS import IntractWithOS
-
-# window.test()
-# window2.test()
-# window3.test()
+from InteractWithOS import InteractWithOS
 
 """
 ******************************************************
@@ -36,7 +28,7 @@ from IntractWithOS import IntractWithOS
 
 class UIMainProcess:
     def Always():
-        get = DisplayStartWindow.StartWindow(IntractWithOS.GetWiFi())
+        get = DisplayStartWindow.StartWindow(InteractWithOS.GetWiFi())
         if get == True:
             get = DisplayOngoingWindow.OngoingWindow()
         if get == False:
@@ -44,14 +36,9 @@ class UIMainProcess:
 
 
     def Regular():
-        for s in IntractWithOS.GetWiFi():
-            print(s)
+        InteractWithOS.GetWiFi()
         get = DisplayRegularStartWindow.RegularStartWindow()
-        # get = True
+        # 
         name = "SRAS2G"
         if get == False:
             DisplayRegularFinishWindow.RegularFinishWindow(name)
-
-        
-UIMainProcess.Always()
-# UIMainProcess.Regular()
