@@ -10,8 +10,8 @@
 """
 
 import subprocess
-import tkinter
-from tkinter import messagebox
+# import tkinter
+# from tkinter import messagebox
 
 class IntractWithOS:
     """
@@ -30,6 +30,8 @@ class IntractWithOS:
 
         # while 1:
         #利用可能なネットワークの検索
+        subprocess.run('chcp 437', shell=True)
+        
         with open('out_network.txt', 'w') as nfp:
             subprocess.run('netsh wlan show network', encoding='utf-8', stdout=nfp, shell=True)
 
