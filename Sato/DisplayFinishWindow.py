@@ -21,11 +21,15 @@ class DisplayFinishWindow:
     def FinishWindow():
         # クリック時のイベント
         def btn_click():
-            messagebox.showinfo("メッセージ","計測開始します")
-            nonlocal btn
-            btn = True
-            return btn
+            # messagebox.showinfo("メッセージ","計測開始します")
+            # nonlocal btn
+            # btn = True
+            # return btn
+            nonlocal Start
+            Start = True
+            frm.destroy()
 
+        Start = False
         # 画面作成
         frm = tkinter.Tk()
         frm.geometry('500x350') #画面サイズ
@@ -58,4 +62,6 @@ class DisplayFinishWindow:
 
         # 画面をそのまま表示
         frm.mainloop()
-    FinishWindow()
+
+        return Start
+    # FinishWindow()

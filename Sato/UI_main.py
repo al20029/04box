@@ -35,16 +35,23 @@ from IntractWithOS import IntractWithOS
 """
 
 class UIMainProcess:
-    DisplayStartWindow()
-    DisplayOngoingWindow()
-    DisplayFinishWindow()
-    for s in IntractWithOS.GetWiFi():
-        print(s)
-    get = DisplayRegularStartWindow.RegularStartWindow()
-    # get = True
-    name = "SRAS2G"
-    if get == False:
-        DisplayRegularFinishWindow = DisplayRegularFinishWindow.RegularFinishWindow(name)
+    def Always():
+        get = DisplayStartWindow.StartWindow(IntractWithOS.GetWiFi())
+        if get == True:
+            get = DisplayOngoingWindow.OngoingWindow()
+        if get == False:
+            DisplayFinishWindow.FinishWindow
+
+
+    def Regular():
+        for s in IntractWithOS.GetWiFi():
+            print(s)
+        get = DisplayRegularStartWindow.RegularStartWindow()
+        # get = True
+        name = "SRAS2G"
+        if get == False:
+            DisplayRegularFinishWindow.RegularFinishWindow(name)
 
         
-maintest = UIMainProcess()
+UIMainProcess.Always()
+# UIMainProcess.Regular()
