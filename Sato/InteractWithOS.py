@@ -13,7 +13,7 @@ import subprocess
 # import tkinter
 # from tkinter import messagebox
 
-class IntractWithOS:
+class InteractWithOS:
     """
     ******************************************************
     *** File Name       :GetWi_fi
@@ -72,9 +72,6 @@ class IntractWithOS:
         #         IntractWithOS.GetWi_Fi()
         #     tki.destroy()
         
-        print(List_network)
-        print(CanConnectWiFiName)
-        print(List_profiles)
         return CanConnectWiFiName
 
     """

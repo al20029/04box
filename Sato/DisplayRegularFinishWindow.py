@@ -11,7 +11,7 @@
 
 import tkinter
 from tkinter import messagebox
-from IntractWithOS import IntractWithOS
+from InteractWithOS import InteractWithOS
 
 """
 ******************************************************
@@ -28,7 +28,7 @@ class DisplayRegularFinishWindow:
         # click時のイベント
         def btn_click():
             # messagebox.askyesno("wi-fi変更中", "停止しますか")
-            IntractWithOS.ChangeWiFi(BestWiFiName)
+            InteractWithOS.ChangeWiFi(BestWiFiName)
             messagebox.showinfo("メッセージ", "Wi-Fi変更を終了しました")
             tki.quit()
 
