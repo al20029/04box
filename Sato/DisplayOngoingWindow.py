@@ -5,6 +5,7 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationTool
 import numpy as np
 #from Data import Data 
 from UpdateGraph import UpdateGraph
+from MainMeasurement import MainMeasurement
 import time
 i = 1
 y = []
@@ -18,6 +19,9 @@ class DisplayOngoingWindow:
             #messagebox.showinfo("メッセージ", "ボタンがクリックされました")
             tki.destroy()
             
+        # 追加
+        MainMeasurement.Measurement(Data)
+
         Stop = False
 
         # 画面作成
@@ -30,7 +34,9 @@ class DisplayOngoingWindow:
         tki.title('計測中') # 画面タイトルの設定
         fig = plt.Figure() #描画の用意
         global y
-        x=np.arange(0,i,1) #x軸のデータ
+        x=np.arange(0,i,1, dtype=int) #x軸のデータ
+
+        
         y=np.append(y,Data.ListInstantSpeed[i-1])
 
         ax = fig.add_subplot(111)
@@ -63,6 +69,10 @@ class DisplayOngoingWindow:
             i+=1
             #定期的に行いたい処理
             if count<10:
+                
+                # 追加
+                MainMeasurement.Measurement(Data)
+                
                 fig = plt.Figure() #描画の用意
                 
                 x=np.arange(0,i,1)

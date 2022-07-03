@@ -23,7 +23,7 @@ class DisplayFinishWindow:
     def FinishWindow(CanConnectWiFiname,a):
         # クリック時のイベント
         def btn_click():
-            InteractWithOS.ChangeWiFi(combobox.get())
+            # InteractWithOS.ChangeWiFi(combobox.get())
             
             #WiFi変更が完了するまで待機 
             # Result_change = str()

@@ -138,8 +138,11 @@ class MainMeasurement:
     """ 
 
     def Measurement(data):
-        FileSize = 7 * 8 #単位はMbps
-        FileGetNum = 10
+        FileSize = 3 * 8 #単位はMbps
+
+        # FileGetNum = 10
+        FileGetNum = 1
+        
         InstantSpeed = []
 
         ManagementDownload.Donwload()
