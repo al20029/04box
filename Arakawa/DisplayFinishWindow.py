@@ -10,22 +10,32 @@
 """
 
 import tkinter
-from tkinter import messagebox
-from tracemalloc import start
+import tkinter.ttk as ttk
+import subprocess
+import time
+from InteractWithOS import InteractWithOS
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import numpy as np
+from ToolTip import *
 
 class DisplayFinishWindow:
-
-    def FinishWindow():
+    def FinishWindow(CanConnectWiFiname,a):
         # クリック時のイベント
         def btn_click():
-            messagebox.showinfo("メッセージ","計測開始します")
-            nonlocal btn
-            btn = True
-            return btn
+            InteractWithOS.ChangeWiFi(combobox.get())
+            
+            #WiFi変更が完了するまで待機 
+            # Result_change = str()
+            # while Result_change == None:
+            #     Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
+            time.sleep(1)
 
+            nonlocal Start
+            Start = True
+            frm.destroy()
+
+        Start = False
         # 画面作成
         frm = tkinter.Tk()
         frm.geometry('500x350') #画面サイズ
@@ -38,10 +48,10 @@ class DisplayFinishWindow:
         # グラフ表示
         fig = plt.Figure() #描画の用意
         x=np.arange(0,10,1) #x軸のデータ
-        y=x
+        y=a.ListInstantSpeed
         ax = fig.add_subplot(111)
         ax.set_ylabel("speed / Mbps")#y軸のラベル
-        ax.set_ylim(0,10)
+        ax.set_ylim(0,a.MaxSpeed*1.1)
         ax.set_xlabel("x / mm")#x軸のラベル
         ax.plot(x, y) #データの描画
         canvas = FigureCanvasTkAgg(fig, master=frm)
@@ -49,8 +59,12 @@ class DisplayFinishWindow:
         canvas.get_tk_widget().place(x=10,y=62,width=360,height=230)
 
         # Wi-Fi名プルタブ配置
-        pulltub = tkinter.Label(text="(Wi-Fi名)", font=("MSゴシック", "13"))
-        pulltub.place(x=170, y=305)
+        list = CanConnectWiFiname
+        combobox = ttk.Combobox(frm, height=3, width = 30, values = list, state = "readonly")
+        combobox.current(0)
+        combobox.place(x = 140, y = 305)
+        # pulltub = tkinter.Label(text="(Wi-Fi名)", font=("MSゴシック", "13"))
+        # pulltub.place(x=170, y=305)
 
         # ボタンの作成
         btn = tkinter.Button(frm, text='計測開始', width = 10, height = 2, command = btn_click, font=("MSゴシック", "10"))
@@ -58,4 +72,6 @@ class DisplayFinishWindow:
 
         # 画面をそのまま表示
         frm.mainloop()
-    FinishWindow()
+
+        return Start
+    # FinishWindow()
