@@ -53,7 +53,7 @@ class IntractWithOS:
         subprocess.run('del out_profiles.txt', shell=True)
 
         for s in Result_profiles:
-            if '' in s:
+            if 'All User Profile' in s:
                 List_profiles.append(s[27:])
 
         #接続可能なネットワーク検索

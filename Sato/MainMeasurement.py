@@ -13,7 +13,7 @@
 
 import time
 from ManagementDownload import *
-
+from UpdateGraph import UpdateGraph
 """
 *******************************************************************
 ***  Class Name		: MainMeasurement
@@ -149,6 +149,7 @@ class MainMeasurement:
                 return -1
             MeasurementTime = time.time() - InstantTime
             InstantSpeed.append(MainMeasurement.InstantSpeedMeasurement(FileSize,MeasurementTime))
+            UpdateGraph.UpdateGraph(InstantSpeed[-1])
 
         AverageSpeed = MainMeasurement.AverageSpeedMeasurement(InstantSpeed,FileGetNum)
         Stability = MainMeasurement.StabilityCalculation(InstantSpeed,FileGetNum)
