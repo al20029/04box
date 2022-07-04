@@ -31,6 +31,7 @@ from Data import Data
 class UIMainProcess:
     def Always():
         list = []
+        DataList =[]
         while len(list) == 0:
             list = InteractWithOS.GetWiFi()
         print(1)
@@ -38,18 +39,25 @@ class UIMainProcess:
         print(2)
         if get == True:
             a = Data()
-
-            # MainMeasurement.Measurement(a)
-            
+            DataList.append(a)
             print(3)
-            DisplayOngoingWindow.OngoingWindow(a)
+            get = DisplayOngoingWindow.OngoingWindow(a)
             print(4)
-            get = DisplayFinishWindow.FinishWindow(list,a)
-            if get:
-                b = Data()
-                DisplayOngoingWindow.OngoingWindow(b)
-                DisplayFinishWindow.FinishWindow(list,b)
-
+            print("a:",DataList[0].ListInstantSpeed)
+            if get == True:
+                print(5)
+                get = DisplayFinishWindow.FinishWindow(list,DataList)
+                print(6)
+                while(get):
+                    print(7)
+                    b = Data()
+                    DataList.append(b)
+                    get = DisplayOngoingWindow.OngoingWindow(b)
+                    print(8)
+                    if get == True:
+                        print(9)
+                        get = DisplayFinishWindow.FinishWindow(list,DataList)
+                        print(10)
     def Regular():
         for s in InteractWithOS.GetWiFi():
             print(s)

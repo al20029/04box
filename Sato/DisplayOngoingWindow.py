@@ -99,7 +99,8 @@ class DisplayOngoingWindow:
             else:
                 time.sleep(2)
                 tki.destroy()
-                return True
+                nonlocal Stop
+                Stop = True
         tki.after(1000,repeat_func)
         tki.mainloop()
         return Stop

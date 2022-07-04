@@ -20,7 +20,7 @@ import numpy as np
 from ToolTip import *
 
 class DisplayFinishWindow:
-    def FinishWindow(CanConnectWiFiname,a):
+    def FinishWindow(CanConnectWiFiname,DataList):
         # クリック時のイベント
         def btn_click():
             # InteractWithOS.ChangeWiFi(combobox.get())
@@ -38,7 +38,7 @@ class DisplayFinishWindow:
         Start = False
         # 画面作成
         frm = tkinter.Tk()
-        frm.geometry('500x350') #画面サイズ
+        frm.geometry('800x500') #画面サイズ
         frm.title()
 
         # 題名表示
@@ -47,28 +47,33 @@ class DisplayFinishWindow:
 
         # グラフ表示
         fig = plt.Figure() #描画の用意
-        x=np.arange(0,len(a.ListInstantSpeed),1) #x軸のデータ
-        y=a.ListInstantSpeed
+       
         ax = fig.add_subplot(111)
         ax.set_ylabel("speed / Mbps")#y軸のラベル
-        ax.set_ylim(0,a.MaxSpeed*1.1)
-        ax.set_xlabel("x / mm")#x軸のラベル
-        ax.plot(x, y) #データの描画
+        ymax = 0
+        for data in DataList:
+            x=np.arange(0,len(data.ListInstantSpeed),1) #x軸のデータ
+            y=data.ListInstantSpeed
+            if(ymax < data.MaxSpeed):
+                ymax = data.MaxSpeed
+                ax.set_ylim(0,data.MaxSpeed*1.1)    
+            ax.set_xlabel("x / mm")#x軸のラベル
+            ax.plot(x, y) #データの描画
         canvas = FigureCanvasTkAgg(fig, master=frm)
         canvas.draw()
-        canvas.get_tk_widget().place(x=10,y=62,width=360,height=230)
+        canvas.get_tk_widget().place(x=10,y=62,width=660,height=380)
 
         # Wi-Fi名プルタブ配置
         list = CanConnectWiFiname
         combobox = ttk.Combobox(frm, height=3, width = 30, values = list, state = "readonly")
         combobox.current(0)
-        combobox.place(x = 140, y = 305)
+        combobox.place(x = 440, y = 455)
         # pulltub = tkinter.Label(text="(Wi-Fi名)", font=("MSゴシック", "13"))
         # pulltub.place(x=170, y=305)
 
         # ボタンの作成
         btn = tkinter.Button(frm, text='計測開始', width = 10, height = 2, command = btn_click, font=("MSゴシック", "10"))
-        btn.place(x=370, y=300) #ボタンを配置する位置の設定
+        btn.place(x=670, y=450) #ボタンを配置する位置の設定
 
         # 画面をそのまま表示
         frm.mainloop()

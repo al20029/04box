@@ -1,15 +1,9 @@
 from Data import Data
-i = 3
-class test:
-    i = 2
-    def test1():
-        i = 0
-        print(i)
-       
-        def test2():
-           global i 
-           print(i)
-
-        test2()
-        print(i)
-test.test1()
+DataList = []
+a = Data()
+DataList.append(a)
+for i in range(10):
+    a.ListInstantSpeed.append(i)
+# print(DataList[0].ListInstantSpeed)
+print(a.ListInstantSpeed)
+print(DataList[0].ListInstantSpeed)
