@@ -9,9 +9,10 @@
 *******************************************************************/
 """
 
+# from multiprocessing import _JoinableQueueType
 import sqlite3
-import datetime
-import numpy as np
+# import datetime
+# import numpy as np
 # from testdb import *
 # from UI_main import UI_main
 # from MainMeasurement import MainMeasurement
@@ -51,7 +52,7 @@ class ManagementWiFi:
     ***  Version        : V1.0
     ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
-    ***  Purpose       	: Wi-Fi情報管理にある過去のWi-Fiデータを, UI処理部に送る.
+    ***  Purpose       	: Wi-Fi情報管理にある過去のWi-Fiデータの代表値を, UI処理部に送る.
     ***
     *******************************************************************/
     """
@@ -122,7 +123,7 @@ class ManagementWiFi:
     ***  Version        : V1.0
     ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
-    ***  Purpose       	: 定期計測時に, 同時刻に計測された各Wi-Fiの代表値を比較処理部に返す.
+    ***  Purpose       	: 定期計測時に, 他に計測された直近10個のWi-Fi情報を比較処理部に返す.
     ***
     *******************************************************************/
     """
@@ -133,20 +134,26 @@ class ManagementWiFi:
         db = sqlite3.connect('main.db')
         db.row_factory = sqlite3.Row
 
-        # listの宣言
+        # listの宣言  
+        list1 = [] # Wi-Fi名, 平均速度, 安定性の二次元配列
+        list2 = [] # 直近10個のデータの二次元配列
         i = 0
+        k = 0
+
         # SQLite3を操作するカーソルの作成
         c = db.cursor()
         # データ検索
         c.execute('SELECT * FROM items')
+        # 直近一時間の計測データの探索
         for row in c:
             if row[3].date == MeasurementTime.date:
                 if row[3].datetime.hour > MeasurementTime.hour - 1:
-                    list[i][0] = row[0]
-                    list[i][1] = row[1]
-                    list[i][2] = row[2]
+                    list1[i] = [row[0],row[1],row[2]]
                     i = i+1
         c.close()
-        for num in range(i):
-            list[num][0]
-        
+        if i > 10:
+            k = 10
+        for j in range(k):
+            list2[j] = list1[i-k]
+            print(list2[j])
+        return list2

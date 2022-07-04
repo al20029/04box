@@ -45,6 +45,8 @@ class UIMainProcess:
         while(get):
             get = DisplayOngoingWindow.OngoingWindow(a)
             if get == True:
+                if '接続されていません'in list:
+                    list.remove('接続されていません')
                 get,WiFiname = DisplayFinishWindow.FinishWindow(list,DataList)
                 list.remove(WiFiname)
                 list.insert(0, WiFiname)
