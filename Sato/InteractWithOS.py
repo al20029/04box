@@ -77,9 +77,12 @@ class InteractWithOS:
                 if ln==lp:
                     # print(len(ln))
                     CanConnectWiFiName.append(ln)
-        
-        CanConnectWiFiName.remove(ConnectingWiFiName)
-        CanConnectWiFiName.insert(0, ConnectingWiFiName)
+        if len(ConnectingWiFiName) == 0:
+            ConnectingWiFiName = '接続されていません'
+            CanConnectWiFiName.insert(0, ConnectingWiFiName)
+        else: 
+            CanConnectWiFiName.remove(ConnectingWiFiName)
+            CanConnectWiFiName.insert(0, ConnectingWiFiName)
         return CanConnectWiFiName
 
     """

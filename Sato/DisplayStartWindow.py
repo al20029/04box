@@ -12,8 +12,10 @@
 """
 
 from ast import Break
+from asyncio.windows_events import NULL
 import subprocess
 import time
+from tkinter import messagebox
 from InteractWithOS import InteractWithOS
 import tkinter
 import tkinter.ttk as ttk
@@ -38,6 +40,9 @@ class DisplayStartWindow:
         check = ''
         # WiFiList = CanConnectWiFiname
         def btn_click():
+            if combobox.get() == '接続されていません':
+                messagebox.showerror('エラー','Wi-Fiが接続されていません')
+                return 0
             InteractWithOS.ChangeWiFi(combobox.get())
             nonlocal WiFiname 
             nonlocal check
