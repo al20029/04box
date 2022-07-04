@@ -47,7 +47,7 @@ class DisplayFinishWindow:
 
         # グラフ表示
         fig = plt.Figure() #描画の用意
-        x=np.arange(0,10,1) #x軸のデータ
+        x=np.arange(0,len(a.ListInstantSpeed),1) #x軸のデータ
         y=a.ListInstantSpeed
         ax = fig.add_subplot(111)
         ax.set_ylabel("speed / Mbps")#y軸のラベル
