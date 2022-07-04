@@ -35,9 +35,6 @@ from IntractWithOS import IntractWithOS
 """
 
 class UIMainProcess:
-    DisplayStartWindow()
-    DisplayOngoingWindow()
-    DisplayFinishWindow()
     for s in IntractWithOS.GetWiFi():
         print(s)
     get = DisplayRegularStartWindow.RegularStartWindow()

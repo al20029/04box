@@ -34,7 +34,7 @@ def OngoingWindow():
     ax.set_ylabel("speed / Mbps")#y軸のラベル
     ax.set_ylim(0,10)
     ax.set_xlabel("x / mm")#x軸のラベル
-    ax.plot(x, y) #データの描画
+    #ax.plot(x, y) #データの描画
     print(x)
     canvas = FigureCanvasTkAgg(fig, master=tki)
     canvas.draw()
@@ -69,6 +69,7 @@ def OngoingWindow():
             ax.set_ylim(0,int(Data.MaxSpeed*1.1))
             ax.set_xlabel("x / mm")#x軸のラベル
             ax.plot(x, y) #データの描画
+            ax.plot(y,x)
             canvas = FigureCanvasTkAgg(fig, master=tki)
             canvas.draw()
             canvas.get_tk_widget().place(x=10,y=62,width=480,height=230)
