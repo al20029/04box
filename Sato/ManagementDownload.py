@@ -25,7 +25,7 @@ class ManagementDownload:
     def Donwload():
         try:
 
-            # urllib.request.urlopen('https://al86-hs.github.io/DownloadTest/test7M').read()
+            #urllib.request.urlopen('https://al86-hs.github.io/DownloadTest/test7M').read()
             urllib.request.urlopen('https://al86-hs.github.io/DownloadTest/test3M').read()
             
             return True

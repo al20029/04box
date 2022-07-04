@@ -138,7 +138,7 @@ class MainMeasurement:
     """ 
 
     def Measurement(data):
-        FileSize = 3 * 8 #単位はMbps
+        FileSize = 3 * 8 #単位はMbit
 
         # FileGetNum = 10
         FileGetNum = 1

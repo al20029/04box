@@ -1,3 +1,4 @@
+from re import I
 import tkinter
 # from tkinter import ON, messagebox
 import matplotlib.pyplot as plt
@@ -34,6 +35,11 @@ class DisplayOngoingWindow:
         tki.title('計測中') # 画面タイトルの設定
         fig = plt.Figure() #描画の用意
         global y
+        global i
+        global count
+        count = 0
+        i = 1
+        y = []
         x=np.arange(0,i,1, dtype=int) #x軸のデータ
 
         
