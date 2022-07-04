@@ -85,7 +85,7 @@ class DisplayOngoingWindow:
                 y=np.append(y,Data.ListInstantSpeed[i-1])
                 ax = fig.add_subplot(111)
                 ax.set_ylabel("speed / Mbps")#y軸のラベル
-                ax.set_ylim(0,int(Data.MaxSpeed*1.1))
+                ax.set_ylim(0,Data.MaxSpeed*1.1)
                 ax.set_xlabel("x / mm")#x軸のラベル
                 ax.plot(x, y) #データの描画
                 canvas = FigureCanvasTkAgg(fig, master=tki)

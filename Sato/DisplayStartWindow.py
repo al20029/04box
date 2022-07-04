@@ -20,6 +20,7 @@ import tkinter.ttk as ttk
 from ToolTip import *
 import Data
 
+
 """
 *******************************************************************
 ***  Class Name		: DisplayStartWindow
@@ -33,16 +34,22 @@ import Data
 """
 class DisplayStartWindow:
     def StartWindow(CanConnectWiFiname):
+        WiFiname = ''
+        # WiFiList = CanConnectWiFiname
         def btn_click():
-            # InteractWithOS.ChangeWiFi(combobox.get())
-
+            InteractWithOS.ChangeWiFi(combobox.get())
+            nonlocal WiFiname 
+            WiFiname = combobox.get()
+            # nonlocal WiFiList
+            # WiFiList.remove(WiFiname)
+            # WiFiList.insert(0,WiFiname)
             #WiFi変更が完了するまで待機 
-            Result_change = str()
-            while Result_change == None:
-                Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
+            # Result_change = str()
+            # while Result_change == None:
+            #     Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
 
             # time.sleep(2)
-            time.sleep(1)
+            time.sleep(3)
 
             nonlocal Start
             Start = True
@@ -87,4 +94,4 @@ class DisplayStartWindow:
         ToolTip(chk3, "一定の間隔で自動計測をして最適なWi-Fiを提案します")
         frm.mainloop()
         Break
-        return Start
+        return Start,WiFiname
