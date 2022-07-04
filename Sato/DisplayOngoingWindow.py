@@ -7,6 +7,7 @@ import numpy as np
 #from Data import Data 
 from UpdateGraph import UpdateGraph
 from MainMeasurement import MainMeasurement
+from ManagementDownload import ManagementDownload
 import time
 i = 1
 y = []
@@ -20,7 +21,9 @@ class DisplayOngoingWindow:
             #messagebox.showinfo("メッセージ", "ボタンがクリックされました")
             tki.destroy()
             
-        # 追加
+        #空ダウンロード
+        ManagementDownload.Donwload()
+        #1回目の計測
         MainMeasurement.Measurement(Data)
 
         Stop = False
@@ -68,7 +71,6 @@ class DisplayOngoingWindow:
         
         def repeat_func():
             global count
-            global label
             global i
             global y
             count+=1
@@ -77,6 +79,7 @@ class DisplayOngoingWindow:
             if count<10:
                 
                 # 追加
+
                 MainMeasurement.Measurement(Data)
                 
                 fig = plt.Figure() #描画の用意
@@ -85,7 +88,7 @@ class DisplayOngoingWindow:
                 y=np.append(y,Data.ListInstantSpeed[i-1])
                 ax = fig.add_subplot(111)
                 ax.set_ylabel("speed / Mbps")#y軸のラベル
-                ax.set_ylim(0,int(Data.MaxSpeed*1.1))
+                ax.set_ylim(0,Data.MaxSpeed*1.1)
                 ax.set_xlabel("x / mm")#x軸のラベル
                 ax.plot(x, y) #データの描画
                 canvas = FigureCanvasTkAgg(fig, master=tki)

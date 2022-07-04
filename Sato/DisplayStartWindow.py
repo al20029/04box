@@ -12,13 +12,16 @@
 """
 
 from ast import Break
+from asyncio.windows_events import NULL
 import subprocess
 import time
+from tkinter import messagebox
 from InteractWithOS import InteractWithOS
 import tkinter
 import tkinter.ttk as ttk
 from ToolTip import *
 import Data
+
 
 """
 *******************************************************************
@@ -33,25 +36,72 @@ import Data
 """
 class DisplayStartWindow:
     def StartWindow(CanConnectWiFiname):
+        WiFiname = ''
+        check = ''
+        # WiFiList = CanConnectWiFiname
         def btn_click():
-            # InteractWithOS.ChangeWiFi(combobox.get())
-
+            if combobox.get() == '接続されていません':
+                messagebox.showerror('エラー','Wi-Fiが接続されていません')
+                return 0
+            InteractWithOS.ChangeWiFi(combobox.get())
+            nonlocal WiFiname 
+            nonlocal check
+            WiFiname = combobox.get()
+            # nonlocal WiFiList
+            # WiFiList.remove(WiFiname)
+            # WiFiList.insert(0,WiFiname)
             #WiFi変更が完了するまで待機 
-            Result_change = str()
-            while Result_change == None:
-                Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
+            # Result_change = str()
+            # while Result_change == None:
+            #     Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
 
             # time.sleep(2)
-            time.sleep(1)
+            time.sleep(3)
 
             nonlocal Start
             Start = True
             if bln.get():
+                # 自動起動のチェックが発動されたときの処理
+                if check == 0:
+                    with open('out_UserName.txt', 'w') as pfp:
+                        subprocess.run('echo %USERNAME%', encoding='utf-8', stdout=pfp, shell=True)
+                    with open('out_UserName.txt', 'r') as lines:
+                        Result_echo = lines.read().splitlines()
+                        # print(lines)
+                    subprocess.run('del out_UserName.txt', shell=True)
+                    for s in Result_echo:
+                        if len(s) != 0:
+                            UserName = s.replace(' ', '').replace('  ', '')
+                            break
+                    print(UserName)
+
+                    # copyするファイルを自動起動処理.exeに
+                    ins = 'copy a.txt C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup'
+                    print(ins)
+                    subprocess.run(ins, encoding='utf-8', shell=True)
                 print('チェックされています')
                 f = open('checkbox.txt','w')
                 f.write('1')
                 f.close()    
             else:
+                # 自動起動のチェックが消されたときの処理
+                if check == 1:
+                    with open('out_UserName.txt', 'w') as pfp:
+                        subprocess.run('echo %USERNAME%', encoding='utf-8', stdout=pfp, shell=True)
+                    with open('out_UserName.txt', 'r') as lines:
+                        Result_echo = lines.read().splitlines()
+                        # print(lines)
+                    subprocess.run('del out_UserName.txt', shell=True)
+                    for s in Result_echo:
+                        if len(s) != 0:
+                            UserName = s.replace(' ', '').replace('  ', '')
+                            break
+                    print(UserName)
+
+                    # delするファイルを自動起動処理.exeに
+                    ins = 'del C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup\\a.txt'
+                    print(ins)
+                    subprocess.run(ins, encoding='utf-8', shell=True)
                 print('チェックされていません')
                 f = open('checkbox.txt','w')
                 f.write('0')
@@ -66,6 +116,7 @@ class DisplayStartWindow:
         bln = tkinter.BooleanVar()
         f = open("checkbox.txt","r")
         bln.set(f.read())
+        check = bln.get()
         f.close
         #bln.set(Data.Data.checkbox)
         chk2 = tkinter.Checkbutton(frm, variable = bln, text = '定期計測を利用する', font = ('MSゴシック',10))
@@ -87,4 +138,4 @@ class DisplayStartWindow:
         ToolTip(chk3, "一定の間隔で自動計測をして最適なWi-Fiを提案します")
         frm.mainloop()
         Break
-        return Start
+        return Start,WiFiname
