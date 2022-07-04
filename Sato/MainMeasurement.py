@@ -145,14 +145,14 @@ class MainMeasurement:
         
         InstantSpeed = []
 
-        for i in range(FileGetNum):
-            InstantTime = time.time()
-            ManagementDownload.Donwload()
-            if ManagementDownload.Donwload() == 2: #1がtrueで2がfalse
-                return -1
-            MeasurementTime = time.time() - InstantTime
-            InstantSpeed.append(MainMeasurement.InstantSpeedMeasurement(FileSize,MeasurementTime))
-            UpdateGraph.UpdateGraph(InstantSpeed[-1],data)
+        
+        InstantTime = time.time()
+        ManagementDownload.Donwload()
+        if ManagementDownload.Donwload() == 2: #1がtrueで2がfalse
+            return -1
+        MeasurementTime = time.time() - InstantTime
+        InstantSpeed.append(MainMeasurement.InstantSpeedMeasurement(FileSize,MeasurementTime))
+        UpdateGraph.UpdateGraph(InstantSpeed[-1],data)
 
         AverageSpeed = MainMeasurement.AverageSpeedMeasurement(InstantSpeed,FileGetNum)
         Stability = MainMeasurement.StabilityCalculation(InstantSpeed,FileGetNum)

@@ -12,6 +12,7 @@ import time
 i = 1
 y = []
 count = 0
+color_list = ["r", "b", "g", "y", "m", "c", "k"]
 class DisplayOngoingWindow:
     def OngoingWindow(Data):
         # click時のイベント
@@ -40,6 +41,7 @@ class DisplayOngoingWindow:
         global y
         global i
         global count
+        global color_list
         count = 0
         i = 1
         y = []
@@ -52,7 +54,10 @@ class DisplayOngoingWindow:
         ax.set_ylabel("speed / Mbps")#y軸のラベル
         ax.set_ylim(0,10)
         ax.set_xlabel("x / mm")#x軸のラベル
-        ax.plot(x, y) #データの描画
+        if Data.color == '':
+            Data.color = color_list.pop(0)
+            color_list.append(Data.color)
+        ax.plot(x, y, color = Data.color) #データの描画
         print(x)
         canvas = FigureCanvasTkAgg(fig, master=tki)
         canvas.draw()
@@ -90,7 +95,7 @@ class DisplayOngoingWindow:
                 ax.set_ylabel("speed / Mbps")#y軸のラベル
                 ax.set_ylim(0,Data.MaxSpeed*1.1)
                 ax.set_xlabel("x / mm")#x軸のラベル
-                ax.plot(x, y) #データの描画
+                ax.plot(x, y, color = Data.color) #データの描画
                 canvas = FigureCanvasTkAgg(fig, master=tki)
                 canvas.draw()
                 canvas.get_tk_widget().place(x=10,y=62,width=480,height=230)
