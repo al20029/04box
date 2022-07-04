@@ -35,30 +35,29 @@ class UIMainProcess:
         while len(list) == 0:
             list = InteractWithOS.GetWiFi()
         print(1)
-        get = DisplayStartWindow.StartWindow(list)
-        print(2)
-        if get == True:
-            a = Data()
-            DataList.append(a)
-            print(3)
+        a = Data()
+        DataList.append(a)
+        get,WiFiname = DisplayStartWindow.StartWindow(list)
+        a.WiFiname = WiFiname
+        list.remove(WiFiname)
+        list.insert(0, WiFiname)
+        print(a.WiFiname)
+        while(get):
             get = DisplayOngoingWindow.OngoingWindow(a)
-            print(4)
-            print("a:",DataList[0].ListInstantSpeed)
             if get == True:
-                print(5)
-                get = DisplayFinishWindow.FinishWindow(list,DataList)
-                print(6)
-                while(get):
-                    print(7)
-                    b = Data()
-                    DataList.append(b)
-                    get = DisplayOngoingWindow.OngoingWindow(b)
-                    print(8)
-                    if get == True:
-                        print(9)
-                        get = DisplayFinishWindow.FinishWindow(list,DataList)
-                        print(10)
-    def Regular():
+                get,WiFiname = DisplayFinishWindow.FinishWindow(list,DataList)
+                list.remove(WiFiname)
+                list.insert(0, WiFiname)
+                a = Data()
+                DataList.append(a)
+                for data in (DataList):
+                    if data.WiFiname == WiFiname:
+                        a = data
+                        a.ListInstantSpeed = []
+                        a.MaxSpeed = 0
+                    else:
+                        a.WiFiname = WiFiname
+def Regular():
         for s in InteractWithOS.GetWiFi():
             print(s)
         get = DisplayRegularStartWindow.RegularStartWindow()

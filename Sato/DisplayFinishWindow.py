@@ -21,15 +21,17 @@ from ToolTip import *
 
 class DisplayFinishWindow:
     def FinishWindow(CanConnectWiFiname,DataList):
+        WiFiname = ''
         # クリック時のイベント
         def btn_click():
-            # InteractWithOS.ChangeWiFi(combobox.get())
-            
+            InteractWithOS.ChangeWiFi(combobox.get())
+            nonlocal WiFiname
+            WiFiname = combobox.get()
             #WiFi変更が完了するまで待機 
             # Result_change = str()
             # while Result_change == None:
             #     Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
-            time.sleep(1)
+            time.sleep(3)
 
             nonlocal Start
             Start = True
@@ -78,5 +80,5 @@ class DisplayFinishWindow:
         # 画面をそのまま表示
         frm.mainloop()
 
-        return Start
+        return Start,WiFiname
     # FinishWindow()
