@@ -42,7 +42,7 @@ class InteractWithOS:
 
         for s in Result_network:
             if 'SSID' in s:
-                List_network.append(s[9:])
+                List_network.append(s[9:].replace(' ', '').replace('  ', ''))
 
         #過去に接続したネットワーク検索
         with open('out_profiles.txt', 'w') as pfp:
@@ -54,24 +54,32 @@ class InteractWithOS:
 
         for s in Result_profiles:
             if 'All User Profile' in s:
-                List_profiles.append(s[27:])
+                List_profiles.append(s[27:].replace(' ', '').replace('  ', ''))
+
+                #現在接続しているWiFiの追加
+        with open('out_interface.txt', 'w') as pfp:
+            subprocess.run('netsh wlan show interface', encoding='utf-8', stdout=pfp, shell=True)
+
+        with open('out_interface.txt', 'r') as lines:
+            Result_interface = lines.read().splitlines()
+        subprocess.run('del out_interface.txt', shell=True)
+
+        ConnectingWiFiName = []
+        for s in Result_interface:
+            if '    Profile                : ' in s:
+                ConnectingWiFiName = s[29:].replace(' ', '').replace('  ', '')
+                break
+        # print(len(ConnectingWiFiName))
 
         #接続可能なネットワーク検索
         for lp in List_profiles:
             for ln in List_network:
                 if ln==lp:
+                    # print(len(ln))
                     CanConnectWiFiName.append(ln)
-
-        # #接続可能なネットワークが存在しない時のエラー
-        # tki = tkinter.Tk()
-        # tki.withdraw()
-
-        # if not CanConnectWiFiName:
-        #     get = messagebox.askretrycancel("wi-fiに接続できませんでした", "再接続しますか")
-        #     if get == True:
-        #         IntractWithOS.GetWi_Fi()
-        #     tki.destroy()
         
+        CanConnectWiFiName.remove(ConnectingWiFiName)
+        CanConnectWiFiName.insert(0, ConnectingWiFiName)
         return CanConnectWiFiName
 
     """
