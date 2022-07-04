@@ -50,6 +50,7 @@ class DisplayFinishWindow:
        
         ax = fig.add_subplot(111)
         ax.set_ylabel("speed / Mbps")#y軸のラベル
+        ax.set_xlabel("x / times")#x軸のラベル
         ymax = 0
         for data in DataList:
             x=np.arange(0,len(data.ListInstantSpeed),1) #x軸のデータ
@@ -57,7 +58,6 @@ class DisplayFinishWindow:
             if(ymax < data.MaxSpeed):
                 ymax = data.MaxSpeed
                 ax.set_ylim(0,data.MaxSpeed*1.1)    
-            ax.set_xlabel("x / mm")#x軸のラベル
             ax.plot(x, y) #データの描画
         canvas = FigureCanvasTkAgg(fig, master=frm)
         canvas.draw()
