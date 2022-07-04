@@ -7,6 +7,7 @@ import numpy as np
 #from Data import Data 
 from UpdateGraph import UpdateGraph
 from MainMeasurement import MainMeasurement
+from ManagementDownload import ManagementDownload
 import time
 i = 1
 y = []
@@ -20,7 +21,9 @@ class DisplayOngoingWindow:
             #messagebox.showinfo("メッセージ", "ボタンがクリックされました")
             tki.destroy()
             
-        # 追加
+        #空ダウンロード
+        ManagementDownload.Donwload()
+        #1回目の計測
         MainMeasurement.Measurement(Data)
 
         Stop = False
@@ -68,7 +71,6 @@ class DisplayOngoingWindow:
         
         def repeat_func():
             global count
-            global label
             global i
             global y
             count+=1
@@ -77,6 +79,7 @@ class DisplayOngoingWindow:
             if count<10:
                 
                 # 追加
+
                 MainMeasurement.Measurement(Data)
                 
                 fig = plt.Figure() #描画の用意

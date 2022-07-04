@@ -145,7 +145,6 @@ class MainMeasurement:
         
         InstantSpeed = []
 
-        ManagementDownload.Donwload()
         for i in range(FileGetNum):
             InstantTime = time.time()
             ManagementDownload.Donwload()

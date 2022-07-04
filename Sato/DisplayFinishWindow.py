@@ -45,7 +45,7 @@ class DisplayFinishWindow:
 
         # 題名表示
         SystemName = tkinter.Label(text="計測終了", font=("MSゴシック", "30", "bold"))
-        SystemName.place(x=160, y=10)
+        SystemName.place(x=310, y=10)
 
         # グラフ表示
         fig = plt.Figure() #描画の用意
