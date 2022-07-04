@@ -15,7 +15,7 @@ from DisplayOngoingWindow import DisplayOngoingWindow
 from DisplayRegularStartWindow import DisplayRegularStartWindow
 from DisplayRegularFinishWindow import DisplayRegularFinishWindow
 from InteractWithOS import InteractWithOS
-from MainMeasurement import MainMeasurement
+# from MainMeasurement import MainMeasurement
 from Data import Data
 
 """
@@ -38,14 +38,17 @@ class UIMainProcess:
         print(2)
         if get == True:
             a = Data()
-            MainMeasurement.Measurement(a)
+
+            # MainMeasurement.Measurement(a)
+            
             print(3)
-            get = DisplayOngoingWindow.OngoingWindow(a)
+            DisplayOngoingWindow.OngoingWindow(a)
             print(4)
-            while DisplayFinishWindow.FinishWindow(list,a) :
-                get = DisplayOngoingWindow.OngoingWindow(a)
-
-
+            get = DisplayFinishWindow.FinishWindow(list,a)
+            if get:
+                b = Data()
+                DisplayOngoingWindow.OngoingWindow(b)
+                DisplayFinishWindow.FinishWindow(list,b)
 
     def Regular():
         for s in InteractWithOS.GetWiFi():

@@ -34,12 +34,14 @@ import Data
 class DisplayStartWindow:
     def StartWindow(CanConnectWiFiname):
         def btn_click():
-            InteractWithOS.ChangeWiFi(combobox.get())
+            # InteractWithOS.ChangeWiFi(combobox.get())
 
             #WiFi変更が完了するまで待機 
-            # Result_change = str()
-            # while Result_change == None:
-            #     Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
+            Result_change = str()
+            while Result_change == None:
+                Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
+
+            # time.sleep(2)
             time.sleep(1)
 
             nonlocal Start
