@@ -11,7 +11,8 @@
 
 import tkinter
 from tkinter import messagebox
-from ManagementDownload import ManagementDownload
+# from ManagementDownload import ManagementDownload
+from MainMeasurement import MainMeasurement
 
 """
 ******************************************************
@@ -24,7 +25,7 @@ from ManagementDownload import ManagementDownload
 """
 
 class DisplayRegularStartWindow:
-    def RegularStartWindow():
+    def RegularStartWindow(a):
         Stop = False
         # ダウンロードする回数
         count = 2
@@ -34,12 +35,12 @@ class DisplayRegularStartWindow:
             nonlocal tki
             nonlocal count
             count -= 1
-            print(ManagementDownload.Donwload())
+            print(MainMeasurement.Measurement(a))
             if count > 0:
                 tki.after(1000, Repeat_Download)
             else:
-                # tki.destroy()
-                tki.quit()
+                tki.destroy()
+                # tki.quit()
 
         # click時のイベント
         def btn_click():
@@ -47,8 +48,8 @@ class DisplayRegularStartWindow:
             Y_N = messagebox.askyesno("確認中", "停止しますか")
             if Y_N == True:   
                 Stop = True
-                # tki.quit()
-                tki.destroy()
+                tki.quit()
+                # tki.destroy()
 
         # 画面作成
         tki = tkinter.Tk()
