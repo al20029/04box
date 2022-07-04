@@ -44,6 +44,16 @@ class DisplayStartWindow:
 
             nonlocal Start
             Start = True
+            if bln.get():
+                print('チェックされています')
+                f = open('checkbox.txt','w')
+                f.write('1')
+                f.close()    
+            else:
+                print('チェックされていません')
+                f = open('checkbox.txt','w')
+                f.write('0')
+                f.close()
             frm.destroy()
         Start = False
         frm = tkinter.Tk()
@@ -52,11 +62,10 @@ class DisplayStartWindow:
         chk1 = tkinter.Label(frm,text = 'Wi-Fi速度計測システム', font = ('MSゴシック',35))
         chk1.place(x = 15, y = 85)
         bln = tkinter.BooleanVar()
+        f = open("checkbox.txt","r")
+        bln.set(f.read())
+        f.close
         #bln.set(Data.Data.checkbox)
-        if bln.get():
-            print('チェックされています')
-        else:
-            print('チェックされていません')
         chk2 = tkinter.Checkbutton(frm, variable = bln, text = '定期計測を利用する', font = ('MSゴシック',10))
         chk2.place(x = 270, y = 30)
         chk3 = tkinter.Label(frm, text = '?', font = ('MSゴシック',10))
@@ -64,7 +73,6 @@ class DisplayStartWindow:
         chk4 = tkinter.Label(frm, text = '現在接続しているWi-Fi', font = ('MSゴシック',15))
         chk4.place(x = 80,y = 170)
 
-        # list = ("AAA", "BBB", "CCC") #単体テスト用
         list = CanConnectWiFiname
 
         combobox = ttk.Combobox(frm, height=3, width = 40, values = list, state = "readonly")
