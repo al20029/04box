@@ -10,5 +10,5 @@ class GetSendDB:
         subprocess.run('ToServer', encoding='utf-8', shell=True)
 
 
-GetSendDB.upload()
-GetSendDB.download()
+# GetSendDB.upload()
+# GetSendDB.download()
