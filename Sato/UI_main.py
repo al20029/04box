@@ -17,6 +17,9 @@ from DisplayRegularFinishWindow import DisplayRegularFinishWindow
 from InteractWithOS import InteractWithOS
 # from MainMeasurement import MainMeasurement
 from Data import Data
+from GetSendDB import GetSendDB
+# from ManagementWiFi import ManagementWiFi
+import time
 
 """
 ******************************************************
@@ -29,7 +32,12 @@ from Data import Data
 """
 
 class UIMainProcess:
+    def __init__(self):
+        print("hello")
     def Always():
+        # データベースの取得
+        GetSendDB.download()
+
         list = []
         DataList =[]
         while len(list) == 0:
@@ -59,15 +67,45 @@ class UIMainProcess:
                         a.MaxSpeed = 0
                     else:
                         a.WiFiname = WiFiname
-def Regular():
-        for s in InteractWithOS.GetWiFi():
-            print(s)
-        get = DisplayRegularStartWindow.RegularStartWindow()
+
+        # データベースの送信
+        GetSendDB.upload()
+
+    def Regular():
+        # データベースの取得
+        # GetSendDB.download()
+
+        # サーバ使わないパターン
+        Fastest_WiFi = ""
+        fastest = 0
+        a = Data()
+        WiFiList = list()
+        WiFiList = InteractWithOS.GetWiFi()
+        for s in WiFiList:
+            # print(s)
+            InteractWithOS.ChangeWiFi(s)
+            time.sleep(1)
+            get, fast = DisplayRegularStartWindow.RegularStartWindow(a)
+
+            print(get)
+            if get == True:
+                break
+            if fast[0] > fastest:
+                fastest = fast[0]
+                Fastest_WiFi = s
         # get = True
-        name = "SRAS2G"
+
+        # リアルタイムデータから最適なWi-Fiを探す
+        # ManagementWiFi.SendRealtimeData(a.ListInstantSpeed[1])
+        name = Fastest_WiFi
+
+
         if get == False:
             DisplayRegularFinishWindow.RegularFinishWindow(name)
 
+        # データベースの送信
+        # GetSendDB.upload()
+
         
-UIMainProcess.Always()
+# UIMainProcess.Always()
 # UIMainProcess.Regular()

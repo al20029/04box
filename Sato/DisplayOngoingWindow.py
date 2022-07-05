@@ -36,7 +36,7 @@ class DisplayOngoingWindow:
         h = tki.winfo_screenheight() - 430
         tki.geometry('500x350+'+str(w)+"+"+str(h)) # 画面サイズの設定
 
-        tki.title('計測中') # 画面タイトルの設定
+        tki.title('計測中画面') # 画面タイトルの設定
         fig = plt.Figure() #描画の用意
         global y
         global i

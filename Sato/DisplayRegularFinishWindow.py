@@ -30,14 +30,15 @@ class DisplayRegularFinishWindow:
             # messagebox.askyesno("wi-fi変更中", "停止しますか")
             InteractWithOS.ChangeWiFi(BestWiFiName)
             messagebox.showinfo("メッセージ", "Wi-Fi変更を終了しました")
-            tki.quit()
+            # tki.quit()
+            tki.destroy()
 
         # 画面作成
         tki = tkinter.Tk()
         h = tki.winfo_screenheight() - 370
         w = tki.winfo_screenwidth() - 405
         tki.geometry('400x300+'+str(w)+"+"+str(h)) # 画面サイズの設定
-        tki.title('ボタンのサンプル') # 画面タイトルの設定
+        tki.title('定期計測終了画面') # 画面タイトルの設定
 
         #題名表示
         SystemName = tkinter.Label(text="計測終了", font=("MSゴシック", "30", "bold"))

@@ -154,13 +154,13 @@ class MainMeasurement:
         InstantSpeed.append(MainMeasurement.InstantSpeedMeasurement(FileSize,MeasurementTime))
         UpdateGraph.UpdateGraph(InstantSpeed[-1],data)
 
-        AverageSpeed = MainMeasurement.AverageSpeedMeasurement(InstantSpeed,FileGetNum)
-        Stability = MainMeasurement.StabilityCalculation(InstantSpeed,FileGetNum)
-        print(InstantSpeed,end = "Mbps\n") #テスト用後で消す
-        print(AverageSpeed,end = "Mbps\n") #テスト用後で消す
-        print(Stability) #テスト用後で消す
+        # AverageSpeed = MainMeasurement.AverageSpeedMeasurement(InstantSpeed,FileGetNum)
+        # Stability = MainMeasurement.StabilityCalculation(InstantSpeed,FileGetNum)
+        # print(InstantSpeed,end = "Mbps\n") #テスト用後で消す
+        # print(AverageSpeed,end = "Mbps\n") #テスト用後で消す
+        # print(Stability) #テスト用後で消す
 
-        return InstantSpeed,AverageSpeed,Stability
+        return InstantSpeed
 #InstantSpeedが10個の瞬間速度のリスト
 #AverageSpeedが平均速度
 #Stabilityがメール、ネット、sns、動画視聴、オンラインゲームの5項目を1~5段階に数値化したリスト
