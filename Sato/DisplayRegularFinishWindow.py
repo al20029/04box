@@ -38,7 +38,7 @@ class DisplayRegularFinishWindow:
         h = tki.winfo_screenheight() - 370
         w = tki.winfo_screenwidth() - 405
         tki.geometry('400x300+'+str(w)+"+"+str(h)) # 画面サイズの設定
-        tki.title('ボタンのサンプル') # 画面タイトルの設定
+        tki.title('定期計測終了画面') # 画面タイトルの設定
 
         #題名表示
         SystemName = tkinter.Label(text="計測終了", font=("MSゴシック", "30", "bold"))

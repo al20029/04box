@@ -39,7 +39,7 @@ class DisplayRegularStartWindow:
 
             count -= 1
             faster = MainMeasurement.Measurement(a)
-            faster,a,b = MainMeasurement.Measurement(a)
+            # faster,a,b = MainMeasurement.Measurement(a)
             # print(MainMeasurement.Measurement(a))
             if count > 0:
                 tki.after(1000, Repeat_Download)

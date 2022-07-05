@@ -92,9 +92,6 @@ class UIMainProcess:
                 break
             if fast[0] > fastest:
                 fastest = fast[0]
-
-            if fast > fastest:
-                fastest = fast
                 Fastest_WiFi = s
         # get = True
 
