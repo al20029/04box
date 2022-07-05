@@ -29,13 +29,16 @@ class DisplayRegularStartWindow:
         Stop = False
         # ダウンロードする回数
         count = 2
+        faster = 100
 
         # 繰り返しダウンロードする
         def Repeat_Download():
             nonlocal tki
             nonlocal count
+            nonlocal faster
             count -= 1
-            print(MainMeasurement.Measurement(a))
+            faster,a,b = MainMeasurement.Measurement(a)
+            # print(MainMeasurement.Measurement(a))
             if count > 0:
                 tki.after(1000, Repeat_Download)
             else:
@@ -80,4 +83,4 @@ class DisplayRegularStartWindow:
         # 画面をそのまま表示
         tki.mainloop()
 
-        return Stop
+        return Stop, faster

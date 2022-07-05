@@ -18,7 +18,8 @@ from InteractWithOS import InteractWithOS
 # from MainMeasurement import MainMeasurement
 from Data import Data
 from GetSendDB import GetSendDB
-from ManagementWiFi import ManagementWiFi
+# from ManagementWiFi import ManagementWiFi
+import time
 
 """
 ******************************************************
@@ -74,14 +75,25 @@ class UIMainProcess:
         # データベースの取得
         GetSendDB.download()
 
-        for s in InteractWithOS.GetWiFi():
-            print(s)
-        get = DisplayRegularStartWindow.RegularStartWindow()
+        # サーバ使わないパターン
+        Fastest_WiFi = ""
+        fastest = 0
+        a = Data()
+        WiFiList = list()
+        WiFiList = InteractWithOS.GetWiFi()
+        for s in WiFiList:
+            # print(s)
+            InteractWithOS.ChangeWiFi(s)
+            time.sleep(1)
+            get, fast = DisplayRegularStartWindow.RegularStartWindow(a)
+            if fast > fastest:
+                fastest = fast
+                Fastest_WiFi = s
         # get = True
 
         # リアルタイムデータから最適なWi-Fiを探す
-        ManagementWiFi.SendRealtimeData
-        name = "SRAS2G"
+        # ManagementWiFi.SendRealtimeData(a.ListInstantSpeed[1])
+        name = Fastest_WiFi
 
 
         if get == False:
