@@ -30,7 +30,8 @@ class DisplayRegularFinishWindow:
             # messagebox.askyesno("wi-fi変更中", "停止しますか")
             InteractWithOS.ChangeWiFi(BestWiFiName)
             messagebox.showinfo("メッセージ", "Wi-Fi変更を終了しました")
-            tki.quit()
+            # tki.quit()
+            tki.destroy()
 
         # 画面作成
         tki = tkinter.Tk()

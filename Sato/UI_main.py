@@ -73,7 +73,7 @@ class UIMainProcess:
 
     def Regular():
         # データベースの取得
-        GetSendDB.download()
+        # GetSendDB.download()
 
         # サーバ使わないパターン
         Fastest_WiFi = ""
@@ -86,8 +86,11 @@ class UIMainProcess:
             InteractWithOS.ChangeWiFi(s)
             time.sleep(1)
             get, fast = DisplayRegularStartWindow.RegularStartWindow(a)
-            if fast > fastest:
-                fastest = fast
+            print(get)
+            if get == True:
+                break
+            if fast[0] > fastest:
+                fastest = fast[0]
                 Fastest_WiFi = s
         # get = True
 
@@ -100,7 +103,7 @@ class UIMainProcess:
             DisplayRegularFinishWindow.RegularFinishWindow(name)
 
         # データベースの送信
-        GetSendDB.upload()
+        # GetSendDB.upload()
 
         
 # UIMainProcess.Always()

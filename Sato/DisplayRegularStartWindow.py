@@ -37,7 +37,7 @@ class DisplayRegularStartWindow:
             nonlocal count
             nonlocal faster
             count -= 1
-            faster,a,b = MainMeasurement.Measurement(a)
+            faster = MainMeasurement.Measurement(a)
             # print(MainMeasurement.Measurement(a))
             if count > 0:
                 tki.after(1000, Repeat_Download)
@@ -48,10 +48,10 @@ class DisplayRegularStartWindow:
         # click時のイベント
         def btn_click():
             nonlocal Stop
-            Y_N = messagebox.askyesno("確認中", "停止しますか")
-            if Y_N == True:   
-                Stop = True
-                tki.quit()
+            # Y_N = messagebox.askyesno("確認中", "停止しますか")
+            # if Y_N == True:   
+            Stop = True
+            tki.quit()
                 # tki.destroy()
 
         # 画面作成
