@@ -42,7 +42,11 @@ class ManagementWiFi:
 
         # 登録
         c.execute('INSERT INTO items (WiFiName, AverageSpeed, Stability, MeasureTime)values(?,?,?,?)',[WiFiName, AverageSpeed, Stability, MeasureTime])
-        db.commit()
+        # テスト
+        c.execute('SELECT * FROM items')     
+        for row in c:
+            print(row)
+            db.commit()
         c.close()
 
     """
@@ -76,14 +80,13 @@ class ManagementWiFi:
         for row in c:   
             if row[0] == WiFiName: 
                 print(row[0], row[1], row[2])
-                # list1[0].append(row[0])
                 SumAverageSpeed = SumAverageSpeed + row[1]
-                # list1[2].append(row[2])
                 SumStability = SumStability + row[2]
                 n = n + 1
         c.close()
         BestAvrageSpeed = SumAverageSpeed / n
-        BestStability = BestStability / n
+        BestStability = SumStability / n
+        print(BestAvrageSpeed, BestStability)
         return BestAvrageSpeed, BestStability
 
     """
@@ -112,7 +115,7 @@ class ManagementWiFi:
         # SQLite3を操作するカーソルの作成
         c = db.cursor()
         # データ検索
-        c.execute('SELECT * FROM items')
+        c.execute('SELECT * FROM items WHERE MeasurementTime-3600 < ?', MeasurementTime)
         # 直近一時間の計測データの探索
         for row in c:
             if row[3].date == MeasurementTime.date:
