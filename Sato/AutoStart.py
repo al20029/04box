@@ -11,7 +11,11 @@ def task():
 task()
 
 # schedule.every(1).hours.do(task)
+<<<<<<< Updated upstream
 schedule.every(60).seconds.do(task)
+=======
+schedule.every(10).seconds.do(task)
+>>>>>>> Stashed changes
 
 while 1:
     schedule.run_pending()
