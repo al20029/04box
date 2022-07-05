@@ -86,16 +86,15 @@ class UIMainProcess:
             InteractWithOS.ChangeWiFi(s)
             time.sleep(1)
             get, fast = DisplayRegularStartWindow.RegularStartWindow(a)
-<<<<<<< Updated upstream
+
             print(get)
             if get == True:
                 break
             if fast[0] > fastest:
                 fastest = fast[0]
-=======
+
             if fast > fastest:
                 fastest = fast
->>>>>>> Stashed changes
                 Fastest_WiFi = s
         # get = True
 

@@ -36,12 +36,10 @@ class DisplayRegularStartWindow:
             nonlocal tki
             nonlocal count
             nonlocal faster
+
             count -= 1
-<<<<<<< Updated upstream
             faster = MainMeasurement.Measurement(a)
-=======
             faster,a,b = MainMeasurement.Measurement(a)
->>>>>>> Stashed changes
             # print(MainMeasurement.Measurement(a))
             if count > 0:
                 tki.after(1000, Repeat_Download)
