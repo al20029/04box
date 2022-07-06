@@ -16,5 +16,5 @@ db = sqlite3.connect('main.db')
 # SQLite3を操作するカーソルの作成
 c = db.cursor()
 # テーブルの作成 (Wi-Fi名, 平均速度, 安定性, 計測時刻)
-c.execute('CREATE TABLE items(WiFiName text, AverageSpeed real, Stability integer, MeasureTime datetime)')
+c.execute('CREATE TABLE items(WiFiName text, AverageSpeed real, Stability integer, MeasurementTime datetime)')
 c.close()

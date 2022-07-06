@@ -10,6 +10,7 @@
 """
 
 # from multiprocessing import _JoinableQueueType
+from asyncio import CancelledError
 import sqlite3
 # import datetime
 # import numpy as np
@@ -95,37 +96,34 @@ class ManagementWiFi:
     ***  Version        : V1.0
     ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
-    ***  Purpose       	: 定期計測時に, 他に計測された直近10個のWi-Fi情報を比較処理部に返す.
+    ***  Purpose       	: 定期計測時に, 他に計測された一時間以内の接続可能なWi-Fi情報の代表値を, 比較処理部に返す.
     ***
     *******************************************************************/
     """
 
     # リアルタイムデータの送信    
-    def SendRealtimeData(MeasurementTime):
+    def SendRealtimeData(MeasurementTime,CanConnectWiFiName):
         # データベースの作成（仮）
         db = sqlite3.connect('main.db')
         db.row_factory = sqlite3.Row
 
         # listの宣言  
-        list1 = [] # Wi-Fi名, 平均速度, 安定性の二次元配列
-        list2 = [] # 直近10個のデータの二次元配列
-        i = 0
-        k = 0
+        SumAverageSpeed = list() # Wi-Fi名ごとの平均速度の和
+        SumStability = list() # Wi-Fi名ごとの安定性の和
 
         # SQLite3を操作するカーソルの作成
         c = db.cursor()
         # データ検索
-        c.execute('SELECT * FROM items WHERE MeasurementTime-3600 < ?', MeasurementTime)
+        c.execute('SELECT * FROM items WHERE (MeasurementTime-3600 < ?) AND (WiFiName == ?)', MeasurementTime, CanConnectWiFiName)
         # 直近一時間の計測データの探索
         for row in c:
-            if row[3].date == MeasurementTime.date:
-                if row[3].datetime.hour > MeasurementTime.hour - 1:
-                    list1[i] = [row[0],row[1],row[2]]
-                    i = i+1
+            for i in range(len(CanConnectWiFiName)):
+                if row[0] == CanConnectWiFiName[i]:
+                    SumAverageSpeed[i] == SumAverageSpeed[i] + row[1]
+                    SumStability[i] == SumStability[i] + row[2]
+        for i in range(len(CanConnectWiFiName)):
+            BestAvrageSpeed = SumAverageSpeed[i] / len(SumAverageSpeed)
+            BestStability = SumStability[i] / len(SumStability)
         c.close()
-        if i > 10:
-            k = 10
-        for j in range(k):
-            list2[j] = list1[i-k]
-            print(list2[j])
-        return list2
+        print(BestAvrageSpeed, BestStability)
+        return BestAvrageSpeed, BestStability
