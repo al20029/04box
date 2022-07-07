@@ -32,7 +32,7 @@ class ManagementWiFi:
     """
 
     # 計測データの登録
-    def RegisterData(WiFiName, AverageSpeed, Stability, MeasureTime):
+    def RegisterData(WiFiName, AverageSpeed, Stability, MeasurementTime):
     # def RegisterData():
 
         # データベースの作成（仮）
@@ -42,7 +42,7 @@ class ManagementWiFi:
         c = db.cursor()
 
         # 登録
-        c.execute('INSERT INTO items (WiFiName, AverageSpeed, Stability, MeasureTime)values(?,?,?,?)',[WiFiName, AverageSpeed, Stability, MeasureTime])
+        c.execute('INSERT INTO items (WiFiName, AverageSpeed, Stability, MeasurementTime)values(?,?,?,?)',[WiFiName, AverageSpeed, Stability, MeasurementTime])
         # テスト
         c.execute('SELECT * FROM items')     
         for row in c:
@@ -62,7 +62,7 @@ class ManagementWiFi:
     """
 
     # 過去データの送信
-    def SendPastData(WiFiName, AveregeSpeed, Stability):
+    def SendPastData(WiFiName, AverageSpeed, Stability):
         # データベースの作成（仮）
         db = sqlite3.connect('main.db')
         db.row_factory = sqlite3.Row
