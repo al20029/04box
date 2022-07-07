@@ -10,6 +10,8 @@
 """
 
 # from multiprocessing import _JoinableQueueType
+from asyncio import CancelledError
+from re import L
 import sqlite3
 # import datetime
 # import numpy as np
@@ -31,20 +33,23 @@ class ManagementWiFi:
     """
 
     # 計測データの登録
-    def RegisterData(WiFiName, AverageSpeed, Stability, MeasureTime):
+    def RegisterData(WiFiName, AverageSpeed, Stability, MeasurementTime):
     # def RegisterData():
 
         # データベースの作成（仮）
         db = sqlite3.connect('main.db')
+        
         # SQLite3を操作するカーソルの作成
         c = db.cursor()
-        # テーブルの作成
-        # c.execute('CREATE TABLE items(WFN text, IPA integer, AS real, S integer, MT datetime)')
+
         # 登録
-        c.execute('INSERT INTO items (WiFiName, AverageSpeed, Stability, MeasureTime)values(?,?,?,?)',[WiFiName, AverageSpeed, Stability, MeasureTime])
-        db.commit()
+        c.execute('INSERT INTO items (WiFiName, AverageSpeed, Stability, MeasurementTime)values(?,?,?,?)',[WiFiName, AverageSpeed, Stability, MeasurementTime])
+        # テスト
+        c.execute('SELECT * FROM items')     
+        for row in c:
+            print(row)
+            db.commit()
         c.close()
-        #済
 
     """
     *******************************************************************
@@ -58,7 +63,7 @@ class ManagementWiFi:
     """
 
     # 過去データの送信
-    def SendPastData(WiFiName, AveregeSpeed, Stability):
+    def SendPastData(WiFiName, AverageSpeed, Stability):
         # データベースの作成（仮）
         db = sqlite3.connect('main.db')
         db.row_factory = sqlite3.Row
@@ -66,56 +71,25 @@ class ManagementWiFi:
         # SQLite3を操作するカーソルの作成
         c = db.cursor()
 
-        # リストを定義
-        # list1 = np.zeros([1,3])
-
         # 平均速度, 平均安定性の定義
         SumAverageSpeed = 0
         SumStability = 0
         n = 0
-        BestAvrageSpeed = 0
+        BestAverageSpeed = 0
         BestStability = 0
         # データ検索
         c.execute('SELECT * FROM items')
         for row in c:   
             if row[0] == WiFiName: 
                 print(row[0], row[1], row[2])
-                # list1[0].append(row[0])
                 SumAverageSpeed = SumAverageSpeed + row[1]
-                # list1[2].append(row[2])
                 SumStability = SumStability + row[2]
                 n = n + 1
         c.close()
-        BestAvrageSpeed = SumAverageSpeed / n
-        BestStability = BestStability / n
-        return BestAvrageSpeed, BestStability
-        # print(list1[0],list[1],list[2])
-        # return list1
-        #済
-
-    """
-    *******************************************************************
-    ***  Func Name      : BestValue
-    ***  Version        : V1.0
-    ***  Designer       : 荒川 塁唯
-    ***  Date           : 2022.6.21
-    ***  Purpose       	: Wi-Fi情報管理にあるデータから, リアルタイムデータとの比較に用いるデータの代表値を計算し, SendRealtimeDataクラスに返す.
-    ***
-    *******************************************************************/
-    """
-
-    # # 代表値の計算
-    # def CalculateBestValue(WiFiName):
-    #    # データベースの作成（仮）
-    #     db = sqlite3.connect('main.db')
-    #     # SQLite3を操作するカーソルの作成
-    #     c = db.cursor()
-    #     # データ検索
-    #     c.execute('SELECT * FROM items where WiFiName = WFN')
-
-    #     # 計算
-    #     BestValue = 1
-    #     return BestValue
+        BestAverageSpeed = SumAverageSpeed / n
+        BestStability = SumStability / n
+        print(BestAverageSpeed, BestStability)
+        return BestAverageSpeed, BestStability
 
     """
     *******************************************************************
@@ -123,37 +97,41 @@ class ManagementWiFi:
     ***  Version        : V1.0
     ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
-    ***  Purpose       	: 定期計測時に, 他に計測された直近10個のWi-Fi情報を比較処理部に返す.
+    ***  Purpose       	: 定期計測時に, 他に計測された一時間以内の接続可能なWi-Fi情報の代表値を, 比較処理部に返す.
     ***
     *******************************************************************/
     """
 
     # リアルタイムデータの送信    
-    def SendRealtimeData(MeasurementTime):
+    def SendRealtimeData(MeasurementTime,CanConnectWiFiName):
         # データベースの作成（仮）
         db = sqlite3.connect('main.db')
         db.row_factory = sqlite3.Row
 
         # listの宣言  
-        list1 = [] # Wi-Fi名, 平均速度, 安定性の二次元配列
-        list2 = [] # 直近10個のデータの二次元配列
-        i = 0
-        k = 0
+        SumAverageSpeed = [0]*len(CanConnectWiFiName) # list() # Wi-Fi名ごとの平均速度の和
+        SumStability =  [0]*len(CanConnectWiFiName) # list() # Wi-Fi名ごとの安定性の和
+        BestAverageSpeed = [0]*len(CanConnectWiFiName)
+        BestStability = [0]*len(CanConnectWiFiName)
+        count = [0]*len(CanConnectWiFiName)
 
         # SQLite3を操作するカーソルの作成
         c = db.cursor()
         # データ検索
-        c.execute('SELECT * FROM items')
-        # 直近一時間の計測データの探索
-        for row in c:
-            if row[3].date == MeasurementTime.date:
-                if row[3].datetime.hour > MeasurementTime.hour - 1:
-                    list1[i] = [row[0],row[1],row[2]]
-                    i = i+1
+        for i in range(len(CanConnectWiFiName)):
+            c.execute('SELECT * FROM items WHERE (MeasurementTime-3600 <= ?) AND (WiFiName == ?)', (MeasurementTime, CanConnectWiFiName[i]))
+            # 直近一時間の計測データの探索
+            for row in c:
+                print(row[0], row[1], row[2])
+                for j in range(len(CanConnectWiFiName)):
+                    if row[0] == CanConnectWiFiName[j]:
+                        SumAverageSpeed[j] = SumAverageSpeed[j] + row[1]
+                        SumStability[j] = SumStability[j] + row[2]
+                        count[j] = count[j] + 1           
+        for k in range(len(CanConnectWiFiName)):
+            BestAverageSpeed[k] = SumAverageSpeed[k] / count[k]
+            BestStability[k] = SumStability[k] / count[k]
         c.close()
-        if i > 10:
-            k = 10
-        for j in range(k):
-            list2[j] = list1[i-k]
-            print(list2[j])
-        return list2
+        for l in range(len(CanConnectWiFiName)):
+            print(CanConnectWiFiName[l] ,BestAverageSpeed[l], BestStability[l])
+        return BestAverageSpeed, BestStability
