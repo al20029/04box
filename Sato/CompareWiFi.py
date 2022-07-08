@@ -40,9 +40,9 @@ class CompareWiFi():
             else:
                 EvalList.append(SumAverage[i]/Count[i])
         if max(EvalList) < MeasuredWiFiEval:
-            print("今の方がいい")
+            # print("今の方がいい")
             return None
         else:
-            print("変えた方がいい")
+            # print("変えた方がいい")
             return WiFiList[EvalList.index(max(EvalList))]
         ################################################
