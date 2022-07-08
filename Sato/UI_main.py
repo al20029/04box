@@ -9,6 +9,7 @@
 ******************************************************
 """
 
+from cv2 import compare
 from DisplayStartWindow import DisplayStartWindow
 from DisplayFinishWindow import DisplayFinishWindow
 from DisplayOngoingWindow import DisplayOngoingWindow
@@ -79,8 +80,6 @@ class UIMainProcess:
         # Fastest_WiFi = ""
         # fastest = 0
         # a = Data()
-        # WiFiList = list()
-        # WiFiList = InteractWithOS.GetWiFi()
         # for s in WiFiList:
         #     # print(s)
         #     InteractWithOS.ChangeWiFi(s)
@@ -95,9 +94,12 @@ class UIMainProcess:
         #         Fastest_WiFi = s
         # get = True
 
+        WiFiList = list()
+        WiFiList = InteractWithOS.GetWiFi()
+
         # リアルタイムデータから最適なWi-Fiを探す
-        ManagementWiFi.SendRealtimeData(a.ListInstantSpeed[1])
-        name = 
+        ManagementWiFi.SendRealtimeData(WiFiList)
+        name = compareWiFi()
         # Fastest_WiFi()
 
 
