@@ -97,7 +97,11 @@ class DisplayRegularStartWindow:
                 print(WiFiList[0])
                 print(AverageSpeed)
                 print(Stability)
-                ssh.ParamikoReg(WiFiList.pop(0), int(AverageSpeed), sum(Stability)/len(Stability))
+                ssh.ParamikoReg(WiFiList.pop(0), AverageSpeed, sum(Stability)/len(Stability))
+                ##########
+                 ##popによりWiFiListがnullになった時どうする？？
+                ##########
+
                 # ManagementWiFi.RegisterData(WiFiList.pop(0), AverageSpeed, Stability)
                 # リアルタイムデータから最適なWi-Fiを探す
                 # ManagementWiFi.SendRealtimeData(WiFiList)

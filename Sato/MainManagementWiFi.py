@@ -17,7 +17,7 @@ args = sys.argv
 print(args)
 if args[1] == "1":
     print(1)
-    ManagementWiFi.ManagementWiFi.RegisterData(args[2], float(args[3]), int(args[4]))
+    ManagementWiFi.ManagementWiFi.RegisterData(args[2], args[3], args[4])
 elif args[1] == "2":
     print(2)
     ManagementWiFi.ManagementWiFi.SendPastData(args[2])
