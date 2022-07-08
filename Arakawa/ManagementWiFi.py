@@ -13,11 +13,6 @@
 from asyncio import CancelledError
 from re import L
 import sqlite3
-# import datetime
-# import numpy as np
-# from testdb import *
-# from UI_main import UI_main
-# from MainMeasurement import MainMeasurement
 
 class ManagementWiFi:
  
@@ -132,6 +127,7 @@ class ManagementWiFi:
             BestAverageSpeed[k] = SumAverageSpeed[k] / count[k]
             BestStability[k] = SumStability[k] / count[k]
         c.close()
-        for l in range(len(CanConnectWiFiName)):
-            print(CanConnectWiFiName[l] ,BestAverageSpeed[l], BestStability[l])
+        # for l in range(len(CanConnectWiFiName)):
+        #     print(CanConnectWiFiName[l] ,BestAverageSpeed[l], BestStability[l])
+        print(CanConnectWiFiName, BestAverageSpeed, BestStability)
         return CanConnectWiFiName, BestAverageSpeed, BestStability
