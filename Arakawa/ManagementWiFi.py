@@ -9,8 +9,6 @@
 *******************************************************************/
 """
 
-# from multiprocessing import _JoinableQueueType
-from asyncio import CancelledError
 import sqlite3
 
 class ManagementWiFi:
