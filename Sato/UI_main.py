@@ -111,7 +111,9 @@ class UIMainProcess:
         # name = CompareWiFi()
         # Fastest_WiFi()
 
-
+        print("戻り値の出力")
+        print(get)
+        print(name)
         if get == False:
             DisplayRegularFinishWindow.RegularFinishWindow(name)
 

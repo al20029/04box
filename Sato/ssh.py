@@ -41,9 +41,6 @@ class ssh():
 
     ## リアルタイムデータの取得
     def ParamikoGetReal(WiFiList):
-
-        WiFiList.append("test78")
-
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         client.connect(hostname = '160.16.141.77',username='root',password='pracb2022',port = 50422)
@@ -55,24 +52,23 @@ class ssh():
         # ReturnValue = stdout.read().split('\n')
 
         ######変更点######
-        print("GetReturn")
-        print(ReturnValue)
         WiFiName = list()
         AverageSpeed = list()
         Stability = list()
+
+        #サーバに目的のWiFiデータが存在しない場合
+        if ReturnValue == "":
+            return 0, WiFiName, AverageSpeed, Stability
+        
         print("Data:")
         for s in ReturnValue:
             # print(s)
             Spl_s = s.split()
             WiFiName.append(Spl_s[0])
-            AverageSpeed.append(Spl_s[1])
-            Stability.append(Spl_s[2])
-        print("GetList")
-        print(WiFiName)
-        print(AverageSpeed)
-        print(Stability)
+            AverageSpeed.append(float(Spl_s[1]))
+            Stability.append(float(Spl_s[2]))
         # print(stdout.read())
         client.close()
-        return WiFiName, AverageSpeed, Stability
+        return 1, WiFiName, AverageSpeed, Stability
         ##################
     ###########################################

@@ -1,19 +1,48 @@
-import datetime
+# import datetime
+from re import X
 from ManagementWiFi import ManagementWiFi
 from ssh import ssh
 
 class CompareWiFi():
-    def CompareWiFi(WiFilist):
+    def CompareWiFi(WiFiList, MeasuredWiFiEval):
         ###################変更点#######################
-        AverageSpeed = list()
-        Stability = list()
+        WiFiNames = list()
+        AverageSpeeds = list()
+        Stabilities = list()
         Calculation = list()
-        date = datetime.datetime.now()
+        # date = datetime.datetime.now()
         # AverageSpeed, Stability = ManagementWiFi.SendRealtimeData(WiFilist, date)
         # AverageSpeed, Stability = ssh.ParamikoGetReal(2, WiFilist)
-        ssh.ParamikoGetReal(WiFilist)
-        # Calculation = AverageSpeed*Stability
-        # return WiFilist.index(max(Calculation))
-        return 0
+        key, WiFiNames, AverageSpeeds, Stabilities = ssh.ParamikoGetReal(WiFiList)
 
+        if key == 0:
+            return None
+        print("key = ")
+        print(key)
+
+        for i in range(len(AverageSpeeds)):
+            Calculation.append(AverageSpeeds[i]*Stabilities[i])
+        
+        ################################################
+        #接続可能なWiFiの中で最も評価の高い数値を求める#
+        ################################################
+        Count = [0] * len(WiFiList)
+        SumAverage = [0] * len(WiFiList)
+        for t in range(len(WiFiNames)):
+            for j in range(len(WiFiList)):
+                if WiFiNames[t] == WiFiList[j]:
+                    Count[j] += 1
+                    SumAverage[j] += Calculation[t]
+        EvalList = list()
+        for i in range(len(Count)):
+            if Count[i] == 0:
+                EvalList.append(0)
+            else:
+                EvalList.append(SumAverage[i]/Count[i])
+        if max(EvalList) < MeasuredWiFiEval:
+            print("今の方がいい")
+            return None
+        else:
+            print("変えた方がいい")
+            return WiFiList[EvalList.index(max(EvalList))]
         ################################################

@@ -9,6 +9,7 @@
 ******************************************************
 """
 
+from queue import Empty
 import tkinter
 
 import paramiko
@@ -88,7 +89,7 @@ class DisplayRegularStartWindow:
             if count > 0:
                 tki.after(1000, Repeat_Download)
             else:
-                
+                Stop = False
                 ################# 変更点#################
                 WiFiList = list()
                 WiFiList = InteractWithOS.GetWiFi()
@@ -99,15 +100,29 @@ class DisplayRegularStartWindow:
                 # print(WiFiList[0])
                 # print(AverageSpeed)
                 # print(Stability)
-                ssh.ParamikoReg(WiFiList.pop(0), AverageSpeed, sum(Stability)/len(Stability))
-                ##########
-                 ##popによりWiFiListがnullになった時どうする？？
-                ##########
+                WiFi = WiFiList.pop(0)
+                #現在接続していないWiFiの中で接続可能なWiFiがない場合は現在接続しているWiFiを最適とする
+                if len(WiFiList) == 0:
+                    BestWiFiName = WiFi
+                else:
+                    ssh.ParamikoReg(WiFi, AverageSpeed, sum(Stability)/len(Stability))
+                    ##########
+                    ##popによりWiFiListがnullになった時どうする？？
+                    ##########
 
-                # ManagementWiFi.RegisterData(WiFiList.pop(0), AverageSpeed, Stability)
-                # リアルタイムデータから最適なWi-Fiを探す
-                # ManagementWiFi.SendRealtimeData(WiFiList)
-                BestWiFiName = CompareWiFi.CompareWiFi(WiFiList)
+                    # ManagementWiFi.RegisterData(WiFiList.pop(0), AverageSpeed, Stability)
+                    # リアルタイムデータから最適なWi-Fiを探す
+                    # ManagementWiFi.SendRealtimeData(WiFiList)
+
+
+                    BestWiFiName = CompareWiFi.CompareWiFi(WiFiList, AverageSpeed*sum(Stability)/len(Stability))
+                    if BestWiFiName == None:
+                        BestWiFiName = WiFi
+
+                ##########仕様変更#######
+                #CompareWiFiの引数には計測したWiFiの評価値を入れる
+                #いったん評価値はAverageSpeed*Stabilityとする
+                #########################
 
                 ########################################
                 tki.destroy()
