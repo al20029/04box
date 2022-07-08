@@ -94,13 +94,13 @@ class UIMainProcess:
         # get = True
 
         a = Data()
-        WiFiList = list()
-        WiFiList = InteractWithOS.GetWiFi()
-        get = DisplayRegularStartWindow.RegularStartWindow(a)
+        # WiFiList = list()
+        # WiFiList = InteractWithOS.GetWiFi()
+        get,name = DisplayRegularStartWindow.RegularStartWindow(a)
 
         # リアルタイムデータから最適なWi-Fiを探す
-        ManagementWiFi.SendRealtimeData(WiFiList)
-        name = CompareWiFi()
+        # ManagementWiFi.SendRealtimeData(WiFiList)
+        # name = CompareWiFi()
         # Fastest_WiFi()
 
 
