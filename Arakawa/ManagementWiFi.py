@@ -10,7 +10,7 @@
 """
 
 import sqlite3
-import time
+import datetime
 
 class ManagementWiFi:
  
@@ -29,7 +29,7 @@ class ManagementWiFi:
     def RegisterData(WiFiName, AverageSpeed, Stability):
     # def RegisterData():
         # 計測時刻の取得
-        MeasurementTime = time.time()
+        MeasurementTime = datetime.datetime()
         # データベースの作成（仮）
         db = sqlite3.connect('main.db')
         
@@ -100,7 +100,7 @@ class ManagementWiFi:
     def SendRealtimeData(CanConnectWiFiName):
 
         # 計測時刻の取得
-        MeasurementTime = time.time()
+        MeasurementTime = datetime.datetime()
 
         # データベースの作成（仮）
         db = sqlite3.connect('main.db')
