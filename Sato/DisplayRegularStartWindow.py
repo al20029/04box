@@ -45,10 +45,11 @@ class DisplayRegularStartWindow:
         def btn_click():
             nonlocal Stop
             # Y_N = messagebox.askyesno("確認中", "停止しますか")
-            # if Y_N == True:   
+            # if Y_N == True:
+            # tki.after_cancel()   
             Stop = True
-            tki.quit()
-                # tki.destroy()
+            # tki.quit()
+            tki.destroy()
 
         # 画面作成
         tki = tkinter.Tk()
@@ -75,10 +76,11 @@ class DisplayRegularStartWindow:
 
         # 繰り返しダウンロードする
         def Repeat_Download():
+            nonlocal Stop
             nonlocal tki
             nonlocal count
             nonlocal BestWiFiName
-
+            Stop = True
             count -= 1
             MainMeasurement.Measurement(data)
             # faster,a,b = MainMeasurement.Measurement(a)
@@ -131,7 +133,5 @@ class DisplayRegularStartWindow:
         
         # 画面をそのまま表示
         tki.mainloop()
-
-        
 
         return Stop, BestWiFiName
