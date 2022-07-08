@@ -61,7 +61,6 @@ class UIMainProcess:
                 list.remove(WiFiName)
                 list.insert(0, WiFiName)
                 a = Data()
-                DataList.append(a)
                 for data in (DataList):
                     if data.WiFiName == WiFiName:
                         a = data
@@ -69,6 +68,7 @@ class UIMainProcess:
                         a.MaxSpeed = 0
                     else:
                         a.WiFiName = WiFiName
+                        DataList.append(a)
 
         # データベースの送信
         # GetSendDB.upload()
