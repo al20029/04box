@@ -31,6 +31,7 @@ from CompareWiFi import CompareWiFi
 class DisplayRegularStartWindow:
     def RegularStartWindow(data):
         Stop = False
+        BestWiFiName = ""
         # ダウンロードする回数
         count = 10
 
@@ -73,6 +74,7 @@ class DisplayRegularStartWindow:
         def Repeat_Download():
             nonlocal tki
             nonlocal count
+            nonlocal BestWiFiName
 
             count -= 1
             MainMeasurement.Measurement(data)
