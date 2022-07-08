@@ -10,6 +10,7 @@
 """
 
 import sqlite3
+import time
 
 class ManagementWiFi:
  
@@ -25,9 +26,10 @@ class ManagementWiFi:
     """
 
     # 計測データの登録
-    def RegisterData(WiFiName, AverageSpeed, Stability, MeasurementTime):
+    def RegisterData(WiFiName, AverageSpeed, Stability):
     # def RegisterData():
-
+        # 計測時刻の取得
+        MeasurementTime = time.time()
         # データベースの作成（仮）
         db = sqlite3.connect('main.db')
         
@@ -95,7 +97,11 @@ class ManagementWiFi:
     """
 
     # リアルタイムデータの送信    
-    def SendRealtimeData(CanConnectWiFiName): # 単体テスト時は引数にMeasurementWiFi
+    def SendRealtimeData(CanConnectWiFiName):
+
+        # 計測時刻の取得
+        MeasurementTime = time.time()
+
         # データベースの作成（仮）
         db = sqlite3.connect('main.db')
         db.row_factory = sqlite3.Row
@@ -103,9 +109,9 @@ class ManagementWiFi:
         # listの宣言  
         SumAverageSpeed = [0]*len(CanConnectWiFiName) # list() # Wi-Fi名ごとの平均速度の和
         SumStability =  [0]*len(CanConnectWiFiName) # list() # Wi-Fi名ごとの安定性の和
-        BestAverageSpeed = [0]*len(CanConnectWiFiName)
-        BestStability = [0]*len(CanConnectWiFiName)
-        count = [0]*len(CanConnectWiFiName)
+        BestAverageSpeed = [0]*len(CanConnectWiFiName) #Wi-Fi名ごとの平均速度の平均
+        BestStability = [0]*len(CanConnectWiFiName) #Wi-Fi名ごとの安定性の平均
+        count = [0]*len(CanConnectWiFiName) #Wi-Fi名ごとのデータ数
 
         # SQLite3を操作するカーソルの作成
         c = db.cursor()
