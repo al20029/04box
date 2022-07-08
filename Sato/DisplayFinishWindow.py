@@ -22,12 +22,12 @@ from MainMeasurement import MainMeasurement
 
 class DisplayFinishWindow:
     def FinishWindow(CanConnectWiFiname,DataList):
-        WiFiname = ''
+        WiFiName = ''
         # クリック時のイベント
         def btn_click():
             InteractWithOS.ChangeWiFi(combobox.get())
-            nonlocal WiFiname
-            WiFiname = combobox.get()
+            nonlocal WiFiName
+            WiFiName = combobox.get()
             #WiFi変更が完了するまで待機 
             # Result_change = str()
             # while Result_change == None:
@@ -124,7 +124,7 @@ class DisplayFinishWindow:
 
         treecount = 0
         for Data in DataList:
-            WiFiname = Data.WiFiname
+            WiFiname = Data.WiFiName
             avgspeed = round(MainMeasurement.AverageSpeedMeasurement(Data.ListInstantSpeed,len(Data.ListInstantSpeed)),1)
             if len(Data.ListInstantSpeed) != 10:
                 stab =[-1,-1,-1,-1,-1]
