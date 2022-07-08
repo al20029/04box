@@ -9,15 +9,7 @@
 *******************************************************************/
 """
 
-# from multiprocessing import _JoinableQueueType
-from asyncio import CancelledError
-from re import L
 import sqlite3
-# import datetime
-# import numpy as np
-# from testdb import *
-# from UI_main import UI_main
-# from MainMeasurement import MainMeasurement
 
 class ManagementWiFi:
  
@@ -89,7 +81,7 @@ class ManagementWiFi:
         BestAverageSpeed = SumAverageSpeed / n
         BestStability = SumStability / n
         print(BestAverageSpeed, BestStability)
-        return BestAverageSpeed, BestStability
+        # return BestAverageSpeed, BestStability
 
     """
     *******************************************************************
@@ -132,6 +124,7 @@ class ManagementWiFi:
             BestAverageSpeed[k] = SumAverageSpeed[k] / count[k]
             BestStability[k] = SumStability[k] / count[k]
         c.close()
-        for l in range(len(CanConnectWiFiName)):
-            print(CanConnectWiFiName[l] ,BestAverageSpeed[l], BestStability[l])
-        return CanConnectWiFiName, BestAverageSpeed, BestStability
+        # for l in range(len(CanConnectWiFiName)):
+        #     print(CanConnectWiFiName[l] ,BestAverageSpeed[l], BestStability[l])
+        print(CanConnectWiFiName, BestAverageSpeed, BestStability)
+        # return CanConnectWiFiName, BestAverageSpeed, BestStability
