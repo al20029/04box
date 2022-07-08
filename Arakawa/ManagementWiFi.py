@@ -11,7 +11,6 @@
 
 # from multiprocessing import _JoinableQueueType
 from asyncio import CancelledError
-from re import L
 import sqlite3
 
 class ManagementWiFi:
@@ -84,7 +83,7 @@ class ManagementWiFi:
         BestAverageSpeed = SumAverageSpeed / n
         BestStability = SumStability / n
         print(BestAverageSpeed, BestStability)
-        return BestAverageSpeed, BestStability
+        # return BestAverageSpeed, BestStability
 
     """
     *******************************************************************
@@ -130,4 +129,4 @@ class ManagementWiFi:
         # for l in range(len(CanConnectWiFiName)):
         #     print(CanConnectWiFiName[l] ,BestAverageSpeed[l], BestStability[l])
         print(CanConnectWiFiName, BestAverageSpeed, BestStability)
-        return CanConnectWiFiName, BestAverageSpeed, BestStability
+        # return CanConnectWiFiName, BestAverageSpeed, BestStability
