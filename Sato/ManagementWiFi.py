@@ -30,7 +30,7 @@ class ManagementWiFi:
     # def RegisterData():
 
         # 計測時刻の取得
-        MeasurementTime = datetime.now()
+        MeasurementTime = datetime.datetime.now()
 
         # データベースの作成（仮）
         db = sqlite3.connect('main.db')
@@ -103,7 +103,7 @@ class ManagementWiFi:
     def SendRealtimeData(CanConnectWiFiName):
 
         # 計測時刻の取得
-        MeasurementTime = datetime.now()
+        MeasurementTime = datetime.datetime.now()
 
         # データベースの作成
         db = sqlite3.connect('main.db')
