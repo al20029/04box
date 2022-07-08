@@ -29,11 +29,10 @@ from CompareWiFi import CompareWiFi
 """
 
 class DisplayRegularStartWindow:
-    def RegularStartWindow(a):
+    def RegularStartWindow(data):
         Stop = False
         # ダウンロードする回数
         count = 10
-        faster = 100
 
         #空ダウンロード
         ManagementDownload.Donwload()
@@ -74,10 +73,9 @@ class DisplayRegularStartWindow:
         def Repeat_Download():
             nonlocal tki
             nonlocal count
-            nonlocal faster
 
             count -= 1
-            faster = MainMeasurement.Measurement(a)
+            MainMeasurement.Measurement(data)
             # faster,a,b = MainMeasurement.Measurement(a)
             # print(MainMeasurement.Measurement(a))
             if count > 0:
@@ -94,12 +92,13 @@ class DisplayRegularStartWindow:
         WiFiList = list()
         WiFiList = InteractWithOS.GetWiFi()
         # リストから現在のWi-Fi名を削除
-        WiFiList.pop(0)
         # 計測値の登録
-        ManagementWiFi.RegisterData()
+        AverageSpeed = MainMeasurement.AverageSpeedMeasurement(data.ListInstantSpeed, len(data.ListInstantSpeed))
+        Stability = MainMeasurement.StabilityCalculation(data.ListInstantSpeed, len(data.ListInstantSpeed))
+        ManagementWiFi.RegisterData(WiFiList.pop(0), AverageSpeed, Stability)
         # リアルタイムデータから最適なWi-Fiを探す
-        ManagementWiFi.SendRealtimeData(WiFiList)
-        BestWiFiName = CompareWiFi()
+        # ManagementWiFi.SendRealtimeData(WiFiList)
+        BestWiFiName = CompareWiFi(WiFiList)
 
         #########################################
         
