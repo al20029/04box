@@ -124,14 +124,14 @@ class DisplayFinishWindow:
 
         treecount = 0
         for Data in DataList:
-            WiFiname = Data.WiFiName
+            WiFiName = Data.WiFiName
             avgspeed = round(MainMeasurement.AverageSpeedMeasurement(Data.ListInstantSpeed,len(Data.ListInstantSpeed)),1)
             if len(Data.ListInstantSpeed) != 10:
                 stab =[-1,-1,-1,-1,-1]
             else:
                 stab = MainMeasurement.StabilityCalculation(Data.ListInstantSpeed,10)
             speed = str(avgspeed) +'Mbps'
-            tree.insert(parent='', index='end', iid = treecount, values=(WiFiname,speed,stab[0],stab[1],stab[2],stab[3],stab[4]),tags=Data.color)
+            tree.insert(parent='', index='end', iid = treecount, values=(WiFiName,speed,stab[0],stab[1],stab[2],stab[3],stab[4]),tags=Data.color)
             treecount += 1
         tree.place(x=420, y=80)     
 
@@ -154,5 +154,5 @@ class DisplayFinishWindow:
         # 画面をそのまま表示
         frm.mainloop()
 
-        return Start,WiFiname
+        return Start,WiFiName
     # FinishWindow()
