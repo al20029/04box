@@ -17,8 +17,8 @@ class DisplayOngoingWindow:
     def OngoingWindow(Data):
         # click時のイベント
         def btn_click():
-            nonlocal Stop
-            Stop = True
+            nonlocal RUN
+            RUN = True
             #messagebox.showinfo("メッセージ", "ボタンがクリックされました")
             tki.destroy()
             
@@ -27,7 +27,7 @@ class DisplayOngoingWindow:
         #1回目の計測
         MainMeasurement.Measurement(Data)
 
-        Stop = False
+        RUN = False
 
         # 画面作成
         tki = tkinter.Tk()
@@ -107,8 +107,8 @@ class DisplayOngoingWindow:
             else:
                 time.sleep(2)
                 tki.destroy()
-                nonlocal Stop
-                Stop = True
+                nonlocal RUN
+                RUN = True
         tki.after(1000,repeat_func)
         tki.mainloop()
-        return Stop
+        return RUN

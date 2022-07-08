@@ -60,15 +60,23 @@ class UIMainProcess:
                 get,WiFiName = DisplayFinishWindow.FinishWindow(list,DataList)
                 list.remove(WiFiName)
                 list.insert(0, WiFiName)
+                print(WiFiName)
                 a = Data()
+                print("P1")
+                for data in (DataList):
+                    print(data.WiFiName)
                 for data in (DataList):
                     if data.WiFiName == WiFiName:
                         a = data
                         a.ListInstantSpeed = []
                         a.MaxSpeed = 0
-                    else:
+                        break
+                    elif data == DataList[-1]:
                         a.WiFiName = WiFiName
                         DataList.append(a)
+                print("P2")
+                for data in (DataList):
+                    print(data.WiFiName)
 
         # データベースの送信
         # GetSendDB.upload()
