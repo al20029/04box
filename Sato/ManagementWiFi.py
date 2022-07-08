@@ -80,7 +80,7 @@ class ManagementWiFi:
         BestAverageSpeed = 0
         BestStability = 0
         # データ検索
-        c.execute('SELECT * FROM items')
+        c.execute('SELECT * FROM items WHERE (WiFiName == ?)',(WiFiName))
         for row in c:   
             if row[0] == WiFiName: 
                 print(row[0], row[1], row[2])

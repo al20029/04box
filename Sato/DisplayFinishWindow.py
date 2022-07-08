@@ -19,6 +19,7 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationTool
 import numpy as np
 from ToolTip import *
 from MainMeasurement import MainMeasurement
+from ssh import ssh
 
 class DisplayFinishWindow:
     def FinishWindow(CanConnectWiFiname,DataList):
@@ -39,6 +40,20 @@ class DisplayFinishWindow:
             frm.destroy()
 
         Start = False
+
+        # DBへ計測済みデータを登録
+        RegData = DataList[0]
+        for data in DataList:
+            if(CanConnectWiFiname[0]==data.WiFiName):
+                RegData = data
+                break
+        if len(RegData.ListInstantSpeed) == 10:
+            RegAvg = MainMeasurement.AverageSpeedMeasurement(RegData.ListInstantSpeed,len(RegData.ListInstantSpeed))
+            # RegStab = MainMeasurement.StabilityCalculation(RegData.ListInstantSpeed,10)
+            RegStab = sum(MainMeasurement.StabilityCalculation(RegData.ListInstantSpeed,10))/5
+            # ssh.ParamikoReg(CanConnectWiFiname[0], RegAvg, RegStab[0],RegStab[1],RegStab[2],RegStab[3],RegStab[4])
+            ssh.ParamikoReg(CanConnectWiFiname[0], RegAvg, RegStab)
+
         # 画面作成
         frm = tkinter.Tk()
         frm.geometry('900x500') #画面サイズ
@@ -126,13 +141,22 @@ class DisplayFinishWindow:
         for Data in DataList:
             WiFiName = Data.WiFiName
             avgspeed = round(MainMeasurement.AverageSpeedMeasurement(Data.ListInstantSpeed,len(Data.ListInstantSpeed)),1)
+            speed = str(avgspeed) +'Mbps'
             if len(Data.ListInstantSpeed) != 10:
                 stab =[-1,-1,-1,-1,-1]
             else:
                 stab = MainMeasurement.StabilityCalculation(Data.ListInstantSpeed,10)
-            speed = str(avgspeed) +'Mbps'
+
+            # 過去データの取得
+            PastAvg, PastStab = ssh.ParamikoGetPast(WiFiName)
+            PastAvg = round(PastAvg,1)
+            PastSpeed = '(' + str(PastAvg) +'Mbps' +')'
+            PastWiFiName = '(' + WiFiName + ')'
+            PastStab = '(' + str(PastStab) + ')'
+
             tree.insert(parent='', index='end', iid = treecount, values=(WiFiName,speed,stab[0],stab[1],stab[2],stab[3],stab[4]),tags=Data.color)
-            treecount += 1
+            tree.insert(parent='', index='end', iid = treecount+1, values=(PastWiFiName,PastSpeed,'-','-','-','-','-'),tags=Data.color)
+            treecount += 2
         tree.place(x=420, y=80)     
 
         #安定性の説明

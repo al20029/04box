@@ -33,10 +33,10 @@ class ssh():
         # print(stdout.read().decode('utf-8'))
         ######変更点######
         ReturnValue = stdout.read().decode('UTF-8').split()
-        BestAverageSpeed = ReturnValue[0]
-        BestStability = ReturnValue[1]
+        AverageSpeed = float(ReturnValue[1])
+        Stability = float(ReturnValue[2])
         client.close()
-        return BestAverageSpeed, BestStability
+        return AverageSpeed, Stability
         ##################
 
     ## リアルタイムデータの取得
