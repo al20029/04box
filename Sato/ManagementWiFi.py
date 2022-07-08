@@ -59,7 +59,8 @@ class ManagementWiFi:
     """
 
     # 過去データの送信
-    def SendPastData(WiFiName, AverageSpeed, Stability):
+    def SendPastData(WiFiName):
+    # def SendPastData(WiFiName, AverageSpeed, Stability):
         # データベースの作成（仮）
         db = sqlite3.connect('main.db')
         db.row_factory = sqlite3.Row
@@ -99,7 +100,7 @@ class ManagementWiFi:
     """
 
     # リアルタイムデータの送信    
-    def SendRealtimeData(CanConnectWiFiName): # 単体テスト時は引数にMeasurementWiFi
+    def SendRealtimeData(CanConnectWiFiName):
 
         # 計測時刻の取得
         MeasurementTime = time.time()

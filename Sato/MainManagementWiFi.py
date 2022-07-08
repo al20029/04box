@@ -10,14 +10,16 @@
 """
 import ManagementWiFi
 import sys
-# from Arakawa.ManagementWiFi import ManagementWiFi
 
 class MainManagementWiFi:
     def main():
         args = sys.argv
         if args[1] == 1:
-            ManagementWiFi.ManagementWiFi.RegisterData()
-        elif args[2] == 2:
-            ManagementWiFi.ManagementWiFi.SendPastData()
-        elif args[3] == 3:
-            ManagementWiFi.ManagementWiFi.SendRealtimeData()
+            ManagementWiFi.ManagementWiFi.RegisterData(args[2], float(args[3]), int(args[4]))
+        elif args[1] == 2:
+            ManagementWiFi.ManagementWiFi.SendPastData(args[2])
+        elif args[1] == 3:
+            CanConnectWiFiName = list()
+            for i in range(3, 3+args[2]):
+                CanConnectWiFiName.append(args[i])
+            ManagementWiFi.ManagementWiFi.SendRealtimeData(CanConnectWiFiName)
