@@ -56,7 +56,7 @@ class InteractWithOS:
             if 'All User Profile' in s:
                 List_profiles.append(s[27:].replace(' ', '').replace('  ', ''))
 
-                #現在接続しているWiFiの追加
+        #現在接続しているWiFiの追加
         with open('out_interface.txt', 'w') as pfp:
             subprocess.run('netsh wlan show interface', encoding='utf-8', stdout=pfp, shell=True)
 

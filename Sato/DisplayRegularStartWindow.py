@@ -94,7 +94,10 @@ class DisplayRegularStartWindow:
                 # 計測値の登録
                 AverageSpeed = MainMeasurement.AverageSpeedMeasurement(data.ListInstantSpeed, len(data.ListInstantSpeed))
                 Stability = MainMeasurement.StabilityCalculation(data.ListInstantSpeed, len(data.ListInstantSpeed))
-                ssh.ParamikoReg(WiFiList.pop(0), AverageSpeed, Stability)
+                print(WiFiList[0])
+                print(AverageSpeed)
+                print(Stability)
+                ssh.ParamikoReg(WiFiList.pop(0), int(AverageSpeed), sum(Stability)/len(Stability))
                 # ManagementWiFi.RegisterData(WiFiList.pop(0), AverageSpeed, Stability)
                 # リアルタイムデータから最適なWi-Fiを探す
                 # ManagementWiFi.SendRealtimeData(WiFiList)
