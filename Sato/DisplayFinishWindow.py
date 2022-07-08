@@ -172,7 +172,7 @@ class DisplayFinishWindow:
         # pulltub.place(x=170, y=305)
 
         # ボタンの作成
-        btn = tkinter.Button(frm, text='計測開始', width = 10, height = 2, command = btn_click, font=("MSゴシック", "10"))
+        btn = tkinter.Button(frm, text='再計測開始', width = 10, height = 2, command = btn_click, font=("MSゴシック", "10"))
         btn.place(x=670, y=450) #ボタンを配置する位置の設定
 
         # 画面をそのまま表示
