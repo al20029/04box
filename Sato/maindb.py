@@ -10,6 +10,8 @@
 """
 
 import sqlite3
+import datetime
+
 # データベースの作成
 db = sqlite3.connect('main.db')
 # SQLite3を操作するカーソルの作成
