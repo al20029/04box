@@ -4,13 +4,12 @@
 ***  Version        : V1.0
 ***  Designer       : 荒川 塁唯
 ***  Date           : 2022.7.3
-***  Purpose       	: 計測されたWi-Fi情報を管理するデータベースを定義する.
+***  Purpose       	: 計測されたWi-Fi情報を管理するデータベースを設定する.
 ***
 *******************************************************************/
 """
 
 import sqlite3
-import datetime
 # データベースの作成（仮）
 db = sqlite3.connect('main.db')
 # SQLite3を操作するカーソルの作成

@@ -10,6 +10,7 @@
 """
 
 import sqlite3
+import time
 
 class ManagementWiFi:
  
@@ -25,8 +26,11 @@ class ManagementWiFi:
     """
 
     # 計測データの登録
-    def RegisterData(WiFiName, AverageSpeed, Stability, MeasurementTime):
+    def RegisterData(WiFiName, AverageSpeed, Stability):
     # def RegisterData():
+
+        # 計測時刻の取得
+        MeasurementTime = time.time()
 
         # データベースの作成（仮）
         db = sqlite3.connect('main.db')
@@ -96,7 +100,11 @@ class ManagementWiFi:
 
     # リアルタイムデータの送信    
     def SendRealtimeData(CanConnectWiFiName): # 単体テスト時は引数にMeasurementWiFi
-        # データベースの作成（仮）
+
+        # 計測時刻の取得
+        MeasurementTime = time.time()
+
+        # データベースの作成
         db = sqlite3.connect('main.db')
         db.row_factory = sqlite3.Row
 
