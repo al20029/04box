@@ -94,9 +94,9 @@ class DisplayRegularStartWindow:
                 # 計測値の登録
                 AverageSpeed = MainMeasurement.AverageSpeedMeasurement(data.ListInstantSpeed, len(data.ListInstantSpeed))
                 Stability = MainMeasurement.StabilityCalculation(data.ListInstantSpeed, len(data.ListInstantSpeed))
-                print(WiFiList[0])
-                print(AverageSpeed)
-                print(Stability)
+                # print(WiFiList[0])
+                # print(AverageSpeed)
+                # print(Stability)
                 ssh.ParamikoReg(WiFiList.pop(0), AverageSpeed, sum(Stability)/len(Stability))
                 ##########
                  ##popによりWiFiListがnullになった時どうする？？

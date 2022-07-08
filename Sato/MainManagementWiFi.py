@@ -14,15 +14,15 @@ import sys
 # class MainManagementWiFi:
 # def main():
 args = sys.argv
-print(args)
+# print(args)
 if args[1] == "1":
-    print(1)
+    # print(1)
     ManagementWiFi.ManagementWiFi.RegisterData(args[2], args[3], args[4])
 elif args[1] == "2":
-    print(2)
+    # print(2)
     ManagementWiFi.ManagementWiFi.SendPastData(args[2])
 elif args[1] == "3":
-    print(3)
+    # print(3)
     CanConnectWiFiName = list()
     for i in range(3, 3+int(args[2])):
         CanConnectWiFiName.append(args[i])

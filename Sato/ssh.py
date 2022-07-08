@@ -4,20 +4,21 @@ class ssh():
     ##################変更点###################
     ## データの登録
     def ParamikoReg(WiFiName, AverageSpeed, Stability):
-        ###############
-        print("pramikoRegPhase")
-        print(type(WiFiName), WiFiName)
-        print(type(AverageSpeed), AverageSpeed)
-        print(type(Stability), Stability)
-        ################
+        # ###############
+        # print("pramikoRegPhase")
+        # print(type(WiFiName), WiFiName)
+        # print(type(AverageSpeed), AverageSpeed)
+        # print(type(Stability), Stability)
+        # ################
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         client.connect(hostname = '160.16.141.77',username='root',password='pracb2022',port = 50422)
         ssh = client.get_transport().open_session()
         argument = WiFiName + " " +  str(AverageSpeed) + " " +  str(Stability)
-        stdin, stdout, stderr = client.exec_command("python3 MainManagementWiFi.py"  + " 1 " + argument)
+        client.exec_command("python3 MainManagementWiFi.py"  + " 1 " + argument)
+        # stdin, stdout, stderr = client.exec_command("python3 MainManagementWiFi.py"  + " 1 " + argument)
         # print(stderr.read().decode('utf-8'))
-        print(stdout.read().decode('utf-8'))
+        # print(stdout.read().decode('utf-8'))
         # print(stdout.read())
         client.close()
 
@@ -34,6 +35,8 @@ class ssh():
 
     ## リアルタイムデータの取得
     def ParamikoGetReal(WiFiList):
+
+        WiFiList.append("test78")
 
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
