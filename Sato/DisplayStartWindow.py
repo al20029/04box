@@ -36,7 +36,7 @@ import Data
 """
 class DisplayStartWindow:
     def StartWindow(CanConnectWiFiname):
-        WiFiname = ''
+        WiFiName = ''
         check = ''
         # WiFiList = CanConnectWiFiname
         def btn_click():
@@ -44,9 +44,9 @@ class DisplayStartWindow:
                 messagebox.showerror('エラー','Wi-Fiが接続されていません')
                 return 0
             InteractWithOS.ChangeWiFi(combobox.get())
-            nonlocal WiFiname 
+            nonlocal WiFiName 
             nonlocal check
-            WiFiname = combobox.get()
+            WiFiName = combobox.get()
             # nonlocal WiFiList
             # WiFiList.remove(WiFiname)
             # WiFiList.insert(0,WiFiname)
@@ -138,4 +138,4 @@ class DisplayStartWindow:
         ToolTip(chk3, "一定の間隔で自動計測をして最適なWi-Fiを提案します")
         frm.mainloop()
         Break
-        return Start,WiFiname
+        return Start,WiFiName

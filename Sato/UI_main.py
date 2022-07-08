@@ -47,28 +47,28 @@ class UIMainProcess:
         print(1)
         a = Data()
         DataList.append(a)
-        get,WiFiname = DisplayStartWindow.StartWindow(list)
-        a.WiFiname = WiFiname
-        list.remove(WiFiname)
-        list.insert(0, WiFiname)
-        print(a.WiFiname)
+        get,WiFiName = DisplayStartWindow.StartWindow(list)
+        a.WiFiName = WiFiName
+        list.remove(WiFiName)
+        list.insert(0, WiFiName)
+        print(a.WiFiName)
         while(get):
             get = DisplayOngoingWindow.OngoingWindow(a)
             if get == True:
                 if '接続されていません'in list:
                     list.remove('接続されていません')
-                get,WiFiname = DisplayFinishWindow.FinishWindow(list,DataList)
-                list.remove(WiFiname)
-                list.insert(0, WiFiname)
+                get,WiFiName = DisplayFinishWindow.FinishWindow(list,DataList)
+                list.remove(WiFiName)
+                list.insert(0, WiFiName)
                 a = Data()
-                DataList.append(a)
                 for data in (DataList):
-                    if data.WiFiname == WiFiname:
+                    if data.WiFiName == WiFiName:
                         a = data
                         a.ListInstantSpeed = []
                         a.MaxSpeed = 0
                     else:
-                        a.WiFiname = WiFiname
+                        a.WiFiName = WiFiName
+                        DataList.append(a)
 
         # データベースの送信
         # GetSendDB.upload()
@@ -94,13 +94,13 @@ class UIMainProcess:
         # get = True
 
         a = Data()
-        WiFiList = list()
-        WiFiList = InteractWithOS.GetWiFi()
-        get = DisplayRegularStartWindow.RegularStartWindow(a)
+        # WiFiList = list()
+        # WiFiList = InteractWithOS.GetWiFi()
+        get,name = DisplayRegularStartWindow.RegularStartWindow(a)
 
         # リアルタイムデータから最適なWi-Fiを探す
-        ManagementWiFi.SendRealtimeData(WiFiList)
-        name = CompareWiFi()
+        # ManagementWiFi.SendRealtimeData(WiFiList)
+        # name = CompareWiFi()
         # Fastest_WiFi()
 
 
