@@ -10,8 +10,10 @@ class CompareWiFi():
         Calculation = list()
         date = datetime.datetime.now()
         # AverageSpeed, Stability = ManagementWiFi.SendRealtimeData(WiFilist, date)
-        AverageSpeed, Stability = ssh.paramiko(2, WiFilist)
-        Calculation = AverageSpeed*Stability
-        return WiFilist.index(max(Calculation))
+        # AverageSpeed, Stability = ssh.ParamikoGetReal(2, WiFilist)
+        ssh.ParamikoGetReal(WiFilist)
+        # Calculation = AverageSpeed*Stability
+        # return WiFilist.index(max(Calculation))
+        return 0
 
         ################################################

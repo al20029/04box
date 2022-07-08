@@ -10,6 +10,8 @@
 """
 
 import tkinter
+
+import paramiko
 # from tkinter import messagebox
 from ManagementWiFi import ManagementWiFi
 from InteractWithOS import InteractWithOS
@@ -17,6 +19,7 @@ from ManagementDownload import ManagementDownload
 # from ManagementDownload import ManagementDownload
 from MainMeasurement import MainMeasurement
 from CompareWiFi import CompareWiFi
+from ssh import ssh
 
 """
 ******************************************************
@@ -91,10 +94,11 @@ class DisplayRegularStartWindow:
                 # 計測値の登録
                 AverageSpeed = MainMeasurement.AverageSpeedMeasurement(data.ListInstantSpeed, len(data.ListInstantSpeed))
                 Stability = MainMeasurement.StabilityCalculation(data.ListInstantSpeed, len(data.ListInstantSpeed))
-                ManagementWiFi.RegisterData(WiFiList.pop(0), AverageSpeed, Stability)
+                ssh.ParamikoReg(WiFiList.pop(0), AverageSpeed, Stability)
+                # ManagementWiFi.RegisterData(WiFiList.pop(0), AverageSpeed, Stability)
                 # リアルタイムデータから最適なWi-Fiを探す
                 # ManagementWiFi.SendRealtimeData(WiFiList)
-                BestWiFiName = CompareWiFi(WiFiList)
+                BestWiFiName = CompareWiFi.CompareWiFi(WiFiList)
 
                 ########################################
                 tki.destroy()

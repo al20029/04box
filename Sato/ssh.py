@@ -8,7 +8,7 @@ class ssh():
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         client.connect(hostname = '160.16.141.77',username='root',password='pracb2022',port = 50422)
         ssh = client.get_transport().open_session()
-        argument = WiFiName + " " +  AverageSpeed + " " +  Stability
+        argument = WiFiName + " " +  str(AverageSpeed) + " " +  str(Stability)
         stdin, stdout, stderr = client.exec_command("python3 MainManagementWiFi.py"  + " 1 " + argument)
         print(stdout.read().decode('utf-8'))
         client.close()
