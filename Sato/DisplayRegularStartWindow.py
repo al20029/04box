@@ -10,9 +10,13 @@
 """
 
 import tkinter
-from tkinter import messagebox
+# from tkinter import messagebox
+from ManagementWiFi import ManagementWiFi
+from InteractWithOS import InteractWithOS
+from ManagementDownload import ManagementDownload
 # from ManagementDownload import ManagementDownload
 from MainMeasurement import MainMeasurement
+from CompareWiFi import CompareWiFi
 
 """
 ******************************************************
@@ -28,24 +32,11 @@ class DisplayRegularStartWindow:
     def RegularStartWindow(a):
         Stop = False
         # ダウンロードする回数
-        count = 2
+        count = 10
         faster = 100
 
-        # 繰り返しダウンロードする
-        def Repeat_Download():
-            nonlocal tki
-            nonlocal count
-            nonlocal faster
-
-            count -= 1
-            faster = MainMeasurement.Measurement(a)
-            # faster,a,b = MainMeasurement.Measurement(a)
-            # print(MainMeasurement.Measurement(a))
-            if count > 0:
-                tki.after(1000, Repeat_Download)
-            else:
-                tki.destroy()
-                # tki.quit()
+        #空ダウンロード
+        ManagementDownload.Donwload()
 
         # click時のイベント
         def btn_click():
@@ -80,9 +71,39 @@ class DisplayRegularStartWindow:
         btn.place(x=200, y=250) #ボタンを配置する位置の設定
 
         # 繰り返しダウンロードする
+        def Repeat_Download():
+            nonlocal tki
+            nonlocal count
+            nonlocal faster
+
+            count -= 1
+            faster = MainMeasurement.Measurement(a)
+            # faster,a,b = MainMeasurement.Measurement(a)
+            # print(MainMeasurement.Measurement(a))
+            if count > 0:
+                tki.after(1000, Repeat_Download)
+            else:
+                tki.destroy()
+                # tki.quit()
+
+        # 繰り返しダウンロードする
         tki.after(1000, Repeat_Download)
+
+
+        ################# 変更点#################
+        WiFiList = list()
+        WiFiList = InteractWithOS.GetWiFi()
+        # リストから現在のWi-Fi名を削除
+        WiFiList.pop(0)
+        # 計測値の登録
+        ManagementWiFi.RegisterData()
+        # リアルタイムデータから最適なWi-Fiを探す
+        ManagementWiFi.SendRealtimeData(WiFiList)
+        BestWiFiName = CompareWiFi()
+
+        #########################################
         
         # 画面をそのまま表示
         tki.mainloop()
 
-        return Stop, faster
+        return Stop, BestWiFiName

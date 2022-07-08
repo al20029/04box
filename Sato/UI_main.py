@@ -18,9 +18,10 @@ from DisplayRegularFinishWindow import DisplayRegularFinishWindow
 from InteractWithOS import InteractWithOS
 # from MainMeasurement import MainMeasurement
 from Data import Data
-from GetSendDB import GetSendDB
+# from GetSendDB import GetSendDB
 from ManagementWiFi import ManagementWiFi
-import time
+# import time
+from CompareWiFi import CompareWiFi
 
 """
 ******************************************************
@@ -79,12 +80,10 @@ class UIMainProcess:
         # サーバ使わないパターン
         # Fastest_WiFi = ""
         # fastest = 0
-        # a = Data()
         # for s in WiFiList:
         #     # print(s)
         #     InteractWithOS.ChangeWiFi(s)
         #     time.sleep(1)
-        #     get, fast = DisplayRegularStartWindow.RegularStartWindow(a)
 
         #     print(get)
         #     if get == True:
@@ -94,12 +93,14 @@ class UIMainProcess:
         #         Fastest_WiFi = s
         # get = True
 
+        a = Data()
         WiFiList = list()
         WiFiList = InteractWithOS.GetWiFi()
+        get = DisplayRegularStartWindow.RegularStartWindow(a)
 
         # リアルタイムデータから最適なWi-Fiを探す
         ManagementWiFi.SendRealtimeData(WiFiList)
-        name = compareWiFi()
+        name = CompareWiFi()
         # Fastest_WiFi()
 
 

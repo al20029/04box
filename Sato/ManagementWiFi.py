@@ -11,6 +11,7 @@
 
 # from multiprocessing import _JoinableQueueType
 from asyncio import CancelledError
+from re import L
 import sqlite3
 # import datetime
 # import numpy as np
@@ -74,7 +75,7 @@ class ManagementWiFi:
         SumAverageSpeed = 0
         SumStability = 0
         n = 0
-        BestAvrageSpeed = 0
+        BestAverageSpeed = 0
         BestStability = 0
         # データ検索
         c.execute('SELECT * FROM items')
@@ -85,10 +86,10 @@ class ManagementWiFi:
                 SumStability = SumStability + row[2]
                 n = n + 1
         c.close()
-        BestAvrageSpeed = SumAverageSpeed / n
+        BestAverageSpeed = SumAverageSpeed / n
         BestStability = SumStability / n
-        print(BestAvrageSpeed, BestStability)
-        return BestAvrageSpeed, BestStability
+        print(BestAverageSpeed, BestStability)
+        return BestAverageSpeed, BestStability
 
     """
     *******************************************************************
@@ -108,22 +109,29 @@ class ManagementWiFi:
         db.row_factory = sqlite3.Row
 
         # listの宣言  
-        SumAverageSpeed = list() # Wi-Fi名ごとの平均速度の和
-        SumStability = list() # Wi-Fi名ごとの安定性の和
+        SumAverageSpeed = [0]*len(CanConnectWiFiName) # list() # Wi-Fi名ごとの平均速度の和
+        SumStability =  [0]*len(CanConnectWiFiName) # list() # Wi-Fi名ごとの安定性の和
+        BestAverageSpeed = [0]*len(CanConnectWiFiName)
+        BestStability = [0]*len(CanConnectWiFiName)
+        count = [0]*len(CanConnectWiFiName)
 
         # SQLite3を操作するカーソルの作成
         c = db.cursor()
         # データ検索
-        c.execute('SELECT * FROM items WHERE (MeasurementTime-3600 < ?) AND (WiFiName == ?)', MeasurementTime, CanConnectWiFiName)
-        # 直近一時間の計測データの探索
-        for row in c:
-            for i in range(len(CanConnectWiFiName)):
-                if row[0] == CanConnectWiFiName[i]:
-                    SumAverageSpeed[i] == SumAverageSpeed[i] + row[1]
-                    SumStability[i] == SumStability[i] + row[2]
         for i in range(len(CanConnectWiFiName)):
-            BestAvrageSpeed = SumAverageSpeed[i] / len(SumAverageSpeed)
-            BestStability = SumStability[i] / len(SumStability)
+            c.execute('SELECT * FROM items WHERE (MeasurementTime-3600 <= ?) AND (WiFiName == ?)', (MeasurementTime, CanConnectWiFiName[i]))
+            # 直近一時間の計測データの探索
+            for row in c:
+                print(row[0], row[1], row[2])
+                for j in range(len(CanConnectWiFiName)):
+                    if row[0] == CanConnectWiFiName[j]:
+                        SumAverageSpeed[j] = SumAverageSpeed[j] + row[1]
+                        SumStability[j] = SumStability[j] + row[2]
+                        count[j] = count[j] + 1           
+        for k in range(len(CanConnectWiFiName)):
+            BestAverageSpeed[k] = SumAverageSpeed[k] / count[k]
+            BestStability[k] = SumStability[k] / count[k]
         c.close()
-        print(BestAvrageSpeed, BestStability)
-        return BestAvrageSpeed, BestStability
+        for l in range(len(CanConnectWiFiName)):
+            print(CanConnectWiFiName[l] ,BestAverageSpeed[l], BestStability[l])
+        return BestAverageSpeed, BestStability
