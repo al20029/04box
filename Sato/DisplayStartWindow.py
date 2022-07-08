@@ -46,7 +46,7 @@ class DisplayStartWindow:
             InteractWithOS.ChangeWiFi(combobox.get())
             nonlocal WiFiName 
             nonlocal check
-            WiFiname = combobox.get()
+            WiFiName = combobox.get()
             # nonlocal WiFiList
             # WiFiList.remove(WiFiname)
             # WiFiList.insert(0,WiFiname)
