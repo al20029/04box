@@ -96,13 +96,15 @@ class DisplayRegularStartWindow:
                 # リストから現在のWi-Fi名を削除
                 # 計測値の登録
                 AverageSpeed = MainMeasurement.AverageSpeedMeasurement(data.ListInstantSpeed, len(data.ListInstantSpeed))
-                Stability = MainMeasurement.StabilityCalculation(data.ListInstantSpeed, len(data.ListInstantSpeed))
+                #Stability = MainMeasurement.StabilityCalculation(data.ListInstantSpeed, len(data.ListInstantSpeed))
+                Stability = MainMeasurement.cmpstability(data.ListInstantSpeed, len(data.ListInstantSpeed))
                 # print(WiFiList[0])
                 # print(AverageSpeed)
                 # print(Stability)
                 WiFi = WiFiList.pop(0)
                 #現在接続していないWiFiの中で接続可能なWiFiがない場合は現在接続しているWiFiを最適とする
-                ssh.ParamikoReg(WiFi, AverageSpeed, sum(Stability)/len(Stability))
+
+                ssh.ParamikoReg(WiFi, AverageSpeed, Stability)
                 if len(WiFiList) == 0:
                     BestWiFiName = WiFi
                 else:
@@ -116,7 +118,7 @@ class DisplayRegularStartWindow:
                     # ManagementWiFi.SendRealtimeData(WiFiList)
 
 
-                    BestWiFiName = CompareWiFi.CompareWiFi(WiFiList, AverageSpeed*sum(Stability)/len(Stability))
+                    BestWiFiName = CompareWiFi.CompareWiFi(WiFiList, AverageSpeed*Stability)
                     if BestWiFiName == None:
                         BestWiFiName = WiFi
 

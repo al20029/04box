@@ -50,7 +50,7 @@ class DisplayFinishWindow:
         if len(RegData.ListInstantSpeed) == 10:
             RegAvg = MainMeasurement.AverageSpeedMeasurement(RegData.ListInstantSpeed,len(RegData.ListInstantSpeed))
             # RegStab = MainMeasurement.StabilityCalculation(RegData.ListInstantSpeed,10)
-            RegStab = sum(MainMeasurement.StabilityCalculation(RegData.ListInstantSpeed,10))/5
+            RegStab = MainMeasurement.cmpstability(RegData.ListInstantSpeed, len(RegData.ListInstantSpeed))
             # ssh.ParamikoReg(CanConnectWiFiname[0], RegAvg, RegStab[0],RegStab[1],RegStab[2],RegStab[3],RegStab[4])
             ssh.ParamikoReg(CanConnectWiFiname[0], RegAvg, RegStab)
 

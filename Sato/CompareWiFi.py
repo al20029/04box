@@ -27,18 +27,18 @@ class CompareWiFi():
         #接続可能なWiFiの中で最も評価の高い数値を求める#
         ################################################
         Count = [0] * len(WiFiList)
-        SumAverage = [0] * len(WiFiList)
+        SumStab = [0] * len(WiFiList)
         for t in range(len(WiFiNames)):
             for j in range(len(WiFiList)):
                 if WiFiNames[t] == WiFiList[j]:
                     Count[j] += 1
-                    SumAverage[j] += Calculation[t]
+                    SumStab[j] += Calculation[t]
         EvalList = list()
         for i in range(len(Count)):
             if Count[i] == 0:
                 EvalList.append(0)
             else:
-                EvalList.append(SumAverage[i]/Count[i])
+                EvalList.append(SumStab[i]/Count[i])
         if max(EvalList) < MeasuredWiFiEval:
             # print("今の方がいい")
             return None
