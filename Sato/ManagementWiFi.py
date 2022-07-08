@@ -109,7 +109,7 @@ class ManagementWiFi:
         db = sqlite3.connect('main.db')
         db.row_factory = sqlite3.Row
 
-        # listの宣言  
+        # listの宣言
         SumAverageSpeed = [0]*len(CanConnectWiFiName) # list() # Wi-Fi名ごとの平均速度の和
         SumStability =  [0]*len(CanConnectWiFiName) # list() # Wi-Fi名ごとの安定性の和
         BestAverageSpeed = [0]*len(CanConnectWiFiName)
@@ -128,12 +128,12 @@ class ManagementWiFi:
                     if row[0] == CanConnectWiFiName[j]:
                         SumAverageSpeed[j] = SumAverageSpeed[j] + row[1]
                         SumStability[j] = SumStability[j] + row[2]
-                        count[j] = count[j] + 1           
+                        count[j] = count[j] + 1
         for k in range(len(CanConnectWiFiName)):
-            BestAverageSpeed[k] = SumAverageSpeed[k] / count[k]
-            BestStability[k] = SumStability[k] / count[k]
+            if count[k] != 0:
+                BestAverageSpeed[k] = SumAverageSpeed[k] / count[k]
+                BestStability[k] = SumStability[k] / count[k]
+                print(CanConnectWiFiName[k], BestAverageSpeed[k], BestStability[k])
         c.close()
-        # for l in range(len(CanConnectWiFiName)):
-        #     print(CanConnectWiFiName[l] ,BestAverageSpeed[l], BestStability[l])
-        print(CanConnectWiFiName, BestAverageSpeed, BestStability)
+        # print(CanConnectWiFiName, BestAverageSpeed, BestStability)
         # return CanConnectWiFiName, BestAverageSpeed, BestStability
