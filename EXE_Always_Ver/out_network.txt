@@ -1,0 +1,64 @@
+ 
+Interface name : Wi-Fi 
+There are 12 networks currently visible. 
+
+SSID 1 : HUMAX-87EBC
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+
+SSID 2 : aterm-939462-g
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+
+SSID 3 : HUMAX-C4273-A
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+
+SSID 4 : SGP200W-0AA4-bg
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+
+SSID 5 : SGP200W-0AA4-a
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+
+SSID 6 : HUMAX-6A829
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+
+SSID 7 : KAONM-3668B-G
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+
+SSID 8 : 5C6199C479C6-2G
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+
+SSID 9 : HUMAX-C4273
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+
+SSID 10 : HUMAX-98C6E
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+
+SSID 11 : BCW710J-1622E-G
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+
+SSID 12 : TP-Link_EC34
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+

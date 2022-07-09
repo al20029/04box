@@ -1,0 +1,19 @@
+
+Profiles on interface Wi-Fi:
+
+Group policy profiles (read only)
+---------------------------------
+    <None>
+
+User profiles
+-------------
+    All User Profile     : SRAS-WPA
+    All User Profile     : eduroam
+    All User Profile     : SRAS5G
+    All User Profile     : SRAS2G
+    All User Profile     : SGP200W-0AA4-a
+    All User Profile     : SGP200W-0AA4-bg
+    All User Profile     : 49739877-2.4G
+    All User Profile     : HUMAX-BA3AB
+    All User Profile     : HUMAX-BA3AB-A
+

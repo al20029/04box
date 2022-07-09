@@ -244,7 +244,7 @@ class InteractWithOS:
 
         ######テキストベースのやり方
         _env = os.environ
-        subprocess.run('chcp 437', env=_env, shell=True)
+        # subprocess.run('chcp 437', env=_env, shell=True)
 
         command = 'netsh wlan connect name=' + ChangeWiFiName
         # Result_change = subprocess.run(command, encoding='ascii', env=_env, shell=True)
@@ -253,9 +253,8 @@ class InteractWithOS:
             print("未接続")
             # Result_change = subprocess.run('netsh wlan show interface', encoding='ascii', env=_env, shell=True)
             Result_change = subprocess.run('netsh wlan show interface', env=_env, shell=True)
-        return Result_change
-
         time.sleep(2)
+        return Result_change
 
         ######stdoutベースのやりかた
         # command = 'netsh wlan connect name=' + ChangeWiFiName
