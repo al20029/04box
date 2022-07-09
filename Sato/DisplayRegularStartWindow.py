@@ -132,6 +132,8 @@ class DisplayRegularStartWindow:
                 # tki.quit()
 
         # 繰り返しダウンロードする
+        ###変更点###
+        tki.after(12000,lambda: tki.destroy())
         tki.after(1000, Repeat_Download)
 
 
