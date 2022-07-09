@@ -68,7 +68,7 @@ class DisplayStartWindow:
                     with open('out_UserName.txt', 'r') as lines:
                         Result_echo = lines.read().splitlines()
                         # print(lines)
-                    subprocess.run('del out_UserName.txt', shell=True)
+                    # subprocess.run('del out_UserName.txt', shell=True)
                     for s in Result_echo:
                         if len(s) != 0:
                             UserName = s.replace(' ', '').replace('  ', '')

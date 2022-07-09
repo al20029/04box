@@ -11,7 +11,7 @@ User profiles
     All User Profile     : SRAS5G
     All User Profile     : SRAS-WPA
     All User Profile     : SRAS2G
-    All User Profile     : aterm-7886a3-a
     All User Profile     : aterm-7886a3-g
+    All User Profile     : aterm-7886a3-a
     All User Profile     : logitecuser
 

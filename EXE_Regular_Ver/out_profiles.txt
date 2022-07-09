@@ -1,17 +1,17 @@
 
-インターフェイス Wi-Fi のプロファイル:
+Profiles on interface Wi-Fi:
 
-グループ ポリシー プロファイル (読み取り専用)
----------------------------------------------
-    <なし>
+Group policy profiles (read only)
+---------------------------------
+    <None>
 
-ユーザー プロファイル
----------------------
-    すべてのユーザー プロファイル     : eduroam
-    すべてのユーザー プロファイル     : SRAS5G
-    すべてのユーザー プロファイル     : SRAS-WPA
-    すべてのユーザー プロファイル     : SRAS2G
-    すべてのユーザー プロファイル     : aterm-7886a3-a
-    すべてのユーザー プロファイル     : aterm-7886a3-g
-    すべてのユーザー プロファイル     : logitecuser
+User profiles
+-------------
+    All User Profile     : eduroam
+    All User Profile     : SRAS5G
+    All User Profile     : SRAS-WPA
+    All User Profile     : SRAS2G
+    All User Profile     : aterm-7886a3-g
+    All User Profile     : aterm-7886a3-a
+    All User Profile     : logitecuser
 
