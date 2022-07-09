@@ -9,7 +9,7 @@
 ******************************************************
 """
 
-from cv2 import compare
+# from cv2 import compare
 from DisplayStartWindow import DisplayStartWindow
 from DisplayFinishWindow import DisplayFinishWindow
 from DisplayOngoingWindow import DisplayOngoingWindow

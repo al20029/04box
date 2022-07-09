@@ -32,7 +32,7 @@ class ssh():
         stdin, stdout, stderr = client.exec_command("python3 MainManagementWiFi.py" + " 2 " + argument)
         # print(stdout.read().decode('utf-8'))
         ######変更点######
-        ReturnValue = stdout.read().decode('UTF-8').split()
+        ReturnValue = stdout.read().decode('utf-8').split()
         AverageSpeed = float(ReturnValue[1])
         Stability = float(ReturnValue[2])
         client.close()
@@ -48,7 +48,7 @@ class ssh():
         argument = " " + str(len(WiFiList)) + " " + " ".join(WiFiList)
         stdin, stdout, stderr = client.exec_command("python3 MainManagementWiFi.py"+ " 3 " + argument)
         # print(stdout.read().decode('utf-8'))
-        ReturnValue = stdout.read().decode('UTF-8').splitlines()
+        ReturnValue = stdout.read().decode('utf-8').splitlines()
         # ReturnValue = stdout.read().split('\n')
 
         ######変更点######
