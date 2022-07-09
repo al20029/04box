@@ -20,7 +20,9 @@ from ManagementDownload import ManagementDownload
 # from ManagementDownload import ManagementDownload
 from MainMeasurement import MainMeasurement
 from CompareWiFi import CompareWiFi
+import subprocess
 from ssh import ssh
+import os
 
 """
 ******************************************************
@@ -68,8 +70,22 @@ class DisplayRegularStartWindow:
         #画像表示
         canvas = tkinter.Canvas(tki, width=200, height=200)
         canvas.place(x=50, y=60)
+
+        _env = os.environ
+        with open('out_UserName.txt', 'w') as nfp:
+            subprocess.run('echo %USERNAME%', stdout=nfp, env=_env, shell=True)
+        f = open("out_UserName.txt","r")
+        Result_echo = f.read().splitlines()
+        # subprocess.run('del out_UserName.txt', shell=True)
+        for s in Result_echo:
+            if len(s) != 0:
+                UserName = s.replace(' ', '').replace('  ', '')
+                break
+        print(UserName)
+
         # wi_fi = tkinter.PhotoImage(file = "wi-fi.png", width=200, height=200)
-        wi_fi = tkinter.PhotoImage(file = "C:MAIFI/wi-fi.png", width=200, height=200)
+        path = 'C:\Users\\' + UserName + '\wi-fi.png'
+        wi_fi = tkinter.PhotoImage(file = path, width=200, height=200)
         canvas.create_image(0, 20, image = wi_fi, anchor = tkinter.NW)
 
         # ボタンの作成
