@@ -150,7 +150,7 @@ class MainMeasurement:
 
         
         InstantTime = time.time()
-        ManagementDownload.Donwload()
+        # ManagementDownload.Donwload()
         if ManagementDownload.Donwload() == False: #1がtrueで2がfalse
             return -1
         MeasurementTime = time.time() - InstantTime
