@@ -6,18 +6,18 @@ There is 1 interface on the system:
     GUID                   : a4093ca0-4ade-4134-9360-94ab28ef49d7
     Physical address       : d8:3b:bf:61:ee:a5
     State                  : connected
-    SSID                   : aterm-7886a3-a
-    BSSID                  : 80:22:a7:6e:14:2f
+    SSID                   : aterm-7886a3-g
+    BSSID                  : 80:22:a7:6e:14:2e
     Network type           : Infrastructure
-    Radio type             : 802.11ac
+    Radio type             : 802.11n
     Authentication         : WPA2-Personal
     Cipher                 : CCMP
     Connection mode        : Profile
-    Channel                : 108
-    Receive rate (Mbps)    : 780
-    Transmit rate (Mbps)   : 390
-    Signal                 : 81% 
-    Profile                : aterm-7886a3-a 
+    Channel                : 11
+    Receive rate (Mbps)    : 173.3
+    Transmit rate (Mbps)   : 144.4
+    Signal                 : 83% 
+    Profile                : aterm-7886a3-g 
 
     Hosted network status  : Not available
 
