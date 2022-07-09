@@ -12,11 +12,11 @@ There is 1 interface on the system:
     Radio type             : 802.11n
     Authentication         : WPA2-Personal
     Cipher                 : CCMP
-    Connection mode        : Profile
+    Connection mode        : Auto Connect
     Channel                : 11
     Receive rate (Mbps)    : 173.3
-    Transmit rate (Mbps)   : 144.4
-    Signal                 : 83% 
+    Transmit rate (Mbps)   : 117
+    Signal                 : 81% 
     Profile                : aterm-7886a3-g 
 
     Hosted network status  : Not available

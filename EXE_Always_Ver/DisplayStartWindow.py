@@ -90,7 +90,7 @@ class DisplayStartWindow:
                             break
                     print(UserName)
                     # copyするファイルを自動起動処理.exeに
-                    CpExe = 'copy AutoStart.exe C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup'
+                    CpExe = 'copy *.lnk C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup'
                     # CpPng = 'copy WiFi. C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup'
                     # print(ins)
                     subprocess.run(CpExe, shell=True)
@@ -129,7 +129,7 @@ class DisplayStartWindow:
                             break
                     print(UserName)
                     # delするファイルを自動起動処理.exeに
-                    DelExe = 'del C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup\\AutoStart.exe'
+                    DelExe = 'del C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup\\*.lnk'
                     # DelPng = 'del C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup\\AutoStart.exe'
                     # print(ins)
                     subprocess.run(DelExe, shell=True)

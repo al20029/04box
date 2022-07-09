@@ -82,7 +82,7 @@ class DisplayRegularStartWindow:
                 UserName = s.replace(' ', '').replace('  ', '')
                 break
         print(UserName)
-        wi_fi = tkinter.PhotoImage(file = r"C:\Users\\" + UserName + "\Desktop\MAIFI\\wi-fi.png", width=200, height=200)
+        wi_fi = tkinter.PhotoImage(file = r"C:\Users\\" + UserName + "\MAIFI\\wi-fi.png", width=200, height=200)
         
         # wi_fi = tkinter.PhotoImage(file = "wi-fi.png", width=200, height=200)
         canvas.create_image(0, 20, image = wi_fi, anchor = tkinter.NW)
