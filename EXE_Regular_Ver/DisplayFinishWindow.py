@@ -163,6 +163,12 @@ class DisplayFinishWindow:
         notes = tkinter.Label(text = "※\'メール\'～\'オンラインゲーム\'は用途における安定性の目安\n  1～5の値を取り，値が大きいほど良い\n計測を途中で中止したときは-1の値を取る",font=('MSゴシック','13'))
         notes.place(x=430,y=320)
 
+        #########変更点#########
+        #過去データの説明
+        notes = tkinter.Label(text = "※過去データは(Wi-Fi名)で表現している\n",font=('MSゴシック','13'))
+        notes.place(x=430,y=380)
+        ########################
+
         # Wi-Fi名プルタブ配置
         list = CanConnectWiFiname
         combobox = ttk.Combobox(frm, height=3, width = 30, values = list, state = "readonly")
