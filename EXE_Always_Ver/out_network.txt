@@ -1,38 +1,8 @@
  
 Interface name : Wi-Fi 
-There are 7 networks currently visible. 
+There are 1 networks currently visible. 
 
-SSID 1 : E4A7C51912CA-5G
-    Network type            : Infrastructure
-    Authentication          : WPA2-Personal
-    Encryption              : CCMP 
-
-SSID 2 : 5C6199CF1FE8-2G
-    Network type            : Infrastructure
-    Authentication          : WPA2-Personal
-    Encryption              : CCMP 
-
-SSID 3 : Buffalo-G-D520
-    Network type            : Infrastructure
-    Authentication          : WPA2-Personal
-    Encryption              : CCMP 
-
-SSID 4 : JCOM_SLDG
-    Network type            : Infrastructure
-    Authentication          : WPA2-Personal
-    Encryption              : CCMP 
-
-SSID 5 : 5C6199CF1FE8-5G
-    Network type            : Infrastructure
-    Authentication          : WPA2-Personal
-    Encryption              : CCMP 
-
-SSID 6 : aterm-7886a3-a
-    Network type            : Infrastructure
-    Authentication          : WPA2-Personal
-    Encryption              : CCMP 
-
-SSID 7 : aterm-7886a3-g
+SSID 1 : aterm-7886a3-a
     Network type            : Infrastructure
     Authentication          : WPA2-Personal
     Encryption              : CCMP 

@@ -48,6 +48,8 @@ class UIMainProcess:
         a = Data()
         DataList.append(a)
         get,WiFiName = DisplayStartWindow.StartWindow(list)
+        if get == False:
+            return
         a.WiFiName = WiFiName
         list.remove(WiFiName)
         list.insert(0, WiFiName)

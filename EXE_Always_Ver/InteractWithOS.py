@@ -253,7 +253,9 @@ class InteractWithOS:
             print("未接続")
             # Result_change = subprocess.run('netsh wlan show interface', encoding='ascii', env=_env, shell=True)
             Result_change = subprocess.run('netsh wlan show interface', env=_env, shell=True)
+
         time.sleep(5)
+        
         return Result_change
 
         ######stdoutベースのやりかた
