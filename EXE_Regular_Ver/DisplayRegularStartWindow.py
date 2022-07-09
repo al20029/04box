@@ -9,10 +9,10 @@
 ******************************************************
 """
 
-from queue import Empty
+# from curses import nonl
+# from queue import Empty
 import tkinter
 
-import paramiko
 # from tkinter import messagebox
 from ManagementWiFi import ManagementWiFi
 from InteractWithOS import InteractWithOS
@@ -83,7 +83,9 @@ class DisplayRegularStartWindow:
             nonlocal BestWiFiName
             Stop = True
             count -= 1
-            MainMeasurement.Measurement(data)
+            if MainMeasurement.Measurement(data) == -1:
+                print("エラー通ってますよ")
+                WiFiError()
             # faster,a,b = MainMeasurement.Measurement(a)
             # print(MainMeasurement.Measurement(a))
             if count > 0:
@@ -104,7 +106,10 @@ class DisplayRegularStartWindow:
                 WiFi = WiFiList.pop(0)
                 #現在接続していないWiFiの中で接続可能なWiFiがない場合は現在接続しているWiFiを最適とする
 
+                print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
                 ssh.ParamikoReg(WiFi, AverageSpeed, Stability)
+                print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+                # tki.after_cancel(errer_id)
                 if len(WiFiList) == 0:
                     BestWiFiName = WiFi
                 else:
@@ -131,7 +136,17 @@ class DisplayRegularStartWindow:
                 tki.destroy()
                 # tki.quit()
 
+        def WiFiError():
+            nonlocal Stop
+            nonlocal tki
+            nonlocal BestWiFiName
+            tki.destroy()
+            Stop = True
+            BestWiFiName = InteractWithOS.GetWiFi().pop(0)
+
         # 繰り返しダウンロードする
+        #         ###変更点###
+        # errer_id = tki.after(30000,lambda: WiFiError)
         tki.after(1000, Repeat_Download)
 
 

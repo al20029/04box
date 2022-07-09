@@ -151,7 +151,7 @@ class MainMeasurement:
         
         InstantTime = time.time()
         ManagementDownload.Donwload()
-        if ManagementDownload.Donwload() == 2: #1がtrueで2がfalse
+        if ManagementDownload.Donwload() == False: #1がtrueで2がfalse
             return -1
         MeasurementTime = time.time() - InstantTime
         InstantSpeed.append(MainMeasurement.InstantSpeedMeasurement(FileSize,MeasurementTime))

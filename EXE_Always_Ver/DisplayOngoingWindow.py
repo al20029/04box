@@ -25,7 +25,10 @@ class DisplayOngoingWindow:
         #空ダウンロード
         ManagementDownload.Donwload()
         #1回目の計測
-        MainMeasurement.Measurement(Data)
+        if MainMeasurement.Measurement(Data) == -1:
+                print("エラー通ってますよ")
+                WiFiError()
+        # MainMeasurement.Measurement(Data)
 
         RUN = False
 
@@ -73,6 +76,12 @@ class DisplayOngoingWindow:
 
         # 画面をそのまま表示
         #tki.mainloop()
+
+        def WiFiError():
+            nonlocal RUN
+            # tki.messagebox.showinfo("メッセージ", "ボタンがクリックされました")
+            RUN = False
+            tki.destroy()
         
         def repeat_func():
             global count
@@ -85,7 +94,9 @@ class DisplayOngoingWindow:
                 
                 # 追加
 
-                MainMeasurement.Measurement(Data)
+                if MainMeasurement.Measurement(Data) == -1:
+                    print("エラー通ってますよ")
+                    WiFiError()
                 
                 fig = plt.Figure() #描画の用意
                 
