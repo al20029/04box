@@ -10,7 +10,7 @@
 """
 
 import subprocess
-# import os
+import os
 import time
 # import tkinter
 # from tkinter import messagebox
@@ -74,12 +74,15 @@ class InteractWithOS:
 
 
         #利用可能なネットワークの検索
-        _env = {"LANG": "C"}
+        # _env = {"LANG": "C"}
+        _env = os.environ
+        # subprocess.run('chcp 437', env=_env, shell=True)
+
 
         ########テキストベースのやりかた
         with open('out_network.txt', 'w') as nfp:
             # subprocess.run('netsh wlan show network', encoding='utf-8', stdout=nfp, env=_env, shell=True)
-            subprocess.run('netsh wlan show network', encoding='ascii', stdout=nfp, env=_env, shell=True)
+            subprocess.run('netsh wlan show network', stdout=nfp, env=_env, shell=True)
             ######パターン1
         f = open("out_network.txt","r")
         Result_network = f.read().splitlines()
@@ -90,6 +93,8 @@ class InteractWithOS:
         for s in Result_network:
             if 'SSID' in s:
                 List_network.append(s[9:].replace(' ', '').replace('  ', ''))
+        print("network = ")
+        print(List_network)
         
         #######stdoutベースのやり方
         # open("a.txt", "w")
@@ -107,7 +112,7 @@ class InteractWithOS:
         ########テキストベースのやりかた
         with open('out_profiles.txt', 'w') as pfp:
             # subprocess.run('netsh wlan show profiles', encoding='utf-8', stdout=pfp, env=_env, shell=True)
-            subprocess.run('netsh wlan show profiles', encoding='ascii', stdout=pfp, env=_env, shell=True)
+            subprocess.run('netsh wlan show profiles', stdout=pfp, env=_env, shell=True)
             ######パターン1
         f = open("out_profiles.txt","r")
         Result_profiles = f.read().splitlines()
@@ -118,6 +123,11 @@ class InteractWithOS:
         for s in Result_profiles:
             if 'All User Profile' in s:
                 List_profiles.append(s[27:].replace(' ', '').replace('  ', ''))
+            elif '    すべてのユーザー プロファイル     : ' in s:
+                List_profiles.append(s[26:].replace(' ', '').replace('  ', ''))
+
+        print("profiles = ")
+        print(List_profiles)
 
         #######stdoutベースのやり方
         # Result_profiles = subprocess.run('netsh wlan show profiles', **subprocess_args(True)).stdout.decode('utf-8', errors='ignore').splitlines()
@@ -130,9 +140,9 @@ class InteractWithOS:
         #現在接続しているWiFiの追加
 
         #######テキストベースのやり方
-        with open('out_interface.txt', 'w') as pfp:
+        with open('out_interface.txt', 'w') as ifp:
             # subprocess.run('netsh wlan show interface', encoding='utf-8', stdout=pfp, shell=True)
-            subprocess.run('netsh wlan show interface', encoding='ascii', stdout=pfp, env=_env, shell=True)
+            subprocess.run('netsh wlan show interface', stdout=ifp, env=_env, shell=True)
             ######パターン1
         f = open("out_interface.txt","r")
         Result_interface = f.read().splitlines()
@@ -145,7 +155,12 @@ class InteractWithOS:
             if '    Profile                : ' in s:
                 ConnectingWiFiName = s[29:].replace(' ', '').replace('  ', '')
                 break
-
+            elif '    プロファイル           : ' in s:
+                ConnectingWiFiName = s[23:].replace(' ', '').replace('  ', '')
+                break
+        print("Connecting")
+        print(ConnectingWiFiName)
+        print("CanConnect")
         #######stdoutベースのやり方
         # Result_interface = subprocess.run('netsh wlan show interface', **subprocess_args(True)).stdout.decode('utf-8', errors='ignore').splitlines()
         # # Result_interface = subprocess.run('netsh wlan show interface', **subprocess_args(True)).stdout.decode("ascii").splitlines()
@@ -169,6 +184,7 @@ class InteractWithOS:
             ConnectingWiFiName = '接続されていません'
             CanConnectWiFiName.insert(0, ConnectingWiFiName)
         else: 
+            print(ConnectingWiFiName)
             CanConnectWiFiName.remove(ConnectingWiFiName)
             CanConnectWiFiName.insert(0, ConnectingWiFiName)
         return CanConnectWiFiName
@@ -227,7 +243,9 @@ class InteractWithOS:
         #########################################################################
 
         ######テキストベースのやり方
-        _env = {"LANG": "C"}
+        _env = os.environ
+        subprocess.run('chcp 437', env=_env, shell=True)
+
         command = 'netsh wlan connect name=' + ChangeWiFiName
         # Result_change = subprocess.run(command, encoding='ascii', env=_env, shell=True)
         Result_change = subprocess.run(command, env=_env, shell=True)
