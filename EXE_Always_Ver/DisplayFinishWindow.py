@@ -56,7 +56,9 @@ class DisplayFinishWindow:
 
         # 画面作成
         frm = tkinter.Tk()
-        frm.geometry('900x500') #画面サイズ
+        w = frm.winfo_screenwidth() - 915
+        h = frm.winfo_screenheight() - 580
+        frm.geometry('900x500+' +str(w)+"+"+str(h)) # 画面サイズの設定
         frm.title('計測終了画面')
 
         # 題名表示

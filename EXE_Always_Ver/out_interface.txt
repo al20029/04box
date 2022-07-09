@@ -2,24 +2,22 @@
 There is 1 interface on the system: 
 
     Name                   : Wi-Fi
-    Description            : Intel(R) Wi-Fi 6 AX200 160MHz
-    GUID                   : bede0552-f32e-418e-9593-4dfe93b37856
-    Physical address       : 5c:80:b6:fe:35:d5
-    Interface type         : Primary
+    Description            : Intel(R) Wireless-AC 9560 160MHz
+    GUID                   : a4093ca0-4ade-4134-9360-94ab28ef49d7
+    Physical address       : d8:3b:bf:61:ee:a5
     State                  : connected
-    SSID                   : SGP200W-0AA4-bg
-    BSSID                  : 00:60:6b:5a:8e:08
+    SSID                   : aterm-7886a3-a
+    BSSID                  : 80:22:a7:6e:14:2f
     Network type           : Infrastructure
-    Radio type             : 802.11n
+    Radio type             : 802.11ac
     Authentication         : WPA2-Personal
     Cipher                 : CCMP
     Connection mode        : Profile
-    Band                   : 2.4 GHz
-    Channel                : 11
-    Receive rate (Mbps)    : 144.4
-    Transmit rate (Mbps)   : 144.4
-    Signal                 : 86% 
-    Profile                : SGP200W-0AA4-bg 
+    Channel                : 108
+    Receive rate (Mbps)    : 780
+    Transmit rate (Mbps)   : 390
+    Signal                 : 81% 
+    Profile                : aterm-7886a3-a 
 
     Hosted network status  : Not available
 

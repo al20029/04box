@@ -154,7 +154,9 @@ class DisplayStartWindow:
             frm.destroy()
         Start = False
         frm = tkinter.Tk()
-        frm.geometry('500x270')
+        w = frm.winfo_screenwidth() - 515
+        h = frm.winfo_screenheight() - 350
+        frm.geometry('500x270+' +str(w)+"+"+str(h)) # 画面サイズの設定
         frm.title('計測開始画面')
         chk1 = tkinter.Label(frm,text = 'Wi-Fi速度計測システム', font = ('MSゴシック',35))
         chk1.place(x = 15, y = 85)
