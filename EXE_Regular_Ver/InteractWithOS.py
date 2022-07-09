@@ -88,7 +88,7 @@ class InteractWithOS:
 
         for s in Result_network:
             if 'SSID' in s:
-                List_network.append(s[9:].replace(' ', '').replace('  ', '').decode('utf-8'))
+                List_network.append(s[9:].replace(' ', '').replace('  ', ''))
 
         #過去に接続したネットワーク検索
         # with open('out_profiles.txt', 'w') as pfp:
@@ -101,7 +101,7 @@ class InteractWithOS:
 
         for s in Result_profiles:
             if 'All User Profile' in s:
-                List_profiles.append(s[27:].replace(' ', '').replace('  ', '').decode('utf-8'))
+                List_profiles.append(s[27:].replace(' ', '').replace('  ', ''))
 
         #現在接続しているWiFiの追加
         # with open('out_interface.txt', 'w') as pfp:
@@ -115,7 +115,7 @@ class InteractWithOS:
         ConnectingWiFiName = []
         for s in Result_interface:
             if '    Profile                : ' in s:
-                ConnectingWiFiName = s[29:].replace(' ', '').replace('  ', '').decode('utf-8')
+                ConnectingWiFiName = s[29:].replace(' ', '').replace('  ', '')
                 break
         # print(len(ConnectingWiFiName))
 

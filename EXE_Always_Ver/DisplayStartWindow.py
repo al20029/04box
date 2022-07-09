@@ -21,6 +21,7 @@ import tkinter
 import tkinter.ttk as ttk
 from ToolTip import *
 import Data
+import os
 
 
 """
@@ -56,19 +57,61 @@ class DisplayStartWindow:
             #     Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
 
             # time.sleep(2)
-            time.sleep(3)
 
             nonlocal Start
             Start = True
             if bln.get():
+
+                ############################変更########################
+                #############################変更点###############################
+                def subprocess_args(include_stdout=True):
+                    # The following is true only on Windows.
+                    if hasattr(subprocess, 'STARTUPINFO'):
+                        # Windowsでは、PyInstallerから「--noconsole」オプションを指定して実行すると、
+                        # サブプロセス呼び出しはデフォルトでコマンドウィンドウをポップアップします。
+                        # この動作を回避しましょう。
+                        si = subprocess.STARTUPINFO()
+                        si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                        # Windowsはデフォルトではパスを検索しません。環境変数を渡してください。
+                        env = os.environ
+                    else:
+                        si = None
+                        env = None
+
+                    # subprocess.check_output()では、「stdout」を指定できません。
+                    #
+                    #   Traceback (most recent call last):
+                    #     File "test_subprocess.py", line 58, in <module>
+                    #       **subprocess_args(stdout=None))
+                    #     File "C:Python27libsubprocess.py", line 567, in check_output
+                    #       raise ValueError('stdout argument not allowed, it will be overridden.')
+                    #   ValueError: stdout argument not allowed, it will be overridden.
+                    #
+                    # したがって、必要な場合にのみ追加してください。
+                    if include_stdout:
+                        ret = {'stdout': subprocess.PIPE}
+                    else:
+                        ret = {}
+
+                    # Windowsでは、「--noconsole」オプションを使用してPyInstallerによって
+                    # 生成されたバイナリからこれを実行するには、
+                    # OSError例外「[エラー6]ハンドルが無効です」を回避するために
+                    # すべて（stdin、stdout、stderr）をリダイレクトする必要があります。
+                    ret.update({'stdin': subprocess.PIPE,
+                                'stderr': subprocess.PIPE,
+                                'startupinfo': si,
+                                'env': env})
+                    return ret
+                #########################################################################
                 # 自動起動のチェックが発動されたときの処理
                 if check == 0:
-                    with open('out_UserName.txt', 'w') as pfp:
-                        subprocess.run('echo %USERNAME%', encoding='utf-8', stdout=pfp, shell=True)
-                    with open('out_UserName.txt', 'r') as lines:
-                        Result_echo = lines.read().splitlines()
-                        # print(lines)
-                    subprocess.run('del out_UserName.txt', shell=True)
+                    Result_echo = subprocess.run('echo %USERNAME%', **subprocess_args(True)).stdout.decode('utf-8', errors='ignore').splitlines()
+                    # with open('out_UserName.txt', 'w') as pfp:
+                    #     subprocess.run('echo %USERNAME%', encoding='utf-8', stdout=pfp, shell=True)
+                    # with open('out_UserName.txt', 'r') as lines:
+                    #     Result_echo = lines.read().splitlines()
+                    #     # print(lines)
+                    # subprocess.run('del out_UserName.txt', shell=True)
                     for s in Result_echo:
                         if len(s) != 0:
                             UserName = s.replace(' ', '').replace('  ', '')
@@ -76,9 +119,9 @@ class DisplayStartWindow:
                     print(UserName)
 
                     # copyするファイルを自動起動処理.exeに
-                    ins = 'copy a.txt C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup'
-                    print(ins)
-                    subprocess.run(ins, encoding='utf-8', shell=True)
+                    ins = 'copy AutoStart.exe C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup'
+                    # print(ins)
+                    subprocess.run(ins, shell=True)
                 print('チェックされています')
                 f = open('checkbox.txt','w')
                 f.write('1')
@@ -86,12 +129,13 @@ class DisplayStartWindow:
             else:
                 # 自動起動のチェックが消されたときの処理
                 if check == 1:
-                    with open('out_UserName.txt', 'w') as pfp:
-                        subprocess.run('echo %USERNAME%', encoding='utf-8', stdout=pfp, shell=True)
-                    with open('out_UserName.txt', 'r') as lines:
-                        Result_echo = lines.read().splitlines()
-                        # print(lines)
-                    subprocess.run('del out_UserName.txt', shell=True)
+                    Result_echo = subprocess.run('echo %USERNAME%', **subprocess_args(True)).stdout.decode('utf-8', errors='ignore').splitlines()
+                    # with open('out_UserName.txt', 'w') as pfp:
+                    #     subprocess.run('echo %USERNAME%', encoding='utf-8', stdout=pfp, shell=True)
+                    # with open('out_UserName.txt', 'r') as lines:
+                    #     Result_echo = lines.read().splitlines()
+                    #     # print(lines)
+                    # subprocess.run('del out_UserName.txt', shell=True)
                     for s in Result_echo:
                         if len(s) != 0:
                             UserName = s.replace(' ', '').replace('  ', '')
@@ -99,13 +143,14 @@ class DisplayStartWindow:
                     print(UserName)
 
                     # delするファイルを自動起動処理.exeに
-                    ins = 'del C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup\\a.txt'
+                    ins = 'del C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup\\AutoStart.exe'
                     print(ins)
-                    subprocess.run(ins, encoding='utf-8', shell=True)
+                    subprocess.run(ins, shell=True)
                 print('チェックされていません')
                 f = open('checkbox.txt','w')
                 f.write('0')
                 f.close()
+            ################################################################
             frm.destroy()
         Start = False
         frm = tkinter.Tk()
