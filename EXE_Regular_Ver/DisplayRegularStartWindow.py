@@ -82,10 +82,9 @@ class DisplayRegularStartWindow:
                 UserName = s.replace(' ', '').replace('  ', '')
                 break
         print(UserName)
-
+        wi_fi = tkinter.PhotoImage(file = r"C:\Users\\" + UserName + "\Desktop\MAIFI\\wi-fi.png", width=200, height=200)
+        
         # wi_fi = tkinter.PhotoImage(file = "wi-fi.png", width=200, height=200)
-        path = 'C:\Users\\' + UserName + '\wi-fi.png'
-        wi_fi = tkinter.PhotoImage(file = path, width=200, height=200)
         canvas.create_image(0, 20, image = wi_fi, anchor = tkinter.NW)
 
         # ボタンの作成
