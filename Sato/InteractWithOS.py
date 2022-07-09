@@ -101,7 +101,6 @@ class InteractWithOS:
         command = 'netsh wlan connect name=' + ChangeWiFiName
         subprocess.run(command, shell=True)
         Result_change = str()
-        key = 0
         while Result_change == None:
             print("未接続")
             Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
