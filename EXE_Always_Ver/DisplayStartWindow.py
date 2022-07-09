@@ -90,14 +90,11 @@ class DisplayStartWindow:
                             break
                     print(UserName)
                     # copyするファイルを自動起動処理.exeに
-                    ins = 'copy AutoStart.exe C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup'
+                    CpExe = 'copy AutoStart.exe C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup'
+                    # CpPng = 'copy WiFi. C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup'
                     # print(ins)
-                    subprocess.run(ins, shell=True)
-
-
-
-
-
+                    subprocess.run(CpExe, shell=True)
+                    # subprocess.run(CpPng, shell=True)
 
 
                 print('チェックされています')
@@ -132,9 +129,11 @@ class DisplayStartWindow:
                             break
                     print(UserName)
                     # delするファイルを自動起動処理.exeに
-                    ins = 'del C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup\\AutoStart.exe'
-                    print(ins)
-                    subprocess.run(ins, shell=True)
+                    DelExe = 'del C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup\\AutoStart.exe'
+                    # DelPng = 'del C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup\\AutoStart.exe'
+                    # print(ins)
+                    subprocess.run(DelExe, shell=True)
+                    # subprocess.run(DelPng, shell=True)
                 print('チェックされていません')
                 f = open('checkbox.txt','w')
                 f.write('0')
