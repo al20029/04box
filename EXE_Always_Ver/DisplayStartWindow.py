@@ -60,16 +60,6 @@ class DisplayStartWindow:
             nonlocal WiFiName 
             nonlocal check
             WiFiName = combobox.get()
-            # nonlocal WiFiList
-            # WiFiList.remove(WiFiname)
-            # WiFiList.insert(0,WiFiname)
-            #WiFi変更が完了するまで待機 
-            # Result_change = str()
-            # while Result_change == None:
-            #     Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
-
-            # time.sleep(2)
-
             nonlocal Start
             Start = True
             if bln.get():
@@ -77,25 +67,12 @@ class DisplayStartWindow:
                 ############################変更########################
                 # 自動起動のチェックが発動されたときの処理
                 if check == 0:
-                    # Result_echo = subprocess.run('echo %USERNAME%', **subprocess_args(True)).stdout.decode('utf-8', errors='ignore').splitlines()
-                    # with open('out_UserName.txt', 'w') as pfp:
-                    #     subprocess.run('echo %USERNAME%', encoding='utf-8', stdout=pfp, shell=True)
-                    # with open('out_UserName.txt', 'r') as lines:
-                    #     Result_echo = lines.read().splitlines()
-                    #     # print(lines)
-                    # subprocess.run('del out_UserName.txt', shell=True)
-                    # for s in Result_echo:
-                    #     if len(s) != 0:
-                    #         UserName = s.replace(' ', '').replace('  ', '')
-                    #         break
-                    # print(UserName)
-
                     _env = os.environ
                     with open('out_UserName.txt', 'w') as nfp:
                         subprocess.run('echo %USERNAME%', stdout=nfp, env=_env, shell=True)
                     f = open("out_UserName.txt","r")
                     Result_echo = f.read().splitlines()
-                    # subprocess.run('del out_UserName.txt', shell=True)
+
                     for s in Result_echo:
                         if len(s) != 0:
                             UserName = s.replace(' ', '').replace('  ', '')
@@ -103,11 +80,7 @@ class DisplayStartWindow:
                     print(UserName)
                     # copyするファイルを自動起動処理.exeに
                     CpExe = 'copy *.lnk C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup'
-                    # CpPng = 'copy WiFi. C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup'
-                    # print(ins)
                     subprocess.run(CpExe, shell=True)
-                    # subprocess.run(CpPng, shell=True)
-
 
                 print('チェックされています')
                 f = open('checkbox.txt','w')
@@ -116,25 +89,11 @@ class DisplayStartWindow:
             else:
                 # 自動起動のチェックが消されたときの処理
                 if check == 1:
-                    # Result_echo = subprocess.run('echo %USERNAME%', **subprocess_args(True)).stdout.decode('utf-8', errors='ignore').splitlines()
-                    # # with open('out_UserName.txt', 'w') as pfp:
-                    # #     subprocess.run('echo %USERNAME%', encoding='utf-8', stdout=pfp, shell=True)
-                    # # with open('out_UserName.txt', 'r') as lines:
-                    # #     Result_echo = lines.read().splitlines()
-                    # #     # print(lines)
-                    # # subprocess.run('del out_UserName.txt', shell=True)
-                    # for s in Result_echo:
-                    #     if len(s) != 0:
-                    #         UserName = s.replace(' ', '').replace('  ', '')
-                    #         break
-                    # print(UserName)
-
                     _env = os.environ
                     with open('out_UserName.txt', 'w') as nfp:
                         subprocess.run('echo %USERNAME%', stdout=nfp, env=_env, shell=True)
                     f = open("out_UserName.txt","r")
                     Result_echo = f.read().splitlines()
-                    # subprocess.run('del out_UserName.txt', shell=True)
                     for s in Result_echo:
                         if len(s) != 0:
                             UserName = s.replace(' ', '').replace('  ', '')
@@ -142,10 +101,7 @@ class DisplayStartWindow:
                     print(UserName)
                     # delするファイルを自動起動処理.exeに
                     DelExe = 'del C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup\\*.lnk'
-                    # DelPng = 'del C:\\Users\\' + UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\\"Start Menu\"\\Programs\\Startup\\AutoStart.exe'
-                    # print(ins)
                     subprocess.run(DelExe, shell=True)
-                    # subprocess.run(DelPng, shell=True)
                 print('チェックされていません')
                 f = open('checkbox.txt','w')
                 f.write('0')
@@ -165,7 +121,7 @@ class DisplayStartWindow:
         bln.set(f.read())
         check = bln.get()
         f.close
-        #bln.set(Data.Data.checkbox)
+        
         chk2 = tkinter.Checkbutton(frm, variable = bln, text = '定期計測を利用する', font = ('MSゴシック',10))
         chk2.place(x = 270, y = 30)
         chk3 = tkinter.Label(frm, text = '?', font = ('MSゴシック',10))

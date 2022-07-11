@@ -65,7 +65,7 @@ class ManagementWiFi:
 
     # 過去データの送信
     def SendPastData(WiFiName):
-    # def SendPastData(WiFiName, AverageSpeed, Stability):
+
         # データベースの作成（仮）
         db = sqlite3.connect('main.db')
         db.row_factory = sqlite3.Row
@@ -79,6 +79,7 @@ class ManagementWiFi:
         n = 0
         BestAverageSpeed = 0
         BestStability = 0
+
         # データ検索
         c.execute('SELECT * FROM items WHERE (WiFiName == ?)',(WiFiName))
         for row in c:   
@@ -91,7 +92,6 @@ class ManagementWiFi:
         BestAverageSpeed = SumAverageSpeed / n
         BestStability = SumStability / n
         print(BestAverageSpeed, BestStability)
-        # return BestAverageSpeed, BestStability
 
     """
     *******************************************************************
@@ -117,8 +117,8 @@ class ManagementWiFi:
         db.row_factory = sqlite3.Row
 
         # listの宣言
-        SumAverageSpeed = [0]*len(CanConnectWiFiName) # list() # Wi-Fi名ごとの平均速度の和
-        SumStability =  [0]*len(CanConnectWiFiName) # list() # Wi-Fi名ごとの安定性の和
+        SumAverageSpeed = [0]*len(CanConnectWiFiName) # Wi-Fi名ごとの平均速度の和
+        SumStability =  [0]*len(CanConnectWiFiName) # Wi-Fi名ごとの安定性の和
         BestAverageSpeed = [0]*len(CanConnectWiFiName)
         BestStability = [0]*len(CanConnectWiFiName)
         count = [0]*len(CanConnectWiFiName)
@@ -142,5 +142,3 @@ class ManagementWiFi:
                 BestStability[k] = SumStability[k] / count[k]
                 print(CanConnectWiFiName[k], BestAverageSpeed[k], BestStability[k])
         c.close()
-        # print(CanConnectWiFiName, BestAverageSpeed, BestStability)
-        # return CanConnectWiFiName, BestAverageSpeed, BestStability

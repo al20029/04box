@@ -1,3 +1,14 @@
+"""
+*******************************************************************
+***  File Name      : DisplayOngoingWindow.py
+***  Version        : V1.0
+***  Designer       : 
+***  Date           : 2022.6.14
+***  Purpose       	: 
+***
+*******************************************************************/
+"""
+
 from re import I
 import tkinter
 # from tkinter import ON, messagebox

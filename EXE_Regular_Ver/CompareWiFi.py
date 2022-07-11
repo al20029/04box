@@ -1,3 +1,14 @@
+"""
+*******************************************************************
+***  File Name      : CompareWiFi.py
+***  Version        : V1.0
+***  Designer       : 
+***  Date           : 2022.6.14
+***  Purpose       	: 
+***
+*******************************************************************/
+"""
+
 # import datetime
 from re import X
 from ManagementWiFi import ManagementWiFi

@@ -41,9 +41,6 @@ class DisplayFinishWindow:
             nonlocal WiFiName
             WiFiName = combobox.get()
             #WiFi変更が完了するまで待機 
-            # Result_change = str()
-            # while Result_change == None:
-            #     Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
             time.sleep(3)
 
             nonlocal Start
@@ -65,9 +62,7 @@ class DisplayFinishWindow:
                 break
         if len(RegData.ListInstantSpeed) == 10:
             RegAvg = MainMeasurement.AverageSpeedMeasurement(RegData.ListInstantSpeed,len(RegData.ListInstantSpeed))
-            # RegStab = MainMeasurement.StabilityCalculation(RegData.ListInstantSpeed,10)
             RegStab = MainMeasurement.cmpstability(RegData.ListInstantSpeed, len(RegData.ListInstantSpeed))
-            # ssh.ParamikoReg(CanConnectWiFiname[0], RegAvg, RegStab[0],RegStab[1],RegStab[2],RegStab[3],RegStab[4])
             ssh.ParamikoReg(CanConnectWiFiname[0], RegAvg, RegStab)
 
         # 画面作成
@@ -85,8 +80,7 @@ class DisplayFinishWindow:
         fig = plt.Figure() #描画の用意
        
         ax = fig.add_subplot(111)
-        ax.set_ylabel("speed / Mbps")#y軸のラベル
-        #ax.set_xlabel("x / times")#x軸のラベル
+        ax.set_ylabel("speed / Mbps") #y軸のラベル
         ymax = 0
         for data in DataList:
             x=np.arange(0,len(data.ListInstantSpeed),1) #x軸のデータ
@@ -99,21 +93,7 @@ class DisplayFinishWindow:
       
         canvas = FigureCanvasTkAgg(fig, master=frm)
         canvas.draw()
-        canvas.get_tk_widget().place(x=10,y=62,width=390,height=380)
-
-        # #WiFiの名前と色をテキスト表示
-        # temp = ''
-        # labelcount = 0
-        # for Data in DataList:
-        #     labelcount += 1
-        #     temp = ''
-        #     temp += '   '
-        #     temp += Data.WiFiname
-        #     XLabel = tkinter.Label(text = temp,font=('MSゴシック','13'))
-        #     XLabel.place(x=30,y=445)
-        #     #canvas.create_line(20, 451, 27, 451, width = 2,fill = "Red" )
-        #     XLabel = tkinter.Label(text = "ー",font=('MSゴシック','17','bold'),fg="red")
-        #     XLabel.place(x=17,y=442)
+        canvas.get_tk_widget().place(x=10, y=62, width=390, height=380)
 
         #結果表
         # ★バグ対応用の関数を追加
@@ -122,10 +102,8 @@ class DisplayFinishWindow:
             return [elm for elm in style.map('Treeview', query_opt=option) if
             elm[:2] != ('!disabled', '!selected')]
 
-
-
-        column = ('WiFi名', 'Speed', 'stab0','stab1','stab2','stab3','stab4')
-        tree = ttk.Treeview(frm,columns=column)
+        column = ('WiFi名', 'Speed', 'stab0', 'stab1', 'stab2', 'stab3', 'stab4')
+        tree = ttk.Treeview(frm, columns=column)
 
         tree.column('#0', width = 0, stretch = 'no')
         tree.column('WiFi名', anchor ='center', width = 110)
@@ -136,13 +114,13 @@ class DisplayFinishWindow:
         tree.column('stab3', anchor = 'center', width = 60)
         tree.column('stab4', anchor = 'center', width = 90) 
 
-        tree.heading('WiFi名',text = 'WiFi名', anchor = 'center')
-        tree.heading('Speed',text = 'Speed', anchor = 'center')
-        tree.heading('stab0',text = 'メール', anchor = 'center')
-        tree.heading('stab1',text = 'ネット検索', anchor = 'center')
-        tree.heading('stab2',text = 'SNS', anchor = 'center')
-        tree.heading('stab3',text = '動画視聴', anchor = 'center')
-        tree.heading('stab4',text = 'オンラインゲーム', anchor = 'center')
+        tree.heading('WiFi名', text = 'WiFi名', anchor = 'center')
+        tree.heading('Speed', text = 'Speed', anchor = 'center')
+        tree.heading('stab0', text = 'メール', anchor = 'center')
+        tree.heading('stab1', text = 'ネット検索', anchor = 'center')
+        tree.heading('stab2', text = 'SNS', anchor = 'center')
+        tree.heading('stab3', text = '動画視聴', anchor = 'center')
+        tree.heading('stab4', text = 'オンラインゲーム', anchor = 'center')
 
         
         style.map('Treeview', foreground=fixed_map('foreground'), background=fixed_map('background'))
@@ -161,7 +139,7 @@ class DisplayFinishWindow:
             avgspeed = round(MainMeasurement.AverageSpeedMeasurement(Data.ListInstantSpeed,len(Data.ListInstantSpeed)),1)
             speed = str(avgspeed) +'Mbps'
             if len(Data.ListInstantSpeed) != 10:
-                stab =[-1,-1,-1,-1,-1]
+                stab =[-1, -1, -1, -1, -1]
             else:
                 stab = MainMeasurement.StabilityCalculation(Data.ListInstantSpeed,10)
 
@@ -184,21 +162,18 @@ class DisplayFinishWindow:
         #########変更点#########
         #過去データの説明
         notes = tkinter.Label(text = "※過去データは(Wi-Fi名)で表現している\n",font=('MSゴシック','13'))
-        notes.place(x=430,y=380)
+        notes.place(x=430, y=380)
         ########################
 
         # Wi-Fi名プルタブ配置
         combobox = ttk.Combobox(frm, height=3, width = 30, values = list, state = "readonly")
         combobox.current(0)
         combobox.place(x = 440, y = 455)
-        # pulltub = tkinter.Label(text="(Wi-Fi名)", font=("MSゴシック", "13"))
-        # pulltub.place(x=170, y=305)
 
         # ボタンの作成
         btn = tkinter.Button(frm, text='再計測開始', width = 10, height = 2, command = btn_click, font=("MSゴシック", "10"))
         btn.place(x=750, y=450) #ボタンを配置する位置の設定
 
-        # リスト更新ボタン
         # リスト更新ボタン
         btn2 = tkinter.Button(frm, text='↺',width = 6,height = 1, command = btn_click_list_change, bg='#808080', font = ('MSゴシック', 10))
         btn2.place(x = 670, y = 455)

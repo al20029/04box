@@ -36,5 +36,3 @@ class ManagementDownload:
             return True
         except:
             return False
-
-# print(ManagementDownload())

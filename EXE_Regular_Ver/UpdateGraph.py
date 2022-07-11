@@ -1,3 +1,14 @@
+"""
+*******************************************************************
+***  File Name      : UpdateGraph.py
+***  Version        : V1.0
+***  Designer       : 
+***  Date           : 2022.6.14
+***  Purpose       	: 
+***
+*******************************************************************/
+"""
+
 # from Data import Data 
 class UpdateGraph:
     # def UpdateGraph(InstantSpeed):

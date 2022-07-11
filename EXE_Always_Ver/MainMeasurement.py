@@ -97,7 +97,7 @@ class MainMeasurement:
     """ 
 
     def StabilityCalculation(InstantSpeed, FileGetNum):
-        #stability[0] = メール,LINE , [1] = ネット検索 , [2] = SNS , [3] = 動画視聴 , [4] = オンラインゲーム
+        # stability[0] = メール,LINE , [1] = ネット検索 , [2] = SNS , [3] = 動画視聴 , [4] = オンラインゲーム
         stability = [0,0,0,0,0]
         mail_ev = 0
         net_ev = 0
@@ -156,17 +156,11 @@ class MainMeasurement:
         InstantSpeed.append(MainMeasurement.InstantSpeedMeasurement(FileSize,MeasurementTime))
         UpdateGraph.UpdateGraph(InstantSpeed[-1],data)
 
-        # AverageSpeed = MainMeasurement.AverageSpeedMeasurement(InstantSpeed,FileGetNum)
-        # Stability = MainMeasurement.StabilityCalculation(InstantSpeed,FileGetNum)
-        # print(InstantSpeed,end = "Mbps\n") #テスト用後で消す
-        # print(AverageSpeed,end = "Mbps\n") #テスト用後で消す
-        # print(Stability) #テスト用後で消す
-
         return InstantSpeed
-#InstantSpeedが10個の瞬間速度のリスト
-#AverageSpeedが平均速度
-#Stabilityがメール、ネット、sns、動画視聴、オンラインゲームの5項目を1~5段階に数値化したリスト
-#ManagementDownloadとの結合テスト完了
+    # InstantSpeedが10個の瞬間速度のリスト
+    # AverageSpeedが平均速度
+    # Stabilityがメール、ネット、sns、動画視聴、オンラインゲームの5項目を1~5段階に数値化したリスト
+    # ManagementDownloadとの結合テスト完了
     def cmpstability(InstantSpeed, FileGetNum):
         average = MainMeasurement.AverageSpeedMeasurement(InstantSpeed, FileGetNum)
         squaresum = 0

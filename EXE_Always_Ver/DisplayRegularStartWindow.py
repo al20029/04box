@@ -44,12 +44,8 @@ class DisplayRegularStartWindow:
 
         # click時のイベント
         def btn_click():
-            nonlocal Stop
-            # Y_N = messagebox.askyesno("確認中", "停止しますか")
-            # if Y_N == True:
-            # tki.after_cancel()   
+            nonlocal Stop   
             Stop = True
-            # tki.quit()
             tki.destroy()
 
         # 画面作成
@@ -84,8 +80,7 @@ class DisplayRegularStartWindow:
             Stop = True
             count -= 1
             MainMeasurement.Measurement(data)
-            # faster,a,b = MainMeasurement.Measurement(a)
-            # print(MainMeasurement.Measurement(a))
+
             if count > 0:
                 tki.after(1000, Repeat_Download)
             else:
@@ -96,14 +91,10 @@ class DisplayRegularStartWindow:
                 # リストから現在のWi-Fi名を削除
                 # 計測値の登録
                 AverageSpeed = MainMeasurement.AverageSpeedMeasurement(data.ListInstantSpeed, len(data.ListInstantSpeed))
-                #Stability = MainMeasurement.StabilityCalculation(data.ListInstantSpeed, len(data.ListInstantSpeed))
                 Stability = MainMeasurement.cmpstability(data.ListInstantSpeed, len(data.ListInstantSpeed))
-                # print(WiFiList[0])
-                # print(AverageSpeed)
-                # print(Stability)
                 WiFi = WiFiList.pop(0)
-                #現在接続していないWiFiの中で接続可能なWiFiがない場合は現在接続しているWiFiを最適とする
 
+                #現在接続していないWiFiの中で接続可能なWiFiがない場合は現在接続しているWiFiを最適とする
                 ssh.ParamikoReg(WiFi, AverageSpeed, Stability)
                 if len(WiFiList) == 0:
                     BestWiFiName = WiFi
@@ -112,11 +103,6 @@ class DisplayRegularStartWindow:
                     ##########
                     ##popによりWiFiListがnullになった時どうする？？
                     ##########
-
-                    # ManagementWiFi.RegisterData(WiFiList.pop(0), AverageSpeed, Stability)
-                    # リアルタイムデータから最適なWi-Fiを探す
-                    # ManagementWiFi.SendRealtimeData(WiFiList)
-
 
                     BestWiFiName = CompareWiFi.CompareWiFi(WiFiList, AverageSpeed*Stability)
                     if BestWiFiName == None:
@@ -129,25 +115,9 @@ class DisplayRegularStartWindow:
 
                 ########################################
                 tki.destroy()
-                # tki.quit()
 
         # 繰り返しダウンロードする
         tki.after(1000, Repeat_Download)
-
-
-        # ################# 変更点#################
-        # WiFiList = list()
-        # WiFiList = InteractWithOS.GetWiFi()
-        # # リストから現在のWi-Fi名を削除
-        # # 計測値の登録
-        # AverageSpeed = MainMeasurement.AverageSpeedMeasurement(data.ListInstantSpeed, len(data.ListInstantSpeed))
-        # Stability = MainMeasurement.StabilityCalculation(data.ListInstantSpeed, len(data.ListInstantSpeed))
-        # ManagementWiFi.RegisterData(WiFiList.pop(0), AverageSpeed, Stability)
-        # # リアルタイムデータから最適なWi-Fiを探す
-        # # ManagementWiFi.SendRealtimeData(WiFiList)
-        # BestWiFiName = CompareWiFi(WiFiList)
-
-        # #########################################
         
         # 画面をそのまま表示
         tki.mainloop()

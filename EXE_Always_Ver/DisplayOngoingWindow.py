@@ -1,10 +1,20 @@
+"""
+*******************************************************************
+***  File Name      : DisplayOngoingWindow.py
+***  Version        : V1.0
+***  Designer       : 
+***  Date           : 2022.6.14
+***  Purpose       	: 
+***
+*******************************************************************/
+"""
+
 from re import I
 import tkinter
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import numpy as np
-#from Data import Data 
 from UpdateGraph import UpdateGraph
 from MainMeasurement import MainMeasurement
 from ManagementDownload import ManagementDownload
@@ -19,21 +29,17 @@ class DisplayOngoingWindow:
         def btn_click():
             nonlocal RUN
             RUN = True
-            #messagebox.showinfo("メッセージ", "ボタンがクリックされました")
             tki.destroy()
             
-
         RUN = False
 
         # 画面作成
-        tki = tkinter.Tk()
-        
+        tki = tkinter.Tk()       
         w = tki.winfo_screenwidth() - 515
         h = tki.winfo_screenheight() - 430
         tki.geometry('500x350+'+str(w)+"+"+str(h)) # 画面サイズの設定
-
         tki.title('計測中画面') # 画面タイトルの設定
-        fig = plt.Figure() #描画の用意
+        fig = plt.Figure() # 描画の用意
         global y
         global i
         global count
@@ -66,8 +72,6 @@ class DisplayOngoingWindow:
             messagebox.showerror('エラー', 'Wi-Fiの変更に失敗しました。')
             tki.destroy()
             return False
-                
-        # MainMeasurement.Measurement(Data)
 
         x=np.arange(0,i,1, dtype=int) #x軸のデータ
         y=np.append(y,Data.ListInstantSpeed[i-1])
@@ -78,7 +82,6 @@ class DisplayOngoingWindow:
         canvas = FigureCanvasTkAgg(fig, master=tki)
         canvas.draw()
         canvas.get_tk_widget().place(x=10,y=62,width=480,height=230)
-    
         
         def repeat_func():
             global count
@@ -118,6 +121,6 @@ class DisplayOngoingWindow:
                 tki.destroy()
                 nonlocal RUN
                 RUN = True
-        tki.after(1000,repeat_func)
+        tki.after(1000, repeat_func)
         tki.mainloop()
         return RUN

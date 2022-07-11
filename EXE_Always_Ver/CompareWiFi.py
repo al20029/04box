@@ -1,3 +1,14 @@
+"""
+*******************************************************************
+***  File Name      : CompareWiFi.py
+***  Version        : V1.0
+***  Designer       : 
+***  Date           : 2022.6.14
+***  Purpose       	: 
+***
+*******************************************************************/
+"""
+
 # import datetime
 from re import X
 from ManagementWiFi import ManagementWiFi
@@ -10,9 +21,6 @@ class CompareWiFi():
         AverageSpeeds = list()
         Stabilities = list()
         Calculation = list()
-        # date = datetime.datetime.now()
-        # AverageSpeed, Stability = ManagementWiFi.SendRealtimeData(WiFilist, date)
-        # AverageSpeed, Stability = ssh.ParamikoGetReal(2, WiFilist)
         key, WiFiNames, AverageSpeeds, Stabilities = ssh.ParamikoGetReal(WiFiList)
 
         if key == 0:
@@ -40,9 +48,7 @@ class CompareWiFi():
             else:
                 EvalList.append(SumStab[i]/Count[i])
         if max(EvalList) < MeasuredWiFiEval:
-            # print("今の方がいい")
             return None
         else:
-            # print("変えた方がいい")
             return WiFiList[EvalList.index(max(EvalList))]
         ################################################
