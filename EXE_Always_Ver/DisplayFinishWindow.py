@@ -24,6 +24,13 @@ from ssh import ssh
 class DisplayFinishWindow:
     def FinishWindow(CanConnectWiFiname,DataList):
         WiFiName = ''
+        # リスト更新ボタンクリックのイベント
+        def btn_click_list_change():
+            nonlocal combobox
+            list = InteractWithOS.GetWiFi()
+            combobox = ttk.Combobox(frm, height=3, width = 30, values = list, state = "readonly")
+            combobox.current(0)
+            combobox.place(x = 440, y = 455)
         # クリック時のイベント
         def btn_click():
             InteractWithOS.ChangeWiFi(combobox.get())
@@ -181,7 +188,12 @@ class DisplayFinishWindow:
 
         # ボタンの作成
         btn = tkinter.Button(frm, text='再計測開始', width = 10, height = 2, command = btn_click, font=("MSゴシック", "10"))
-        btn.place(x=670, y=450) #ボタンを配置する位置の設定
+        btn.place(x=750, y=450) #ボタンを配置する位置の設定
+
+        # リスト更新ボタン
+        # リスト更新ボタン
+        btn2 = tkinter.Button(frm, text='↺',width = 6,height = 1, command = btn_click_list_change, bg='#808080', font = ('MSゴシック', 10))
+        btn2.place(x = 670, y = 455)
 
         # 画面をそのまま表示
         frm.mainloop()

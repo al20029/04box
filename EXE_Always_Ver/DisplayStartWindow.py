@@ -39,6 +39,14 @@ class DisplayStartWindow:
     def StartWindow(CanConnectWiFiname):
         WiFiName = ''
         check = ''
+
+        def btn_click_list_change():
+            nonlocal combobox
+            list = InteractWithOS.GetWiFi()
+            combobox = ttk.Combobox(frm, height=3, width = 30, values = list, state = "readonly")
+            combobox.current(0)
+            combobox.place(x = 50, y = 200)
+
         # WiFiList = CanConnectWiFiname
         def btn_click():
             if combobox.get() == '接続されていません':
@@ -163,12 +171,16 @@ class DisplayStartWindow:
 
         list = CanConnectWiFiname
 
-        combobox = ttk.Combobox(frm, height=3, width = 40, values = list, state = "readonly")
+        combobox = ttk.Combobox(frm, height=3, width = 30, values = list, state = "readonly")
         combobox.current(0)
         combobox.place(x = 50, y = 200)
 
         btn = tkinter.Button(frm, text='計測開始',width = 18,height = 2, command = btn_click, bg='#808080', font = ('MSゴシック', 10))
         btn.place(x = 330, y = 200)
+
+        # リスト更新ボタン
+        btn2 = tkinter.Button(frm, text='↺',width = 6,height = 1, command = btn_click_list_change, bg='#808080', font = ('MSゴシック', 10))
+        btn2.place(x = 260, y = 200)
 
         ToolTip(chk3, "一定の間隔で自動計測をして最適なWi-Fiを提案します")
         frm.mainloop()

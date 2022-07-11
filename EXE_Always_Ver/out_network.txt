@@ -1,49 +1,54 @@
  
 Interface name : Wi-Fi 
-There are 9 networks currently visible. 
+There are 10 networks currently visible. 
 
-SSID 1 : JCOM_SLDG
+SSID 1 : moow
+    Network type            : Infrastructure
+    Authentication          : WPA2-Enterprise
+    Encryption              : CCMP 
+
+SSID 2 : SRAS-WPA
+    Network type            : Infrastructure
+    Authentication          : WPA2-Enterprise
+    Encryption              : CCMP 
+
+SSID 3 : SHIBAURA
+    Network type            : Infrastructure
+    Authentication          : WPA2-Enterprise
+    Encryption              : CCMP 
+
+SSID 4 : eduroam
+    Network type            : Infrastructure
+    Authentication          : WPA2-Enterprise
+    Encryption              : CCMP 
+
+SSID 5 : SRAS2G
+    Network type            : Infrastructure
+    Authentication          : WPA2-Enterprise
+    Encryption              : CCMP 
+
+SSID 6 : SRAS5G
+    Network type            : Infrastructure
+    Authentication          : WPA2-Enterprise
+    Encryption              : CCMP 
+
+SSID 7 : aterm-f98216-gw
+    Network type            : Infrastructure
+    Authentication          : Open
+    Encryption              : WEP 
+
+SSID 8 : 
+    Network type            : Infrastructure
+    Authentication          : WPA2-Enterprise
+    Encryption              : CCMP 
+
+SSID 9 : SPWN_H37_52B43C
     Network type            : Infrastructure
     Authentication          : WPA2-Personal
     Encryption              : CCMP 
 
-SSID 2 : 
+SSID 10 : VoWoV
     Network type            : Infrastructure
-    Authentication          : WPA2-Personal
-    Encryption              : CCMP 
-
-SSID 3 : E4A7C51912CA-5G
-    Network type            : Infrastructure
-    Authentication          : WPA2-Personal
-    Encryption              : CCMP 
-
-SSID 4 : Buffalo-G-D520
-    Network type            : Infrastructure
-    Authentication          : WPA2-Personal
-    Encryption              : CCMP 
-
-SSID 5 : E4A7C51912CA-2G
-    Network type            : Infrastructure
-    Authentication          : WPA2-Personal
-    Encryption              : CCMP 
-
-SSID 6 : 5C6199CF1FE8-2G
-    Network type            : Infrastructure
-    Authentication          : WPA2-Personal
-    Encryption              : CCMP 
-
-SSID 7 : aterm-7886a3-a
-    Network type            : Infrastructure
-    Authentication          : WPA2-Personal
-    Encryption              : CCMP 
-
-SSID 8 : 5C6199CF1FE8-5G
-    Network type            : Infrastructure
-    Authentication          : WPA2-Personal
-    Encryption              : CCMP 
-
-SSID 9 : aterm-7886a3-g
-    Network type            : Infrastructure
-    Authentication          : WPA2-Personal
+    Authentication          : WPA2-Enterprise
     Encryption              : CCMP 
 
