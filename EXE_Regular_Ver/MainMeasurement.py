@@ -12,30 +12,17 @@
 """
 
 import time
-
 from numpy import average
 from ManagementDownload import *
 from UpdateGraph import UpdateGraph
 from Data import Data
 import math
-"""
-*******************************************************************
-***  Class Name		: MainMeasurement
-***  Designer		    : 池戸 陸
-***  Date		        : 2022.06.02
-***  Function			: 計測時にダウンロード情報管理にファイルを要求する
-                          瞬間速度、平均速度、安定性を求める
-***  Return      	    : -1 エラー
-                          0以上 計測結果
-***
-*******************************************************************
-"""
 
 class MainMeasurement:
 
     """
     *******************************************************************
-    ***  Func Name		    : InstantSpeed
+    ***  Function Name	    : InstantSpeed
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.06.12
     ***  Function			: 瞬間速度を計測する
@@ -49,7 +36,7 @@ class MainMeasurement:
 
     """
     *******************************************************************
-    ***  Func Name		    : AverageSpeed
+    ***  Function Name	    : AverageSpeed
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.06.12
     ***  Function			: 平均速度を計測する
@@ -63,7 +50,7 @@ class MainMeasurement:
 
     """
     *******************************************************************
-    ***  Func Name		    : StabilityEvaluation
+    ***  Function Name	    : StabilityEvaluation
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.07.01
     ***  Function			: 安定性の評価値を定める
@@ -87,7 +74,7 @@ class MainMeasurement:
 
     """
     *******************************************************************
-    ***  Func Name		    : StabilityCalculation
+    ***  Function Name	    : StabilityCalculation
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.07.01
     ***  Function			: 安定性を計算する
@@ -98,7 +85,7 @@ class MainMeasurement:
 
     def StabilityCalculation(InstantSpeed, FileGetNum):
         #stability[0] = メール,LINE , [1] = ネット検索 , [2] = SNS , [3] = 動画視聴 , [4] = オンラインゲーム
-        stability = [0,0,0,0,0]
+        stability = [0, 0, 0, 0, 0]
         mail_ev = 0
         net_ev = 0
         sns_ev = 0
@@ -122,16 +109,16 @@ class MainMeasurement:
                                     movie_ev += 1
                                     if InstantSpeed[i] >= 100:
                                         game_ev += 1
-        stability[0] = MainMeasurement.StabilityEvaluation(mail_ev,stability[0])
-        stability[1] = MainMeasurement.StabilityEvaluation(net_ev,stability[1])
-        stability[2] = MainMeasurement.StabilityEvaluation(sns_ev,stability[2])
-        stability[3] = MainMeasurement.StabilityEvaluation(movie_ev,stability[3])
-        stability[4] = MainMeasurement.StabilityEvaluation(game_ev,stability[4])
+        stability[0] = MainMeasurement.StabilityEvaluation(mail_ev, stability[0])
+        stability[1] = MainMeasurement.StabilityEvaluation(net_ev, stability[1])
+        stability[2] = MainMeasurement.StabilityEvaluation(sns_ev, stability[2])
+        stability[3] = MainMeasurement.StabilityEvaluation(movie_ev, stability[3])
+        stability[4] = MainMeasurement.StabilityEvaluation(game_ev, stability[4])
         return stability
 
     """
     *******************************************************************
-    ***  Func Name		    : Measurement
+    ***  Function Name	    : Measurement
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.07.01
     ***  Function			: メイン処理を行う
@@ -142,32 +129,34 @@ class MainMeasurement:
 
     def Measurement(data):
         FileSize = 2 * 8 #単位はMbit
-
-        # FileGetNum = 10
         FileGetNum = 1
-        
         InstantSpeed = []
-
-        
         InstantTime = time.time()
-        # ManagementDownload.Donwload()
+
         if ManagementDownload.Donwload() == False: #1がtrueで2がfalse
             return -1
         MeasurementTime = time.time() - InstantTime
-        InstantSpeed.append(MainMeasurement.InstantSpeedMeasurement(FileSize,MeasurementTime))
-        UpdateGraph.UpdateGraph(InstantSpeed[-1],data)
-
-        # AverageSpeed = MainMeasurement.AverageSpeedMeasurement(InstantSpeed,FileGetNum)
-        # Stability = MainMeasurement.StabilityCalculation(InstantSpeed,FileGetNum)
-        # print(InstantSpeed,end = "Mbps\n") #テスト用後で消す
-        # print(AverageSpeed,end = "Mbps\n") #テスト用後で消す
-        # print(Stability) #テスト用後で消す
+        InstantSpeed.append(MainMeasurement.InstantSpeedMeasurement(FileSize, MeasurementTime))
+        UpdateGraph.UpdateGraph(InstantSpeed[-1], data)
 
         return InstantSpeed
+
 #InstantSpeedが10個の瞬間速度のリスト
 #AverageSpeedが平均速度
 #Stabilityがメール、ネット、sns、動画視聴、オンラインゲームの5項目を1~5段階に数値化したリスト
 #ManagementDownloadとの結合テスト完了
+
+    """
+    *******************************************************************
+    ***  Function Name  : cmpstability
+    ***  Version        : V1.0
+    ***  Designer       : 
+    ***  Date           : 2022.6.21
+    ***  Purpose       	: 
+    ***
+    *******************************************************************/
+    """
+
     def cmpstability(InstantSpeed, FileGetNum):
         average = MainMeasurement.AverageSpeedMeasurement(InstantSpeed, FileGetNum)
         squaresum = 0

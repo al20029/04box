@@ -34,7 +34,7 @@ class MainMeasurement:
 
     """
     *******************************************************************
-    ***  Func Name		    : InstantSpeed
+    ***  Function Name		: InstantSpeed
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.06.12
     ***  Function			: 瞬間速度を計測する
@@ -48,7 +48,7 @@ class MainMeasurement:
 
     """
     *******************************************************************
-    ***  Func Name		    : AverageSpeed
+    ***  Function Name		: AverageSpeed
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.06.12
     ***  Function			: 平均速度を計測する
@@ -62,7 +62,7 @@ class MainMeasurement:
 
     """
     *******************************************************************
-    ***  Func Name		    : StabilityEvaluation
+    ***  Function Name		: StabilityEvaluation
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.07.01
     ***  Function			: 安定性の評価値を定める
@@ -86,7 +86,7 @@ class MainMeasurement:
 
     """
     *******************************************************************
-    ***  Func Name		    : StabilityCalculation
+    ***  Function Name		: StabilityCalculation
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.07.01
     ***  Function			: 安定性を計算する
@@ -130,7 +130,7 @@ class MainMeasurement:
 
     """
     *******************************************************************
-    ***  Func Name		    : Measurement
+    ***  Function Name      : Measurement
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.07.01
     ***  Function			: メイン処理を行う

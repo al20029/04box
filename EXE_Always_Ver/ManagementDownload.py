@@ -11,16 +11,6 @@
 
 import urllib.request
 
-"""
-******************************************************
-*** File Name       :Download
-*** Designer        :佐藤 光
-*** Date            :2022/06/14
-*** Purpose         :MBのファイルをダウンロードする
-*** 
-******************************************************
-"""
-
 class ManagementDownload:
     def Donwload():
         try:

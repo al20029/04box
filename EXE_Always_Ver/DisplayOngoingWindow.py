@@ -24,6 +24,18 @@ y = []
 count = 0
 color_list = ["r", "b", "g", "y", "m", "c", "k"]
 class DisplayOngoingWindow:
+
+    """
+    *******************************************************************
+    ***  Function Name  : OngoingWindow
+    ***  Version        : V1.0
+    ***  Designer       : 
+    ***  Date           : 2022.6.21
+    ***  Purpose       	: 
+    ***
+    *******************************************************************/
+    """
+
     def OngoingWindow(Data):
         # click時のイベント
         def btn_click():

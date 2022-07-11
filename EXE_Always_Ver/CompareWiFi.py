@@ -14,6 +14,18 @@ from ManagementWiFi import ManagementWiFi
 from ssh import ssh
 
 class CompareWiFi():
+
+    """
+    *******************************************************************
+    ***  Function Name  : CompareWiFi
+    ***  Version        : V1.0
+    ***  Designer       : 
+    ***  Date           : 2022.6.21
+    ***  Purpose       	: 
+    ***
+    *******************************************************************/
+    """
+
     def CompareWiFi(WiFiList, MeasuredWiFiEval):
         ###################変更点#######################
         WiFiNames = list()
@@ -45,7 +57,7 @@ class CompareWiFi():
             if Count[i] == 0:
                 EvalList.append(0)
             else:
-                EvalList.append(SumStab[i]/Count[i])
+                EvalList.append(SumStab[i] / Count[i])
         if max(EvalList) < MeasuredWiFiEval:
             return None
         else:

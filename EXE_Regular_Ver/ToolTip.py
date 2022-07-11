@@ -66,9 +66,9 @@ class ToolTip():
         self.tw = tk.Toplevel(self.widget)
         self.tw.wm_overrideredirect(True)
         self.tw.geometry(f"+{x+10}+{y+10}")
-        label = tk.Label(self.tw, text=self.text, background="lightyellow",
-                         relief="solid", borderwidth=1, justify="left")
-        label.pack(ipadx=10)
+        label = tk.Label(self.tw, text = self.text, background = "lightyellow",
+                         relief = "solid", borderwidth = 1, justify = "left")
+        label.pack(ipadx = 10)
 
     def hideTooltip(self):
         tw = self.tw

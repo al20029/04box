@@ -23,19 +23,19 @@ from ToolTip import *
 import Data
 import os
 
-
-"""
-*******************************************************************
-***  Class Name		: DisplayStartWindow
-***  Designer		    : 池戸 陸
-***  Date		        : 2022.07.01
-***  Function			: 計測開始画面を表示する
-***  Return      	    : -1 エラー
-                          0以上 画面表示
-***
-*******************************************************************
-"""
 class DisplayStartWindow:
+
+    """
+    *******************************************************************
+    ***  Function Name  : StartWindow
+    ***  Version        : V1.0
+    ***  Designer       : 
+    ***  Date           : 2022.6.21
+    ***  Purpose       	: 
+    ***
+    *******************************************************************/
+    """
+
     def StartWindow(CanConnectWiFiname):
         list = CanConnectWiFiname
         WiFiName = ''

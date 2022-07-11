@@ -6,4 +6,3 @@ SSID 1 : aterm-7886a3-a
     Network type            : Infrastructure
     Authentication          : WPA2-Personal
     Encryption              : CCMP 
-

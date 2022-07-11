@@ -4,7 +4,7 @@
 ***  Version        : V1.0
 ***  Designer       : 荒川 塁唯
 ***  Date           : 2022.6.14
-***  Purpose       	: 計測終了画面を表示し, ユーザの入力を受け取る.
+***  Purpose       	: 計測終了画面を表示し、ユーザの入力を受け取る
 ***
 *******************************************************************/
 """
@@ -22,6 +22,18 @@ from MainMeasurement import MainMeasurement
 from ssh import ssh
 
 class DisplayFinishWindow:
+
+    """
+    *******************************************************************
+    ***  Function Name  : FinishWindow
+    ***  Version        : V1.0
+    ***  Designer       : 荒川 塁唯
+    ***  Date           : 2022.6.21
+    ***  Purpose       	: 計測終了画面を定義する
+    ***
+    *******************************************************************/
+    """
+
     def FinishWindow(CanConnectWiFiname, DataList):
         list = CanConnectWiFiname
         WiFiName = ''

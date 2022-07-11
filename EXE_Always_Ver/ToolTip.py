@@ -25,6 +25,7 @@ import tkinter as tk
 """
 
 class ToolTip():
+
     def __init__(self, widget, text = "default tooltip"):
         self.widget = widget
         self.text = text

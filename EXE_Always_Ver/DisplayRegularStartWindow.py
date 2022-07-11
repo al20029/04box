@@ -1,10 +1,10 @@
 """
 ******************************************************
-*** File Name       :DisplayRegularStartWindow.py
-*** Version         :V1.0
-*** Designer        :佐藤 光
-*** Date            :2022/06/14
-*** Purpose         :定期計測中画面を表示する
+*** File Name       : DisplayRegularStartWindow.py
+*** Version         : V1.0
+*** Designer        : 佐藤 光
+*** Date            : 2022/06/14
+*** Purpose         : 定期計測中画面を表示し、ユーザの入力を受け取る
 *** 
 ******************************************************
 """
@@ -19,17 +19,19 @@ from MainMeasurement import MainMeasurement
 from CompareWiFi import CompareWiFi
 from ssh import ssh
 
-"""
-******************************************************
-*** File Name       :DisplayRegularStartWindow
-*** Designer        :佐藤 光
-*** Date            :2022/06/14
-*** Purpose         :定期計測中画面を表示し、ユーザの入力を受け取る
-*** 
-******************************************************
-"""
-
 class DisplayRegularStartWindow:
+
+    """
+    *******************************************************************
+    ***  Function Name  : RegularStartWindow
+    ***  Version        : V1.0
+    ***  Designer       : 
+    ***  Date           : 2022.6.21
+    ***  Purpose       	: 
+    ***
+    *******************************************************************/
+    """
+
     def RegularStartWindow(data):
         Stop = False
         BestWiFiName = ""

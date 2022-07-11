@@ -1,10 +1,10 @@
 """
 ******************************************************
-*** File Name       :DisplayRegularFinishWindow.py
-*** Version         :V1.0
-*** Designer        :佐藤 光
-*** Date            :2022/06/14
-*** Purpose         :定期計測終了画面を表示する
+*** File Name       : DisplayRegularFinishWindow.py
+*** Version         : V1.0
+*** Designer        : 佐藤 光
+*** Date            : 2022/06/14
+*** Purpose         : 定期計測終了画面を表示し、ユーザの入力を受け取る
 *** 
 ******************************************************
 """
@@ -13,17 +13,19 @@ import tkinter
 from tkinter import messagebox
 from InteractWithOS import InteractWithOS
 
-"""
-******************************************************
-*** File Name       :DisplayRegularFinishWindow
-*** Designer        :佐藤 光
-*** Date            :2022/06/14
-*** Purpose         :定期計測終了画面を表示し、ユーザの入力を受け取る
-*** 
-******************************************************
-"""
-
 class DisplayRegularFinishWindow:
+
+    """
+    *******************************************************************
+    ***  Function Name  : RegularFinishWindow
+    ***  Version        : V1.0
+    ***  Designer       : 
+    ***  Date           : 2022.6.21
+    ***  Purpose       	: 
+    ***
+    *******************************************************************/
+    """
+
     def RegularFinishWindow(BestWiFiName):
         # click時のイベント
         def btn_click():

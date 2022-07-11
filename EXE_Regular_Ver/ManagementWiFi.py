@@ -16,7 +16,7 @@ class ManagementWiFi:
  
     """
     *******************************************************************
-    ***  Func Name      : Register
+    ***  Function Name  : Register
     ***  Version        : V1.0
     ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
@@ -27,7 +27,6 @@ class ManagementWiFi:
 
     # 計測データの登録
     def RegisterData(WiFiName, AverageSpeed, Stability):
-    # def RegisterData():
 
         ###########デバッグ用########
         print(type(WiFiName), WiFiName)
@@ -54,7 +53,7 @@ class ManagementWiFi:
 
     """
     *******************************************************************
-    ***  Func Name      : SendPastData
+    ***  Function Name  : SendPastData
     ***  Version        : V1.0
     ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
@@ -65,7 +64,6 @@ class ManagementWiFi:
 
     # 過去データの送信
     def SendPastData(WiFiName):
-    # def SendPastData(WiFiName, AverageSpeed, Stability):
         # データベースの作成（仮）
         db = sqlite3.connect('main.db')
         db.row_factory = sqlite3.Row
@@ -80,7 +78,7 @@ class ManagementWiFi:
         BestAverageSpeed = 0
         BestStability = 0
         # データ検索
-        c.execute('SELECT * FROM items WHERE (WiFiName == ?)',(WiFiName))
+        c.execute('SELECT * FROM items WHERE (WiFiName == ?)', (WiFiName))
         for row in c:   
             if row[0] == WiFiName: 
                 print(row[0], row[1], row[2])
@@ -91,11 +89,10 @@ class ManagementWiFi:
         BestAverageSpeed = SumAverageSpeed / n
         BestStability = SumStability / n
         print(BestAverageSpeed, BestStability)
-        # return BestAverageSpeed, BestStability
 
     """
     *******************************************************************
-    ***  Func Name      : SendRealtimeData
+    ***  Function Name  : SendRealtimeData
     ***  Version        : V1.0
     ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
@@ -142,5 +139,3 @@ class ManagementWiFi:
                 BestStability[k] = SumStability[k] / count[k]
                 print(CanConnectWiFiName[k], BestAverageSpeed[k], BestStability[k])
         c.close()
-        # print(CanConnectWiFiName, BestAverageSpeed, BestStability)
-        # return CanConnectWiFiName, BestAverageSpeed, BestStability

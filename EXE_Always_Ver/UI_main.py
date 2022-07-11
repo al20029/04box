@@ -19,17 +19,8 @@ from Data import Data
 from ManagementWiFi import ManagementWiFi
 from CompareWiFi import CompareWiFi
 
-"""
-******************************************************
-*** File Name       :UIMainProcess
-*** Designer        :佐藤 光
-*** Date            :2022/06/14
-*** Purpose         :Windowを表示しその戻り値をもとに他のコンポーネント、OSとやり取りをする
-*** 
-******************************************************
-"""
-
 class UIMainProcess:
+    
     def __init__(self):
 
         print("hello")

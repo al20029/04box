@@ -13,6 +13,18 @@ import paramiko
 
 class ssh():
     ##################変更点###################
+
+    """
+    *******************************************************************
+    ***  Function Name  : ParamikoReg
+    ***  Version        : V1.0
+    ***  Designer       : 
+    ***  Date           : 2022.6.21
+    ***  Purpose       	: 
+    ***
+    *******************************************************************/
+    """
+
     ## データの登録
     def ParamikoReg(WiFiName, AverageSpeed, Stability):
         client = paramiko.SSHClient()
@@ -23,6 +35,17 @@ class ssh():
         stdin, stdout, stderr = client.exec_command("python3 MainManagementWiFi.py"  + " 1 " + argument)
         print(stdout.read().decode('utf-8'))
         client.close()
+
+    """
+    *******************************************************************
+    ***  Function Name  : ParamikoGetPast
+    ***  Version        : V1.0
+    ***  Designer       : 
+    ***  Date           : 2022.6.21
+    ***  Purpose       	: 
+    ***
+    *******************************************************************/
+    """
 
     ## 過去データの取得
     def ParamikoGetPast(WiFiName):
@@ -40,6 +63,18 @@ class ssh():
         client.close()
         return AverageSpeed, Stability
         ##################
+
+
+    """
+    *******************************************************************
+    ***  Function Name  : ParamikoGetReal
+    ***  Version        : V1.0
+    ***  Designer       : 
+    ***  Date           : 2022.6.21
+    ***  Purpose       	: 
+    ***
+    *******************************************************************/
+    """
 
     ## リアルタイムデータの取得
     def ParamikoGetReal(WiFiList):

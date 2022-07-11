@@ -1,10 +1,10 @@
 """
 ******************************************************
-*** File Name       :UI_main.py
-*** Version         :V1.0
-*** Designer        :佐藤 光
-*** Date            :2022/06/14
-*** Purpose         :Wi-Fiの変更を行う。接続可能なWi-Fi名をlistとして取得する
+*** File Name       : UI_main.py
+*** Version         : V1.0
+*** Designer        : 佐藤 光
+*** Date            : 2022/06/14
+*** Purpose         : Wi-Fiの変更を行う。接続可能なWi-Fi名をlistとして取得する
 *** 
 ******************************************************
 """
@@ -14,15 +14,18 @@ import os
 import time
 
 class InteractWithOS:
+
     """
     ******************************************************
-    *** File Name       :GetWi_fi
-    *** Designer        :佐藤 光
-    *** Date            :2022/06/14
-    *** Purpose         :接続可能なWi-Fi情報を取得する
+    *** Fuunction Name  : GetWi_fi
+    *** Version         : V1.0
+    *** Designer        : 佐藤 光
+    *** Date            : 2022/06/14
+    *** Function        : 接続可能なWi-Fi情報を取得する
     *** 
     ******************************************************
     """
+
     def GetWiFi():
         List_network = list()
         List_profiles = list()
@@ -102,13 +105,14 @@ class InteractWithOS:
         return CanConnectWiFiName
 
     """
-    ******************************************************
-    *** File Name       :ChangeWi_Fi
-    *** Designer        :佐藤 光
-    *** Date            :2022/06/14
-    *** Purpose         :Wi-Fiの変更を行う
-    *** 
-    ******************************************************
+    *******************************************************************
+    ***  Function Name  : ChangeWiFiName
+    ***  Version        : V1.0
+    ***  Designer       : 佐藤 光
+    ***  Date           : 2022.6.21
+    ***  Purpose       	: Wi-Fiの変更を行う
+    ***
+    *******************************************************************/
     """
 
     #Wi-Fi変更,接続が正常かを確認

@@ -4,37 +4,34 @@
 *** Version         :V1.0
 *** Designer        :佐藤 光
 *** Date            :2022/06/14
-*** Purpose         :定期計測中画面を表示する
+*** Purpose         :定期計測中画面を表示し、ユーザの入力を受け取る
 *** 
 ******************************************************
 """
 
-# from curses import nonl
-# from queue import Empty
 import tkinter
-
-# from tkinter import messagebox
 from ManagementWiFi import ManagementWiFi
 from InteractWithOS import InteractWithOS
 from ManagementDownload import ManagementDownload
-# from ManagementDownload import ManagementDownload
 from MainMeasurement import MainMeasurement
 from CompareWiFi import CompareWiFi
 import subprocess
 from ssh import ssh
 import os
 
-"""
-******************************************************
-*** File Name       :DisplayRegularStartWindow
-*** Designer        :佐藤 光
-*** Date            :2022/06/14
-*** Purpose         :定期計測中画面を表示し、ユーザの入力を受け取る
-*** 
-******************************************************
-"""
-
 class DisplayRegularStartWindow:
+
+    """
+    *******************************************************************
+    ***  Function Name  : RegularStartWindow
+    ***  Version        : V1.0
+    ***  Designer       : 
+    ***  Date           : 2022.6.21
+    ***  Purpose       	: 
+    ***
+    *******************************************************************/
+    """
+
     def RegularStartWindow(data):
         Stop = False
         BestWiFiName = ""
@@ -47,11 +44,7 @@ class DisplayRegularStartWindow:
         # click時のイベント
         def btn_click():
             nonlocal Stop
-            # Y_N = messagebox.askyesno("確認中", "停止しますか")
-            # if Y_N == True:
-            # tki.after_cancel()   
             Stop = True
-            # tki.quit()
             tki.destroy()
 
         # 画面作成
@@ -64,32 +57,29 @@ class DisplayRegularStartWindow:
         tki.title('定期計測中画面') # 画面タイトルの設定
 
         #題名表示
-        SystemName = tkinter.Label(text="速度計測中", font=("MSゴシック", "30", "bold"))
-        SystemName.place(x=50, y=10)
+        SystemName = tkinter.Label(text = "速度計測中", font = ("MSゴシック", "30", "bold"))
+        SystemName.place(x = 50, y = 10)
 
         #画像表示
-        canvas = tkinter.Canvas(tki, width=200, height=200)
-        canvas.place(x=50, y=60)
+        canvas = tkinter.Canvas(tki, width = 200, height = 200)
+        canvas.place(x = 50, y = 60)
 
         _env = os.environ
         with open('out_UserName.txt', 'w') as nfp:
-            subprocess.run('echo %USERNAME%', stdout=nfp, env=_env, shell=True)
+            subprocess.run('echo %USERNAME%', stdout = nfp, env = _env, shell = True)
         f = open("out_UserName.txt","r")
         Result_echo = f.read().splitlines()
-        # subprocess.run('del out_UserName.txt', shell=True)
         for s in Result_echo:
             if len(s) != 0:
                 UserName = s.replace(' ', '').replace('  ', '')
                 break
         print(UserName)
-        wi_fi = tkinter.PhotoImage(file = r"C:\Users\\" + UserName + "\MAIFI\\wi-fi.png", width=200, height=200)
-        
-        # wi_fi = tkinter.PhotoImage(file = "wi-fi.png", width=200, height=200)
+        wi_fi = tkinter.PhotoImage(file = r"C:\Users\\" + UserName + "\MAIFI\\wi-fi.png", width = 200, height = 200)
         canvas.create_image(0, 20, image = wi_fi, anchor = tkinter.NW)
 
         # ボタンの作成
-        btn = tkinter.Button(tki, text='計測中止', width = 10, height = 2, command = btn_click, font=("MSゴシック", "10"))
-        btn.place(x=200, y=250) #ボタンを配置する位置の設定
+        btn = tkinter.Button(tki, text = '計測中止', width = 10, height = 2, command = btn_click, font = ("MSゴシック", "10"))
+        btn.place(x = 200, y = 250) #ボタンを配置する位置の設定
 
         # 繰り返しダウンロードする
         def Repeat_Download():
@@ -102,8 +92,6 @@ class DisplayRegularStartWindow:
             if MainMeasurement.Measurement(data) == -1:
                 print("エラー通ってますよ")
                 WiFiError()
-            # faster,a,b = MainMeasurement.Measurement(a)
-            # print(MainMeasurement.Measurement(a))
             if count > 0:
                 tki.after(1000, Repeat_Download)
             else:
@@ -114,43 +102,20 @@ class DisplayRegularStartWindow:
                 # リストから現在のWi-Fi名を削除
                 # 計測値の登録
                 AverageSpeed = MainMeasurement.AverageSpeedMeasurement(data.ListInstantSpeed, len(data.ListInstantSpeed))
-                #Stability = MainMeasurement.StabilityCalculation(data.ListInstantSpeed, len(data.ListInstantSpeed))
                 Stability = MainMeasurement.cmpstability(data.ListInstantSpeed, len(data.ListInstantSpeed))
-                # print(WiFiList[0])
-                # print(AverageSpeed)
-                # print(Stability)
                 WiFi = WiFiList.pop(0)
                 #現在接続していないWiFiの中で接続可能なWiFiがない場合は現在接続しているWiFiを最適とする
 
                 print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
                 ssh.ParamikoReg(WiFi, AverageSpeed, Stability)
                 print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-                # tki.after_cancel(errer_id)
                 if len(WiFiList) == 0:
                     BestWiFiName = WiFi
                 else:
-
-                    ##########
-                    ##popによりWiFiListがnullになった時どうする？？
-                    ##########
-
-                    # ManagementWiFi.RegisterData(WiFiList.pop(0), AverageSpeed, Stability)
-                    # リアルタイムデータから最適なWi-Fiを探す
-                    # ManagementWiFi.SendRealtimeData(WiFiList)
-
-
                     BestWiFiName = CompareWiFi.CompareWiFi(WiFiList, AverageSpeed*Stability)
                     if BestWiFiName == None:
                         BestWiFiName = WiFi
-
-                ##########仕様変更#######
-                #CompareWiFiの引数には計測したWiFiの評価値を入れる
-                #いったん評価値はAverageSpeed*Stabilityとする
-                #########################
-
-                ########################################
                 tki.destroy()
-                # tki.quit()
 
         def WiFiError():
             nonlocal Stop
@@ -159,26 +124,7 @@ class DisplayRegularStartWindow:
             tki.destroy()
             Stop = True
             BestWiFiName = InteractWithOS.GetWiFi().pop(0)
-
-        # 繰り返しダウンロードする
-        #         ###変更点###
-        # errer_id = tki.after(30000,lambda: WiFiError)
         tki.after(1000, Repeat_Download)
-
-
-        # ################# 変更点#################
-        # WiFiList = list()
-        # WiFiList = InteractWithOS.GetWiFi()
-        # # リストから現在のWi-Fi名を削除
-        # # 計測値の登録
-        # AverageSpeed = MainMeasurement.AverageSpeedMeasurement(data.ListInstantSpeed, len(data.ListInstantSpeed))
-        # Stability = MainMeasurement.StabilityCalculation(data.ListInstantSpeed, len(data.ListInstantSpeed))
-        # ManagementWiFi.RegisterData(WiFiList.pop(0), AverageSpeed, Stability)
-        # # リアルタイムデータから最適なWi-Fiを探す
-        # # ManagementWiFi.SendRealtimeData(WiFiList)
-        # BestWiFiName = CompareWiFi(WiFiList)
-
-        # #########################################
         
         # 画面をそのまま表示
         tki.mainloop()

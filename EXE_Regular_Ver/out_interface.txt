@@ -20,4 +20,3 @@ There is 1 interface on the system:
     Profile                : aterm-7886a3-a 
 
     Hosted network status  : Not available
-
