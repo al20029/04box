@@ -45,21 +45,20 @@ class DisplayRegularFinishWindow:
         SystemName.place(x=110, y=10)
 
         #メッセージ表示
-        SystemName = tkinter.Label(text="最も最適なWi-Fiは", font=("MSゴシック", "20"))
-        SystemName.place(x=70, y=80)
-        SystemName = tkinter.Label(text="です", font=("MSゴシック", "20"))
-        SystemName.place(x=70, y=190)
-
+        SystemName = tkinter.Label(text = "最も最適なWi-Fiは", font = ("MSゴシック", "20"))
+        SystemName.place(x = 70, y = 80)
+        SystemName = tkinter.Label(text = "です", font = ("MSゴシック", "20"))
+        SystemName.place(x = 70, y = 190)
 
         #最適なWi-Fi名の表示
         msg = BestWiFiName
-        SystemName = tkinter.Label(text=msg, font=("MSゴシック", "30"))
-        SystemName.place(x=110, y=130)
-        SystemName.pack(anchor='center',expand=1)
+        SystemName = tkinter.Label(text = msg, font = ("MSゴシック", "30"))
+        SystemName.place(x = 110, y = 130)
+        SystemName.pack(anchor = 'center',expand = 1)
 
         # ボタンの作成
-        btn = tkinter.Button(tki, text='Wi-Fi変更', width = 10, height = 2, command = btn_click, font=("MSゴシック", "10"))
-        btn.place(x=280, y=250) #ボタンを配置する位置の設定
+        btn = tkinter.Button(tki, text = 'Wi-Fi変更', width = 10, height = 2, command = btn_click, font = ("MSゴシック", "10"))
+        btn.place(x = 280, y = 250) #ボタンを配置する位置の設定
 
         # 画面をそのまま表示
         tki.mainloop()

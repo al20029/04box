@@ -27,13 +27,13 @@ class ManagementWiFi:
 
     # 計測データの登録
     def RegisterData(WiFiName, AverageSpeed, Stability):
-    # def RegisterData():
 
         ###########デバッグ用########
         print(type(WiFiName), WiFiName)
         print(type(AverageSpeed), AverageSpeed)
         print(type(Stability), Stability)
         #############################
+
         # 計測時刻の取得
         MeasurementTime = datetime.datetime.now()
 
@@ -44,7 +44,7 @@ class ManagementWiFi:
         c = db.cursor()
 
         # 登録
-        c.execute('INSERT INTO items (WiFiName, AverageSpeed, Stability, MeasurementTime)values(?,?,?,?)',[WiFiName, AverageSpeed, Stability, MeasurementTime])
+        c.execute('INSERT INTO items (WiFiName, AverageSpeed, Stability, MeasurementTime)values(?,?,?,?)', [WiFiName, AverageSpeed, Stability, MeasurementTime])
         # テスト
         c.execute('SELECT * FROM items')     
         for row in c:
@@ -81,7 +81,7 @@ class ManagementWiFi:
         BestStability = 0
 
         # データ検索
-        c.execute('SELECT * FROM items WHERE (WiFiName == ?)',(WiFiName))
+        c.execute('SELECT * FROM items WHERE (WiFiName == ?)', (WiFiName))
         for row in c:   
             if row[0] == WiFiName: 
                 print(row[0], row[1], row[2])

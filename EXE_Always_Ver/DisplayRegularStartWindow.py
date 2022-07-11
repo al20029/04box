@@ -11,13 +11,10 @@
 
 from queue import Empty
 import tkinter
-
 import paramiko
-# from tkinter import messagebox
 from ManagementWiFi import ManagementWiFi
 from InteractWithOS import InteractWithOS
 from ManagementDownload import ManagementDownload
-# from ManagementDownload import ManagementDownload
 from MainMeasurement import MainMeasurement
 from CompareWiFi import CompareWiFi
 from ssh import ssh
@@ -58,18 +55,18 @@ class DisplayRegularStartWindow:
         tki.title('定期計測中画面') # 画面タイトルの設定
 
         #題名表示
-        SystemName = tkinter.Label(text="速度計測中", font=("MSゴシック", "30", "bold"))
-        SystemName.place(x=50, y=10)
+        SystemName = tkinter.Label(text = "速度計測中", font = ("MSゴシック", "30", "bold"))
+        SystemName.place(x = 50, y = 10)
 
         #画像表示
-        canvas = tkinter.Canvas(tki, width=200, height=200)
-        canvas.place(x=50, y=60)
-        wi_fi = tkinter.PhotoImage(file = "wi-fi.png", width=200, height=200)
+        canvas = tkinter.Canvas(tki, width = 200, height = 200)
+        canvas.place(x = 50, y = 60)
+        wi_fi = tkinter.PhotoImage(file = "wi-fi.png", width = 200, height = 200)
         canvas.create_image(0, 20, image = wi_fi, anchor = tkinter.NW)
 
         # ボタンの作成
-        btn = tkinter.Button(tki, text='計測中止', width = 10, height = 2, command = btn_click, font=("MSゴシック", "10"))
-        btn.place(x=200, y=250) #ボタンを配置する位置の設定
+        btn = tkinter.Button(tki, text = '計測中止', width = 10, height = 2, command = btn_click, font = ("MSゴシック", "10"))
+        btn.place(x = 200, y = 250) #ボタンを配置する位置の設定
 
         # 繰り返しダウンロードする
         def Repeat_Download():
@@ -99,11 +96,6 @@ class DisplayRegularStartWindow:
                 if len(WiFiList) == 0:
                     BestWiFiName = WiFi
                 else:
-
-                    ##########
-                    ##popによりWiFiListがnullになった時どうする？？
-                    ##########
-
                     BestWiFiName = CompareWiFi.CompareWiFi(WiFiList, AverageSpeed*Stability)
                     if BestWiFiName == None:
                         BestWiFiName = WiFi
@@ -113,7 +105,6 @@ class DisplayRegularStartWindow:
                 #いったん評価値はAverageSpeed*Stabilityとする
                 #########################
 
-                ########################################
                 tki.destroy()
 
         # 繰り返しダウンロードする

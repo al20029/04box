@@ -22,7 +22,7 @@ from MainMeasurement import MainMeasurement
 from ssh import ssh
 
 class DisplayFinishWindow:
-    def FinishWindow(CanConnectWiFiname,DataList):
+    def FinishWindow(CanConnectWiFiname, DataList):
         list = CanConnectWiFiname
         WiFiName = ''
         WiFiList = []
@@ -32,7 +32,7 @@ class DisplayFinishWindow:
             nonlocal combobox
             nonlocal list
             list = InteractWithOS.GetWiFi()
-            combobox = ttk.Combobox(frm, height=3, width = 30, values = list, state = "readonly")
+            combobox = ttk.Combobox(frm, height = 3, width = 30, values = list, state = "readonly")
             combobox.current(0)
             combobox.place(x = 440, y = 455)
         # クリック時のイベント
@@ -83,17 +83,17 @@ class DisplayFinishWindow:
         ax.set_ylabel("speed / Mbps") #y軸のラベル
         ymax = 0
         for data in DataList:
-            x=np.arange(0,len(data.ListInstantSpeed),1) #x軸のデータ
+            x=np.arange(0, len(data.ListInstantSpeed), 1) #x軸のデータ
             y=data.ListInstantSpeed
             if(ymax < data.MaxSpeed):
                 ymax = data.MaxSpeed
-                ax.set_ylim(0,data.MaxSpeed*1.1)    
+                ax.set_ylim(0, data.MaxSpeed*1.1)    
             ax.plot(x, y, data.color) #データの描画
         
       
         canvas = FigureCanvasTkAgg(fig, master=frm)
         canvas.draw()
-        canvas.get_tk_widget().place(x=10, y=62, width=390, height=380)
+        canvas.get_tk_widget().place(x = 10, y = 62, width = 390, height = 380)
 
         #結果表
         # ★バグ対応用の関数を追加
@@ -123,15 +123,15 @@ class DisplayFinishWindow:
         tree.heading('stab4', text = 'オンラインゲーム', anchor = 'center')
 
         
-        style.map('Treeview', foreground=fixed_map('foreground'), background=fixed_map('background'))
+        style.map('Treeview', foreground = fixed_map('foreground'), background = fixed_map('background'))
 
-        tree.tag_configure("r", foreground='red')
-        tree.tag_configure("b", foreground='blue')
-        tree.tag_configure("g", foreground='green')
-        tree.tag_configure("y", foreground='yellow')
-        tree.tag_configure("m", foreground='magenta')
-        tree.tag_configure("c", foreground='cyan')
-        tree.tag_configure("k", foreground='black')
+        tree.tag_configure("r", foreground = 'red')
+        tree.tag_configure("b", foreground = 'blue')
+        tree.tag_configure("g", foreground = 'green')
+        tree.tag_configure("y", foreground = 'yellow')
+        tree.tag_configure("m", foreground = 'magenta')
+        tree.tag_configure("c", foreground = 'cyan')
+        tree.tag_configure("k", foreground = 'black')
 
         treecount = 0
         for Data in DataList:
@@ -141,46 +141,45 @@ class DisplayFinishWindow:
             if len(Data.ListInstantSpeed) != 10:
                 stab =[-1, -1, -1, -1, -1]
             else:
-                stab = MainMeasurement.StabilityCalculation(Data.ListInstantSpeed,10)
+                stab = MainMeasurement.StabilityCalculation(Data.ListInstantSpeed, 10)
 
             # 過去データの取得
             PastAvg, PastStab = ssh.ParamikoGetPast(WiFiName)
-            PastAvg = round(PastAvg,1)
+            PastAvg = round(PastAvg, 1)
             PastSpeed = '(' + str(PastAvg) +'Mbps' +')'
             PastWiFiName = '(' + WiFiName + ')'
             PastStab = '(' + str(PastStab) + ')'
 
-            tree.insert(parent='', index='end', iid = treecount, values=(WiFiName,speed,stab[0],stab[1],stab[2],stab[3],stab[4]),tags=Data.color)
-            tree.insert(parent='', index='end', iid = treecount+1, values=(PastWiFiName,PastSpeed,'-','-','-','-','-'),tags=Data.color)
+            tree.insert(parent='', index ='end', iid = treecount, values = (WiFiName, speed, stab[0], stab[1], stab[2], stab[3], stab[4]), tags = Data.color)
+            tree.insert(parent='', index ='end', iid = treecount+1, values = (PastWiFiName, PastSpeed, '-', '-', '-', '-', '-'), tags = Data.color)
             treecount += 2
         tree.place(x=420, y=80)     
 
         #安定性の説明
         notes = tkinter.Label(text = "※\'メール\'～\'オンラインゲーム\'は用途における安定性の目安\n  1～5の値を取り，値が大きいほど良い\n計測を途中で中止したときは-1の値を取る",font=('MSゴシック','13'))
-        notes.place(x=430,y=320)
+        notes.place(x = 430, y = 320)
 
         #########変更点#########
         #過去データの説明
         notes = tkinter.Label(text = "※過去データは(Wi-Fi名)で表現している\n",font=('MSゴシック','13'))
-        notes.place(x=430, y=380)
+        notes.place(x = 430, y = 380)
         ########################
 
         # Wi-Fi名プルタブ配置
-        combobox = ttk.Combobox(frm, height=3, width = 30, values = list, state = "readonly")
+        combobox = ttk.Combobox(frm, height = 3, width = 30, values = list, state = "readonly")
         combobox.current(0)
         combobox.place(x = 440, y = 455)
 
         # ボタンの作成
-        btn = tkinter.Button(frm, text='再計測開始', width = 10, height = 2, command = btn_click, font=("MSゴシック", "10"))
-        btn.place(x=750, y=450) #ボタンを配置する位置の設定
+        btn = tkinter.Button(frm, text='再計測開始', width = 10, height = 2, command = btn_click, font = ("MSゴシック", "10"))
+        btn.place(x = 750, y = 450) #ボタンを配置する位置の設定
 
         # リスト更新ボタン
-        btn2 = tkinter.Button(frm, text='↺',width = 6,height = 1, command = btn_click_list_change, bg='#808080', font = ('MSゴシック', 10))
+        btn2 = tkinter.Button(frm, text = '↺',width = 6,height = 1, command = btn_click_list_change, bg = '#808080', font = ('MSゴシック', 10))
         btn2.place(x = 670, y = 455)
 
         # 画面をそのまま表示
         frm.mainloop()
 
         WiFiList = list
-        return Start,WiFiName,WiFiList
-    # FinishWindow()
+        return Start, WiFiName, WiFiList

@@ -9,18 +9,14 @@
 ******************************************************
 """
 
-# from cv2 import compare
 from DisplayStartWindow import DisplayStartWindow
 from DisplayFinishWindow import DisplayFinishWindow
 from DisplayOngoingWindow import DisplayOngoingWindow
 from DisplayRegularStartWindow import DisplayRegularStartWindow
 from DisplayRegularFinishWindow import DisplayRegularFinishWindow
 from InteractWithOS import InteractWithOS
-# from MainMeasurement import MainMeasurement
 from Data import Data
-# from GetSendDB import GetSendDB
 from ManagementWiFi import ManagementWiFi
-# import time
 from CompareWiFi import CompareWiFi
 
 """
@@ -35,26 +31,23 @@ from CompareWiFi import CompareWiFi
 
 class UIMainProcess:
     def __init__(self):
+
         print("hello")
+
     def Always():
-        # データベースの取得
-        # GetSendDB.download()
 
         list = []
-        # WiFiList = []
         DataList =[]
         while len(list) == 0:
             list = InteractWithOS.GetWiFi()
         print(1)
         a = Data()
         DataList.append(a)
-        get,WiFiName,WiFiList = DisplayStartWindow.StartWindow(list)
+        get,WiFiName, WiFiList = DisplayStartWindow.StartWindow(list)
         list = []
         list.extend(WiFiList)
-        # list[len(list):len(list)] = WiFiList
         if get == False:
             return
-
         print("listの内容")
         print(list)
         print("WiFinameの内容")
@@ -68,17 +61,15 @@ class UIMainProcess:
             if get == True:
                 if '接続されていません'in list:
                     list.remove('接続されていません')
-                get,WiFiName,WiFiList = DisplayFinishWindow.FinishWindow(list,DataList)
+                get, WiFiName, WiFiList = DisplayFinishWindow.FinishWindow(list, DataList)
                 print("WiFiList_UIMAIN")
                 print(WiFiList)
                 print("List_UIMAIN")
                 print(list)
                 list = []
                 list.extend(WiFiList)
-                # list[len(list):len(list)] = WiFiLis
                 list.remove(WiFiName)
                 list.insert(0, WiFiName)
-                # print(WiFiName)
                 a = Data()
                 print("P1")
                 for data in (DataList):
@@ -96,48 +87,13 @@ class UIMainProcess:
                 for data in (DataList):
                     print(data.WiFiName)
 
-        # データベースの送信
-        # GetSendDB.upload()
-
     def Regular():
-        # データベースの取得
-        # GetSendDB.download()
-
-        # サーバ使わないパターン
-        # Fastest_WiFi = ""
-        # fastest = 0
-        # for s in WiFiList:
-        #     # print(s)
-        #     InteractWithOS.ChangeWiFi(s)
-        #     time.sleep(1)
-
-        #     print(get)
-        #     if get == True:
-        #         break
-        #     if fast[0] > fastest:
-        #         fastest = fast[0]
-        #         Fastest_WiFi = s
-        # get = True
 
         a = Data()
-        # WiFiList = list()
-        # WiFiList = InteractWithOS.GetWiFi()
         get,name = DisplayRegularStartWindow.RegularStartWindow(a)
-
-        # リアルタイムデータから最適なWi-Fiを探す
-        # ManagementWiFi.SendRealtimeData(WiFiList)
-        # name = CompareWiFi()
-        # Fastest_WiFi()
 
         print("戻り値の出力")
         print(get)
         print(name)
         if get == False:
             DisplayRegularFinishWindow.RegularFinishWindow(name)
-
-        # データベースの送信
-        # GetSendDB.upload()
-
-        
-# UIMainProcess.Always()
-# UIMainProcess.Regular()

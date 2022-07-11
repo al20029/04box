@@ -12,7 +12,6 @@
 """
 
 import time
-
 from numpy import average
 from ManagementDownload import *
 from UpdateGraph import UpdateGraph
@@ -122,11 +121,11 @@ class MainMeasurement:
                                     movie_ev += 1
                                     if InstantSpeed[i] >= 100:
                                         game_ev += 1
-        stability[0] = MainMeasurement.StabilityEvaluation(mail_ev,stability[0])
-        stability[1] = MainMeasurement.StabilityEvaluation(net_ev,stability[1])
-        stability[2] = MainMeasurement.StabilityEvaluation(sns_ev,stability[2])
-        stability[3] = MainMeasurement.StabilityEvaluation(movie_ev,stability[3])
-        stability[4] = MainMeasurement.StabilityEvaluation(game_ev,stability[4])
+        stability[0] = MainMeasurement.StabilityEvaluation(mail_ev, stability[0])
+        stability[1] = MainMeasurement.StabilityEvaluation(net_ev, stability[1])
+        stability[2] = MainMeasurement.StabilityEvaluation(sns_ev, stability[2])
+        stability[3] = MainMeasurement.StabilityEvaluation(movie_ev, stability[3])
+        stability[4] = MainMeasurement.StabilityEvaluation(game_ev, stability[4])
         return stability
 
     """
@@ -142,19 +141,14 @@ class MainMeasurement:
 
     def Measurement(data):
         FileSize = 2 * 8 #単位はMbit
-
-        # FileGetNum = 10
         FileGetNum = 1
-        
         InstantSpeed = []
-
-        
         InstantTime = time.time()
         if ManagementDownload.Donwload() == False:
             return -1
         MeasurementTime = time.time() - InstantTime
-        InstantSpeed.append(MainMeasurement.InstantSpeedMeasurement(FileSize,MeasurementTime))
-        UpdateGraph.UpdateGraph(InstantSpeed[-1],data)
+        InstantSpeed.append(MainMeasurement.InstantSpeedMeasurement(FileSize, MeasurementTime))
+        UpdateGraph.UpdateGraph(InstantSpeed[-1], data)
 
         return InstantSpeed
     # InstantSpeedが10個の瞬間速度のリスト

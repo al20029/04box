@@ -50,7 +50,7 @@ class DisplayOngoingWindow:
         
         ax = fig.add_subplot(111)
         ax.set_ylabel("speed / Mbps")#y軸のラベル
-        ax.set_ylim(0,10)
+        ax.set_ylim(0, 10)
         ax.set_xlabel("x / mm")#x軸のラベル
         if Data.color == '':
             Data.color = color_list.pop(0)
@@ -58,11 +58,11 @@ class DisplayOngoingWindow:
 
         #題名表示
         SystemName = tkinter.Label(text="速度計測中", font=("MSゴシック", "30", "bold"))
-        SystemName.place(x=135, y=10)
+        SystemName.place(x = 135, y = 10)
 
         # ボタンの作成
-        btn = tkinter.Button(tki, text='計測中止', width = 10, height = 2, command = btn_click, font=("MSゴシック", "10"))
-        btn.place(x=370, y=300) #ボタンを配置する位置の設定
+        btn = tkinter.Button(tki, text = '計測中止', width = 10, height = 2, command = btn_click, font = ("MSゴシック", "10"))
+        btn.place(x = 370, y = 300) #ボタンを配置する位置の設定
 
         #空ダウンロード
         ManagementDownload.Donwload()
@@ -73,24 +73,24 @@ class DisplayOngoingWindow:
             tki.destroy()
             return False
 
-        x=np.arange(0,i,1, dtype=int) #x軸のデータ
-        y=np.append(y,Data.ListInstantSpeed[i-1])
+        x = np.arange(0, i, 1, dtype = int) #x軸のデータ
+        y = np.append(y, Data.ListInstantSpeed[i-1])
 
         ax.plot(x, y, color = Data.color) #データの描画
 
         print(x)
-        canvas = FigureCanvasTkAgg(fig, master=tki)
+        canvas = FigureCanvasTkAgg(fig, master = tki)
         canvas.draw()
-        canvas.get_tk_widget().place(x=10,y=62,width=480,height=230)
+        canvas.get_tk_widget().place(x = 10, y = 62, width = 480, height = 230)
         
         def repeat_func():
             global count
             global i
             global y
-            count+=1
-            i+=1
+            count += 1
+            i += 1
             #定期的に行いたい処理
-            if count<10:
+            if count < 10:
                 
                 # 追加
 
@@ -101,21 +101,21 @@ class DisplayOngoingWindow:
                 
                 fig = plt.Figure() #描画の用意
                 
-                x=np.arange(0,i,1)
-                y=np.append(y,Data.ListInstantSpeed[i-1])
+                x = np.arange(0, i, 1)
+                y = np.append(y, Data.ListInstantSpeed[i-1])
                 ax = fig.add_subplot(111)
                 ax.set_ylabel("speed / Mbps")#y軸のラベル
-                ax.set_ylim(0,Data.MaxSpeed*1.1)
+                ax.set_ylim(0, Data.MaxSpeed*1.1)
                 ax.set_xlabel("x / mm")#x軸のラベル
                 ax.plot(x, y, color = Data.color) #データの描画
                 canvas = FigureCanvasTkAgg(fig, master=tki)
                 canvas.draw()
-                canvas.get_tk_widget().place(x=10,y=62,width=480,height=230)
+                canvas.get_tk_widget().place(x=10, y=62, width=480, height=230)
                 print(count)
                 print(x)
                 print(y)
             
-                tki.after(1000,repeat_func)
+                tki.after(1000, repeat_func)
             else:
                 time.sleep(2)
                 tki.destroy()

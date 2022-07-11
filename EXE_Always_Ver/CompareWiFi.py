@@ -9,7 +9,6 @@
 *******************************************************************/
 """
 
-# import datetime
 from re import X
 from ManagementWiFi import ManagementWiFi
 from ssh import ssh
@@ -51,4 +50,3 @@ class CompareWiFi():
             return None
         else:
             return WiFiList[EvalList.index(max(EvalList))]
-        ################################################

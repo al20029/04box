@@ -24,15 +24,7 @@ import urllib.request
 class ManagementDownload:
     def Donwload():
         try:
-
-            #urllib.request.urlopen('https://al86-hs.github.io/DownloadTest/test7M').read()
-            #urllib.request.urlopen('https://al86-hs.github.io/DownloadTest/test5M').read()
-            #urllib.request.urlopen('https://al86-hs.github.io/DownloadTest/test4M').read()
-            #urllib.request.urlopen('https://al86-hs.github.io/DownloadTest/test3M').read()
-            #urllib.request.urlopen('https://al86-hs.github.io/DownloadTest/test3M_').read()
-            urllib.request.urlopen('https://al86-hs.github.io/DownloadTest/test2M').read()
-            
-            
+            urllib.request.urlopen('https://al86-hs.github.io/DownloadTest/test2M').read()      
             return True
         except:
             return False
