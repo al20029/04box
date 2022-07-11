@@ -55,7 +55,7 @@ class DisplayFinishWindow:
         # DBへ計測済みデータを登録
         
         #########大学でやる場合############
-        InteractWithOS.ChangeWiFi("eduroam")
+        # InteractWithOS.ChangeWiFi("eduroam")
         ###################################
 
         RegData = DataList[0]
