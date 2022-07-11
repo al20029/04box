@@ -23,10 +23,14 @@ from ssh import ssh
 
 class DisplayFinishWindow:
     def FinishWindow(CanConnectWiFiname,DataList):
+        list = CanConnectWiFiname
         WiFiName = ''
+        WiFiList = []
+        WiFiList = CanConnectWiFiname
         # リスト更新ボタンクリックのイベント
         def btn_click_list_change():
             nonlocal combobox
+            nonlocal list
             list = InteractWithOS.GetWiFi()
             combobox = ttk.Combobox(frm, height=3, width = 30, values = list, state = "readonly")
             combobox.current(0)
@@ -49,6 +53,11 @@ class DisplayFinishWindow:
         Start = False
 
         # DBへ計測済みデータを登録
+        
+        #########大学でやる場合############
+        InteractWithOS.ChangeWiFi("eduroam")
+        ###################################
+
         RegData = DataList[0]
         for data in DataList:
             if(CanConnectWiFiname[0]==data.WiFiName):
@@ -179,7 +188,6 @@ class DisplayFinishWindow:
         ########################
 
         # Wi-Fi名プルタブ配置
-        list = CanConnectWiFiname
         combobox = ttk.Combobox(frm, height=3, width = 30, values = list, state = "readonly")
         combobox.current(0)
         combobox.place(x = 440, y = 455)
@@ -198,5 +206,6 @@ class DisplayFinishWindow:
         # 画面をそのまま表示
         frm.mainloop()
 
-        return Start,WiFiName
+        WiFiList = list
+        return Start,WiFiName,WiFiList
     # FinishWindow()

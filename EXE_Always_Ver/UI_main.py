@@ -41,15 +41,24 @@ class UIMainProcess:
         # GetSendDB.download()
 
         list = []
+        # WiFiList = []
         DataList =[]
         while len(list) == 0:
             list = InteractWithOS.GetWiFi()
         print(1)
         a = Data()
         DataList.append(a)
-        get,WiFiName = DisplayStartWindow.StartWindow(list)
+        get,WiFiName,WiFiList = DisplayStartWindow.StartWindow(list)
+        list = []
+        list.extend(WiFiList)
+        # list[len(list):len(list)] = WiFiList
         if get == False:
             return
+
+        print("listの内容")
+        print(list)
+        print("WiFinameの内容")
+        print(WiFiName)
         a.WiFiName = WiFiName
         list.remove(WiFiName)
         list.insert(0, WiFiName)
@@ -59,10 +68,17 @@ class UIMainProcess:
             if get == True:
                 if '接続されていません'in list:
                     list.remove('接続されていません')
-                get,WiFiName = DisplayFinishWindow.FinishWindow(list,DataList)
+                get,WiFiName,WiFiList = DisplayFinishWindow.FinishWindow(list,DataList)
+                print("WiFiList_UIMAIN")
+                print(WiFiList)
+                print("List_UIMAIN")
+                print(list)
+                list = []
+                list.extend(WiFiList)
+                # list[len(list):len(list)] = WiFiLis
                 list.remove(WiFiName)
                 list.insert(0, WiFiName)
-                print(WiFiName)
+                # print(WiFiName)
                 a = Data()
                 print("P1")
                 for data in (DataList):

@@ -1,30 +1,30 @@
  
 Interface name : Wi-Fi 
-There are 10 networks currently visible. 
+There are 8 networks currently visible. 
 
-SSID 1 : moow
+SSID 1 : 
     Network type            : Infrastructure
     Authentication          : WPA2-Enterprise
     Encryption              : CCMP 
 
-SSID 2 : SRAS-WPA
+SSID 2 : SRAS2G
     Network type            : Infrastructure
     Authentication          : WPA2-Enterprise
     Encryption              : CCMP 
 
-SSID 3 : SHIBAURA
+SSID 3 : eduroam
     Network type            : Infrastructure
     Authentication          : WPA2-Enterprise
     Encryption              : CCMP 
 
-SSID 4 : eduroam
+SSID 4 : moow
     Network type            : Infrastructure
     Authentication          : WPA2-Enterprise
     Encryption              : CCMP 
 
-SSID 5 : SRAS2G
+SSID 5 : DIRECT-TZLAPTOP-F92HOUDVmsXE
     Network type            : Infrastructure
-    Authentication          : WPA2-Enterprise
+    Authentication          : WPA2-Personal
     Encryption              : CCMP 
 
 SSID 6 : SRAS5G
@@ -32,23 +32,13 @@ SSID 6 : SRAS5G
     Authentication          : WPA2-Enterprise
     Encryption              : CCMP 
 
-SSID 7 : aterm-f98216-gw
-    Network type            : Infrastructure
-    Authentication          : Open
-    Encryption              : WEP 
-
-SSID 8 : 
+SSID 7 : SRAS-WPA
     Network type            : Infrastructure
     Authentication          : WPA2-Enterprise
     Encryption              : CCMP 
 
-SSID 9 : SPWN_H37_52B43C
+SSID 8 : Pixel_1510
     Network type            : Infrastructure
     Authentication          : WPA2-Personal
-    Encryption              : CCMP 
-
-SSID 10 : VoWoV
-    Network type            : Infrastructure
-    Authentication          : WPA2-Enterprise
     Encryption              : CCMP 
 

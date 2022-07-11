@@ -158,9 +158,8 @@ class InteractWithOS:
             elif '    プロファイル           : ' in s:
                 ConnectingWiFiName = s[23:].replace(' ', '').replace('  ', '')
                 break
-        print("Connecting")
+        print("Connecting_InteractWithOS")
         print(ConnectingWiFiName)
-        print("CanConnect")
         #######stdoutベースのやり方
         # Result_interface = subprocess.run('netsh wlan show interface', **subprocess_args(True)).stdout.decode('utf-8', errors='ignore').splitlines()
         # # Result_interface = subprocess.run('netsh wlan show interface', **subprocess_args(True)).stdout.decode("ascii").splitlines()
@@ -178,6 +177,8 @@ class InteractWithOS:
                 if ln==lp:
                     # print(len(ln))
                     CanConnectWiFiName.append(ln)
+        print("CanConnect_IntereactWithOS")
+        print(CanConnectWiFiName)
         if len(ConnectingWiFiName) == 0:
             print("選ばれたのは")
             print(CanConnectWiFiName)

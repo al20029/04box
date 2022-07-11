@@ -7,7 +7,7 @@ There is 1 interface on the system:
     Physical address       : d8:3b:bf:61:ee:a5
     State                  : connected
     SSID                   : eduroam
-    BSSID                  : 06:02:42:1a:81:73
+    BSSID                  : ea:9e:38:73:98:80
     Network type           : Infrastructure
     Radio type             : 802.11ac
     Authentication         : WPA2-Enterprise
@@ -16,7 +16,7 @@ There is 1 interface on the system:
     Channel                : 36
     Receive rate (Mbps)    : 400
     Transmit rate (Mbps)   : 400
-    Signal                 : 85% 
+    Signal                 : 90% 
     Profile                : eduroam 
 
     Hosted network status  : Not available
