@@ -1,0 +1,44 @@
+ 
+Interface name : Wi-Fi 
+There are 8 networks currently visible. 
+
+SSID 1 : 
+    Network type            : Infrastructure
+    Authentication          : WPA2-Enterprise
+    Encryption              : CCMP 
+
+SSID 2 : SRAS2G
+    Network type            : Infrastructure
+    Authentication          : WPA2-Enterprise
+    Encryption              : CCMP 
+
+SSID 3 : eduroam
+    Network type            : Infrastructure
+    Authentication          : WPA2-Enterprise
+    Encryption              : CCMP 
+
+SSID 4 : moow
+    Network type            : Infrastructure
+    Authentication          : WPA2-Enterprise
+    Encryption              : CCMP 
+
+SSID 5 : DIRECT-TZLAPTOP-F92HOUDVmsXE
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+
+SSID 6 : SRAS5G
+    Network type            : Infrastructure
+    Authentication          : WPA2-Enterprise
+    Encryption              : CCMP 
+
+SSID 7 : SRAS-WPA
+    Network type            : Infrastructure
+    Authentication          : WPA2-Enterprise
+    Encryption              : CCMP 
+
+SSID 8 : Pixel_1510
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+

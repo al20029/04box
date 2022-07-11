@@ -10,6 +10,7 @@
 """
 
 import subprocess
+import time
 # import tkinter
 # from tkinter import messagebox
 
@@ -56,7 +57,7 @@ class InteractWithOS:
             if 'All User Profile' in s:
                 List_profiles.append(s[27:].replace(' ', '').replace('  ', ''))
 
-                #現在接続しているWiFiの追加
+        #現在接続しているWiFiの追加
         with open('out_interface.txt', 'w') as pfp:
             subprocess.run('netsh wlan show interface', encoding='utf-8', stdout=pfp, shell=True)
 
@@ -101,7 +102,10 @@ class InteractWithOS:
         subprocess.run(command, shell=True)
         Result_change = str()
         while Result_change == None:
+            print("未接続")
             Result_change = subprocess.run('netsh wlan show interface', encoding='utf-8', shell=True)
         # return Result_change
+
+        time.sleep(2)
 
     GetWiFi()

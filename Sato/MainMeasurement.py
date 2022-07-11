@@ -12,9 +12,12 @@
 """
 
 import time
+
+from numpy import average
 from ManagementDownload import *
 from UpdateGraph import UpdateGraph
 from Data import Data
+import math
 """
 *******************************************************************
 ***  Class Name		: MainMeasurement
@@ -148,7 +151,7 @@ class MainMeasurement:
         
         InstantTime = time.time()
         ManagementDownload.Donwload()
-        if ManagementDownload.Donwload() == 2: #1がtrueで2がfalse
+        if ManagementDownload.Donwload() == False: #1がtrueで2がfalse
             return -1
         MeasurementTime = time.time() - InstantTime
         InstantSpeed.append(MainMeasurement.InstantSpeedMeasurement(FileSize,MeasurementTime))
@@ -165,3 +168,21 @@ class MainMeasurement:
 #AverageSpeedが平均速度
 #Stabilityがメール、ネット、sns、動画視聴、オンラインゲームの5項目を1~5段階に数値化したリスト
 #ManagementDownloadとの結合テスト完了
+    def cmpstability(InstantSpeed, FileGetNum):
+        average = MainMeasurement.AverageSpeedMeasurement(InstantSpeed, FileGetNum)
+        squaresum = 0
+        for i in range(FileGetNum):
+            squaresum += InstantSpeed[i] ** 2
+        squaresum = squaresum / FileGetNum
+        deviation = math.sqrt((squaresum - average ** 2))
+        cv = deviation / average
+        if cv <= 0.2:
+            stablevel = 1
+        elif cv <= 0.4:
+            stablevel = 0.9
+        elif cv <= 0.6:
+            stablevel = 0.8
+        else:
+            stablevel = 0.7
+        print(stablevel)
+        return stablevel

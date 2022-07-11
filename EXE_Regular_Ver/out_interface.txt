@@ -1,0 +1,23 @@
+
+There is 1 interface on the system: 
+
+    Name                   : Wi-Fi
+    Description            : Intel(R) Wireless-AC 9560 160MHz
+    GUID                   : a4093ca0-4ade-4134-9360-94ab28ef49d7
+    Physical address       : d8:3b:bf:61:ee:a5
+    State                  : connected
+    SSID                   : aterm-7886a3-a
+    BSSID                  : 80:22:a7:6e:14:2f
+    Network type           : Infrastructure
+    Radio type             : 802.11ac
+    Authentication         : WPA2-Personal
+    Cipher                 : CCMP
+    Connection mode        : Profile
+    Channel                : 108
+    Receive rate (Mbps)    : 1300
+    Transmit rate (Mbps)   : 1170
+    Signal                 : 77% 
+    Profile                : aterm-7886a3-a 
+
+    Hosted network status  : Not available
+

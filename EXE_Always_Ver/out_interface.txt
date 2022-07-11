@@ -1,0 +1,23 @@
+
+There is 1 interface on the system: 
+
+    Name                   : Wi-Fi
+    Description            : Intel(R) Wireless-AC 9560 160MHz
+    GUID                   : a4093ca0-4ade-4134-9360-94ab28ef49d7
+    Physical address       : d8:3b:bf:61:ee:a5
+    State                  : connected
+    SSID                   : eduroam
+    BSSID                  : ea:9e:38:73:98:80
+    Network type           : Infrastructure
+    Radio type             : 802.11ac
+    Authentication         : WPA2-Enterprise
+    Cipher                 : CCMP
+    Connection mode        : Profile
+    Channel                : 36
+    Receive rate (Mbps)    : 400
+    Transmit rate (Mbps)   : 400
+    Signal                 : 90% 
+    Profile                : eduroam 
+
+    Hosted network status  : Not available
+

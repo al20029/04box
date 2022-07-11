@@ -9,6 +9,7 @@
 ******************************************************
 """
 
+from queue import Empty
 import tkinter
 
 import paramiko
@@ -45,10 +46,11 @@ class DisplayRegularStartWindow:
         def btn_click():
             nonlocal Stop
             # Y_N = messagebox.askyesno("確認中", "停止しますか")
-            # if Y_N == True:   
+            # if Y_N == True:
+            # tki.after_cancel()   
             Stop = True
-            tki.quit()
-                # tki.destroy()
+            # tki.quit()
+            tki.destroy()
 
         # 画面作成
         tki = tkinter.Tk()
@@ -75,10 +77,11 @@ class DisplayRegularStartWindow:
 
         # 繰り返しダウンロードする
         def Repeat_Download():
+            nonlocal Stop
             nonlocal tki
             nonlocal count
             nonlocal BestWiFiName
-
+            Stop = True
             count -= 1
             MainMeasurement.Measurement(data)
             # faster,a,b = MainMeasurement.Measurement(a)
@@ -86,25 +89,51 @@ class DisplayRegularStartWindow:
             if count > 0:
                 tki.after(1000, Repeat_Download)
             else:
-                
+                Stop = False
                 ################# 変更点#################
                 WiFiList = list()
                 WiFiList = InteractWithOS.GetWiFi()
                 # リストから現在のWi-Fi名を削除
                 # 計測値の登録
                 AverageSpeed = MainMeasurement.AverageSpeedMeasurement(data.ListInstantSpeed, len(data.ListInstantSpeed))
-                Stability = MainMeasurement.StabilityCalculation(data.ListInstantSpeed, len(data.ListInstantSpeed))
-                ssh.ParamikoReg(WiFiList.pop(0), AverageSpeed, Stability)
-                # ManagementWiFi.RegisterData(WiFiList.pop(0), AverageSpeed, Stability)
-                # リアルタイムデータから最適なWi-Fiを探す
-                # ManagementWiFi.SendRealtimeData(WiFiList)
-                BestWiFiName = CompareWiFi.CompareWiFi(WiFiList)
+                #Stability = MainMeasurement.StabilityCalculation(data.ListInstantSpeed, len(data.ListInstantSpeed))
+                Stability = MainMeasurement.cmpstability(data.ListInstantSpeed, len(data.ListInstantSpeed))
+                # print(WiFiList[0])
+                # print(AverageSpeed)
+                # print(Stability)
+                WiFi = WiFiList.pop(0)
+                #現在接続していないWiFiの中で接続可能なWiFiがない場合は現在接続しているWiFiを最適とする
+
+                ssh.ParamikoReg(WiFi, AverageSpeed, Stability)
+                if len(WiFiList) == 0:
+                    BestWiFiName = WiFi
+                else:
+
+                    ##########
+                    ##popによりWiFiListがnullになった時どうする？？
+                    ##########
+
+                    # ManagementWiFi.RegisterData(WiFiList.pop(0), AverageSpeed, Stability)
+                    # リアルタイムデータから最適なWi-Fiを探す
+                    # ManagementWiFi.SendRealtimeData(WiFiList)
+
+
+                    BestWiFiName = CompareWiFi.CompareWiFi(WiFiList, AverageSpeed*Stability)
+                    if BestWiFiName == None:
+                        BestWiFiName = WiFi
+
+                ##########仕様変更#######
+                #CompareWiFiの引数には計測したWiFiの評価値を入れる
+                #いったん評価値はAverageSpeed*Stabilityとする
+                #########################
 
                 ########################################
                 tki.destroy()
                 # tki.quit()
 
         # 繰り返しダウンロードする
+        ###変更点###
+        tki.after(12000,lambda: tki.destroy())
         tki.after(1000, Repeat_Download)
 
 
@@ -124,7 +153,5 @@ class DisplayRegularStartWindow:
         
         # 画面をそのまま表示
         tki.mainloop()
-
-        
 
         return Stop, BestWiFiName
