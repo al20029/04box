@@ -27,9 +27,9 @@ class DisplayFinishWindow:
     *******************************************************************
     ***  Function Name  : FinishWindow
     ***  Version        : V1.0
-    ***  Designer       : 
+    ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
-    ***  Purpose       	: 
+    ***  Purpose       	: 計測終了画面を定義する
     ***
     *******************************************************************/
     """
@@ -167,4 +167,4 @@ class DisplayFinishWindow:
         # 画面をそのまま表示
         frm.mainloop()
 
-        return Start,WiFiName
+        return Start, WiFiName
