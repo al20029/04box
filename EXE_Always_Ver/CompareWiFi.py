@@ -9,8 +9,6 @@
 *******************************************************************/
 """
 
-from re import X
-from ManagementWiFi import ManagementWiFi
 from ssh import ssh
 
 class CompareWiFi():

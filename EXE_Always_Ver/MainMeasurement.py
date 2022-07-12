@@ -12,7 +12,6 @@
 """
 
 import time
-from numpy import average
 from ManagementDownload import *
 from UpdateGraph import UpdateGraph
 from Data import Data

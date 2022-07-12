@@ -11,7 +11,6 @@
 
 import subprocess
 import os
-import time
 
 class InteractWithOS:
 

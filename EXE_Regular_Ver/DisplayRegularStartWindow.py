@@ -10,7 +10,6 @@
 """
 
 import tkinter
-from ManagementWiFi import ManagementWiFi
 from InteractWithOS import InteractWithOS
 from ManagementDownload import ManagementDownload
 from MainMeasurement import MainMeasurement

@@ -9,10 +9,7 @@
 ******************************************************
 """
 
-from queue import Empty
 import tkinter
-import paramiko
-from ManagementWiFi import ManagementWiFi
 from InteractWithOS import InteractWithOS
 from ManagementDownload import ManagementDownload
 from MainMeasurement import MainMeasurement

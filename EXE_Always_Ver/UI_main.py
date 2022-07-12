@@ -16,8 +16,6 @@ from DisplayRegularStartWindow import DisplayRegularStartWindow
 from DisplayRegularFinishWindow import DisplayRegularFinishWindow
 from InteractWithOS import InteractWithOS
 from Data import Data
-from ManagementWiFi import ManagementWiFi
-from CompareWiFi import CompareWiFi
 
 class UIMainProcess:
     

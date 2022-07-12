@@ -9,12 +9,10 @@
 *******************************************************************/
 """
 
-from re import I
 import tkinter
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import numpy as np
-from UpdateGraph import UpdateGraph
 from MainMeasurement import MainMeasurement
 from ManagementDownload import ManagementDownload
 import time

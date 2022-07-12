@@ -11,7 +11,6 @@
 
 import tkinter
 import tkinter.ttk as ttk
-import subprocess
 import time
 from InteractWithOS import InteractWithOS
 import matplotlib.pyplot as plt

@@ -12,9 +12,7 @@
 """
 
 from ast import Break
-from asyncio.windows_events import NULL
 import subprocess
-import time
 from tkinter import messagebox
 from InteractWithOS import InteractWithOS
 import tkinter
