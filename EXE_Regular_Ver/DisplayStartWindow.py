@@ -22,19 +22,6 @@ import tkinter.ttk as ttk
 from ToolTip import *
 import Data
 
-
-"""
-*******************************************************************
-***  Class Name		: DisplayStartWindow
-***  Designer		    : 池戸 陸
-***  Date		        : 2022.07.01
-***  Function			: 計測開始画面を表示する
-***  Return      	    : -1 エラー
-                          0以上 画面表示
-***
-*******************************************************************
-"""
-
 class DisplayStartWindow:
 
     """

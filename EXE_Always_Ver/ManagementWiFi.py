@@ -45,11 +45,7 @@ class ManagementWiFi:
 
         # 登録
         c.execute('INSERT INTO items (WiFiName, AverageSpeed, Stability, MeasurementTime)values(?,?,?,?)', [WiFiName, AverageSpeed, Stability, MeasurementTime])
-        # テスト
-        c.execute('SELECT * FROM items')     
-        for row in c:
-            print(row)
-            db.commit()
+  
         c.close()
 
     """
@@ -84,7 +80,6 @@ class ManagementWiFi:
         c.execute('SELECT * FROM items WHERE (WiFiName == ?)', (WiFiName))
         for row in c:   
             if row[0] == WiFiName: 
-                print(row[0], row[1], row[2])
                 SumAverageSpeed = SumAverageSpeed + row[1]
                 SumStability = SumStability + row[2]
                 n = n + 1
@@ -130,7 +125,6 @@ class ManagementWiFi:
             c.execute('SELECT * FROM items WHERE (MeasurementTime >= ?) AND (WiFiName == ?)', (MeasurementTime, CanConnectWiFiName[i]))
             # 直近一時間の計測データの探索
             for row in c:
-                print(row[0], row[1], row[2])
                 for j in range(len(CanConnectWiFiName)):
                     if row[0] == CanConnectWiFiName[j]:
                         SumAverageSpeed[j] = SumAverageSpeed[j] + row[1]
