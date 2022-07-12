@@ -13,17 +13,6 @@
 
 import tkinter as tk
 
-"""
-*******************************************************************
-***  Class Name		: ToolTip
-***  Designer		    : 池戸 陸
-***  Date		        : 2022.06.21
-***  Function			: ツールチップを表示する
-***  Return      	    : ツールチップを表示
-***
-*******************************************************************
-"""
-
 class ToolTip():
     def __init__(self, widget, text="default tooltip"):
         self.widget = widget

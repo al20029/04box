@@ -97,7 +97,7 @@ class MainMeasurement:
 
     def StabilityCalculation(InstantSpeed, FileGetNum):
         # stability[0] = メール,LINE , [1] = ネット検索 , [2] = SNS , [3] = 動画視聴 , [4] = オンラインゲーム
-        stability = [0,0,0,0,0]
+        stability = [0, 0, 0, 0, 0]
         mail_ev = 0
         net_ev = 0
         sns_ev = 0
