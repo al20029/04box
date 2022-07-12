@@ -1,7 +1,7 @@
 """
 *******************************************************************
 ***  File Name      : CompareWiFi.py
-***  Version        : V1.0
+***  Version        : V1.1
 ***  Designer       : 
 ***  Date           : 2022.6.14
 ***  Purpose       	: 
@@ -9,8 +9,6 @@
 *******************************************************************/
 """
 
-from re import X
-from ManagementWiFi import ManagementWiFi
 from ssh import ssh
 
 class CompareWiFi():
