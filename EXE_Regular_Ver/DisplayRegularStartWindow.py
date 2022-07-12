@@ -105,9 +105,8 @@ class DisplayRegularStartWindow:
                 WiFi = WiFiList.pop(0)
                 #現在接続していないWiFiの中で接続可能なWiFiがない場合は現在接続しているWiFiを最適とする
 
-                print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
                 ssh.ParamikoReg(WiFi, AverageSpeed, Stability)
-                print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
                 if len(WiFiList) == 0:
                     BestWiFiName = WiFi
                 else:

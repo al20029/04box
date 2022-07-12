@@ -1,12 +1,11 @@
 """
-******************************************************
-*** File Name       :UI_main.py
-*** Version         :V1.0
-*** Designer        :佐藤 光
-*** Date            :2022/06/14
-*** Purpose         :Windowを表示しその戻り値をもとに他のコンポーネント、OSとやり取りをする
-*** 
-******************************************************
+*******************************************************************
+*** File Name       : UI_main.py
+*** Version         : V1.1
+*** Designer        : 佐藤 光
+*** Date            : 2022/06/14
+*** Purpose         : 通常計測，定期計測の二つに分けて，処理を行う．
+*******************************************************************
 """
 
 from DisplayStartWindow import DisplayStartWindow
@@ -17,11 +16,33 @@ from DisplayRegularFinishWindow import DisplayRegularFinishWindow
 from InteractWithOS import InteractWithOS
 from Data import Data
 
+"""
+*******************************************************************
+*** File Name       : UIMainProcess
+*** Version         : V1.1
+*** Designer        : 佐藤 光
+*** Date            : 2022/06/14
+*** Purpose         : 通常計測，定期計測の二つに分けて，処理を行う．
+*******************************************************************
+"""
+
 class UIMainProcess:
     
     def __init__(self):
 
         print("hello")
+
+
+    """
+    *******************************************************************
+    *** Function Name   : Always
+    *** Version         : V1.1
+    *** Designer        : 佐藤 光
+    *** Date            : 2022/06/14
+    *** Purpose         : 通常計測で行う処理をする. Windowを表示し
+                          その戻り値をもとに他のコンポーネントやOSとやり取りをする.
+    *******************************************************************
+    """
 
     def Always():
 
@@ -75,6 +96,18 @@ class UIMainProcess:
                 print("P2")
                 for data in (DataList):
                     print(data.WiFiName)
+
+
+    """
+    *******************************************************************
+    *** Function Name   : Regular
+    *** Version         : V1.1
+    *** Designer        : 佐藤 光
+    *** Date            : 2022/06/14
+    *** Purpose         : 定期計測で行う処理をする。Windowを表示し
+                          その戻り値をもとに他のコンポーネント、OSとやり取りをする.
+    *******************************************************************
+    """
 
     def Regular():
 

@@ -13,13 +13,24 @@ import tkinter
 from tkinter import messagebox
 from InteractWithOS import InteractWithOS
 
+"""
+******************************************************
+*** File Name       : DisplayRegularFinishWindow
+*** Version         : V1.0
+*** Designer        : 佐藤 光
+*** Date            : 2022/06/14
+*** Purpose         : 定期計測終了画面を表示し、ユーザの入力を受け取る
+*** 
+******************************************************
+"""
+
 class DisplayRegularFinishWindow:
 
     """
     *******************************************************************
     ***  Function Name  : RegularFinishWindow
     ***  Version        : V1.0
-    ***  Designer       : 
+    ***  Designer       : 佐藤 光
     ***  Date           : 2022.6.21
     ***  Purpose       	: 
     ***

@@ -2,11 +2,11 @@
 *******************************************************************
 ***  File Name      : DisplayOngoingWindow.py
 ***  Version        : V1.0
-***  Designer       : 
+***  Designer       : 太田峻輔
 ***  Date           : 2022.6.14
-***  Purpose       	: 
-***
-*******************************************************************/
+***  Purpose       	: 計測中画面，グラフを表示する.
+                      また、ユーザの入力を受け取り UI 処理に返す.
+*******************************************************************
 """
 
 import tkinter
@@ -21,17 +21,30 @@ i = 1
 y = []
 count = 0
 color_list = ["r", "b", "g", "y", "m", "c", "k"]
+
+"""
+*******************************************************************
+***  Class Name     : DisplayOngoingWindow
+***  Version        : V1.0
+***  Designer       : 太田峻輔
+***  Date           : 2022.6.14
+***  Purpose       	: 計測中画面，グラフを表示する.
+                      また、ユーザの入力を受け取り UI 処理に返す.
+*******************************************************************
+"""
+
 class DisplayOngoingWindow:
 
     """
     *******************************************************************
     ***  Function Name  : OngoingWindow
     ***  Version        : V1.0
-    ***  Designer       : 
+    ***  Designer       : 太田峻輔
     ***  Date           : 2022.6.21
-    ***  Purpose       	: 
-    ***
-    *******************************************************************/
+    ***  Purpose       	: 計測中画面を定義する.
+    ***  Return         : True 計測終了画面へ遷移
+                          False プログラムを終了
+    *******************************************************************
     """
 
     def OngoingWindow(Data):
@@ -110,7 +123,8 @@ class DisplayOngoingWindow:
                     return False
                 
                 fig = plt.Figure() #描画の用意
-                
+
+                # 画面の描画
                 x = np.arange(0, i, 1)
                 y = np.append(y, Data.ListInstantSpeed[i-1])
                 ax = fig.add_subplot(111)
@@ -121,9 +135,6 @@ class DisplayOngoingWindow:
                 canvas = FigureCanvasTkAgg(fig, master=tki)
                 canvas.draw()
                 canvas.get_tk_widget().place(x=10, y=62, width=480, height=230)
-                print(count)
-                print(x)
-                print(y)
             
                 tki.after(1000, repeat_func)
             else:

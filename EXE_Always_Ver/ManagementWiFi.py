@@ -5,23 +5,30 @@
 ***  Designer       : 荒川 塁唯
 ***  Date           : 2022.6.21
 ***  Purpose       	: 計測されたWi-Fi情報を管理する.
-***
 *******************************************************************/
 """
 
 import sqlite3
 import datetime
 
+"""
+*******************************************************************
+***  Class Name     : ManagementWiFi
+***  Version        : V1.0
+***  Designer       : 荒川 塁唯
+***  Date           : 2022.6.21
+***  Purpose       	: 計測されたWi-Fi情報を管理する.
+*******************************************************************/
+"""
+
 class ManagementWiFi:
  
     """
     *******************************************************************
-    ***  Function Name      : Register
+    ***  Function Name      : RegisterData
     ***  Designer           : 荒川 塁唯
     ***  Date               : 2022.6.21
     ***  Function       	: 計測されたWi-Fi情報を, Wi-Fi情報管理に登録する.
-    ***  Return             : 
-    ***
     *******************************************************************/
     """
 
@@ -55,7 +62,6 @@ class ManagementWiFi:
     ***  Date           : 2022.6.21
     ***  Function      	: Wi-Fi情報管理にある過去のWi-Fiデータの代表値を, UI処理部に送る.
     ***  Return         : 代表平均速度, 代表安定性 
-    ***
     *******************************************************************/
     """
 
@@ -94,8 +100,6 @@ class ManagementWiFi:
     ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
     ***  Function      	: 定期計測時に, 他に計測された一時間以内の接続可能なWi-Fi情報の代表値を, 比較処理部に返す.
-    ***  Return         :  
-    ***
     *******************************************************************/
     """
 
@@ -103,9 +107,7 @@ class ManagementWiFi:
     def SendRealtimeData(CanConnectWiFiName):
 
         # 計測時刻の取得
-        ####変更点######
         MeasurementTime = datetime.datetime.now() - datetime.timedelta(hours = 1)
-        ################
 
         # データベースの作成
         db = sqlite3.connect('main.db')

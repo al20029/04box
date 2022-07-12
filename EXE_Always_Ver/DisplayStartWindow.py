@@ -1,14 +1,12 @@
 """
 ******************************************************************
 ***  File Name		: DisplayStartWindow.py
-***  Version		: V1.0
+***  Version		: V1.1
 ***  Designer		: 池戸 陸
 ***  Date			: 2022.07.01
-***  Purpose        : 計測開始画面
-***
+***  Purpose        : 計測開始画面を表示し、ユーザの入力を受け取り、
+                      UI 処理部に返す.
 *******************************************************************
-*** Revision :
-*** V1.1 : 池戸陸
 """
 
 from ast import Break
@@ -21,20 +19,34 @@ from ToolTip import *
 import Data
 import os
 
+"""
+******************************************************************
+***  File Name		: DisplayStartWindow.py
+***  Version		: V1.1
+***  Designer		: 池戸 陸
+***  Date			: 2022.07.01
+***  Purpose        : 計測開始画面を表示し、ユーザの入力を受け取り、
+                      UI 処理部に返す.
+*******************************************************************
+"""
+
 class DisplayStartWindow:
 
     """
     *******************************************************************
     ***  Function Name  : StartWindow
-    ***  Version        : V1.0
-    ***  Designer       : 
+    ***  Version        : V1.1
+    ***  Designer       : 池戸 陸
     ***  Date           : 2022.6.21
-    ***  Purpose       	: 
-    ***
+    ***  Purpose       	: 計測開始画面を定義する.
+    ***  Return         : Bool Start  プログラムが続行かどうか
+                          String WiFiName  計測するWiFi名
+                          String WiFiList  接続可能なWiFi名のリスト
     *******************************************************************/
     """
 
     def StartWindow(CanConnectWiFiname):
+
         list = CanConnectWiFiname
         WiFiName = ''
         check = ''
@@ -42,6 +54,7 @@ class DisplayStartWindow:
         WiFiList = CanConnectWiFiname
 
         def btn_click_list_change():
+
             nonlocal combobox
             nonlocal list
             list = InteractWithOS.GetWiFi()
@@ -50,6 +63,7 @@ class DisplayStartWindow:
             combobox.place(x = 50, y = 200)
 
         def btn_click():
+
             if combobox.get() == '接続されていません':
                 messagebox.showerror('エラー', 'Wi-Fiが接続されていません')
                 return 0
@@ -59,9 +73,8 @@ class DisplayStartWindow:
             WiFiName = combobox.get()
             nonlocal Start
             Start = True
-            if bln.get():
 
-                ############################変更########################
+            if bln.get():
                 # 自動起動のチェックが発動されたときの処理
                 if check == 0:
                     _env = os.environ
@@ -103,8 +116,8 @@ class DisplayStartWindow:
                 f = open('checkbox.txt','w')
                 f.write('0')
                 f.close()
-            ################################################################
             frm.destroy()
+
         Start = False
         frm = tkinter.Tk()
         w = frm.winfo_screenwidth() - 515

@@ -1,27 +1,36 @@
 """
 *******************************************************************
 ***  File Name      : ssh.py
-***  Version        : V1.0
-***  Designer       : 
+***  Version        : V1.1
+***  Designer       : 荒川 塁唯
 ***  Date           : 2022.6.14
-***  Purpose       	: 
-***
+***  Purpose       	: Paramikoを利用し,サーバにsshで接続し,
+                      サーバにあるPythonファイルを実行する
+*******************************************************************/
+"""
+
+"""
+*******************************************************************
+***  Class Name     : ssh
+***  Version        : V1.1
+***  Designer       : 荒川 塁唯
+***  Date           : 2022.6.14
+***  Purpose       	: Paramikoを利用し,サーバにsshで接続し,
+                      サーバにあるPythonファイルを実行する
 *******************************************************************/
 """
 
 import paramiko
 
 class ssh():
-    ##################変更点###################
 
     """
     *******************************************************************
     ***  Function Name  : ParamikoReg
     ***  Version        : V1.0
-    ***  Designer       : 
+    ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
-    ***  Purpose       	: 
-    ***
+    ***  Purpose       	: サーバにあるファイルを実行し，計測データをサーバに登録する．
     *******************************************************************/
     """
 
@@ -40,10 +49,12 @@ class ssh():
     *******************************************************************
     ***  Function Name  : ParamikoGetPast
     ***  Version        : V1.0
-    ***  Designer       : 
+    ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
-    ***  Purpose       	: 
-    ***
+    ***  Purpose       	: サーバにあるファイルを実行し,Wi-Fi情報管理にあるデータから,
+                          リアルタイムデータとの比較に用いるデータの代表値を計算する.
+    ***  Return         : float AverageSpeed 平均速度
+                          int Stability 安定性
     *******************************************************************/
     """
 
@@ -56,23 +67,24 @@ class ssh():
         argument = WiFiName
         stdin, stdout, stderr = client.exec_command("python3 MainManagementWiFi.py" + " 2 " + argument)
 
-        ######変更点######
         ReturnValue = stdout.read().decode('UTF-8').split()
         AverageSpeed = float(ReturnValue[1])
         Stability = float(ReturnValue[2])
         client.close()
         return AverageSpeed, Stability
-        ##################
 
 
     """
     *******************************************************************
     ***  Function Name  : ParamikoGetReal
     ***  Version        : V1.0
-    ***  Designer       : 
+    ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
-    ***  Purpose       	: 
-    ***
+    ***  Purpose       	: サーバにあるファイルを実行し,Wi-Fi情報管理にあるデータから, 
+                          リアルタイムデータとの比較に用いるデータの代表値を計算する.
+    ***  Return         : String WiFiName Wi-Fi名
+                          float AverageSpeed 平均速度
+                          int Stability 安定性
     *******************************************************************/
     """
 

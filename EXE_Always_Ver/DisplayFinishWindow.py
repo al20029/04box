@@ -1,12 +1,12 @@
 """
 *******************************************************************
 ***  File Name      : DisplayFinishWindow.py
-***  Version        : V1.0
+***  Version        : V1.1
 ***  Designer       : 荒川 塁唯
 ***  Date           : 2022.6.14
-***  Purpose       	: 計測終了画面を表示し、ユーザの入力を受け取る
-***
-*******************************************************************/
+***  Purpose       	: 計測終了画面を表示し、ユーザの入力を受け取り、
+                      UI 処理部に返す.
+*******************************************************************
 """
 
 import tkinter
@@ -20,6 +20,16 @@ from ToolTip import *
 from MainMeasurement import MainMeasurement
 from ssh import ssh
 
+"""
+*******************************************************************
+***  Class Name     : DisplayFinishWindow
+***  Version        : V1.1
+***  Designer       : 荒川 塁唯
+***  Date           : 2022.6.14
+***  Purpose       	: 計測終了画面を表示し、ユーザの入力を受け取り、
+                      UI 処理部に返す.
+*******************************************************************
+"""
 class DisplayFinishWindow:
 
     """
@@ -29,8 +39,10 @@ class DisplayFinishWindow:
     ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
     ***  Purpose       	: 計測終了画面を定義する
-    ***
-    *******************************************************************/
+    ***  Return         : Bool Start  再計測かどうか
+                          String WiFiName  再計測するWiFi名
+                          list WiFiList  現在接続可能なWiFi名のリスト
+    *******************************************************************
     """
 
     def FinishWindow(CanConnectWiFiname, DataList):
@@ -61,10 +73,6 @@ class DisplayFinishWindow:
         Start = False
 
         # DBへ計測済みデータを登録
-        
-        #########大学でやる場合############
-        # InteractWithOS.ChangeWiFi("eduroam")
-        ###################################
 
         RegData = DataList[0]
         for data in DataList:
@@ -106,9 +114,11 @@ class DisplayFinishWindow:
         canvas.draw()
         canvas.get_tk_widget().place(x = 10, y = 62, width = 390, height = 380)
 
-        #結果表
-        # ★バグ対応用の関数を追加
         style = ttk.Style()
+
+        #結果表
+
+        # バグ対応用の関数
         def fixed_map(option):
             return [elm for elm in style.map('Treeview', query_opt=option) if
             elm[:2] != ('!disabled', '!selected')]
@@ -170,11 +180,9 @@ class DisplayFinishWindow:
         notes = tkinter.Label(text = "※\'メール\'～\'オンラインゲーム\'は用途における安定性の目安\n  1～5の値を取り，値が大きいほど良い\n計測を途中で中止したときは-1の値を取る",font=('MSゴシック','13'))
         notes.place(x = 430, y = 320)
 
-        #########変更点#########
         #過去データの説明
         notes = tkinter.Label(text = "※過去データは(Wi-Fi名)で表現している\n",font=('MSゴシック','13'))
         notes.place(x = 430, y = 380)
-        ########################
 
         # Wi-Fi名プルタブ配置
         combobox = ttk.Combobox(frm, height = 3, width = 30, values = list, state = "readonly")
