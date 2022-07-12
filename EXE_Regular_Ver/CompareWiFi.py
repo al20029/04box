@@ -27,7 +27,7 @@ class CompareWiFi():
     """
 
     def CompareWiFi(WiFiList, MeasuredWiFiEval):
-        ###################変更点#######################
+
         WiFiNames = list()
         AverageSpeeds = list()
         Stabilities = list()

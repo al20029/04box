@@ -102,9 +102,7 @@ class ManagementWiFi:
     def SendRealtimeData(CanConnectWiFiName):
 
         # 計測時刻の取得
-        ####変更点######
         MeasurementTime = datetime.datetime.now() - datetime.timedelta(hours = 1)
-        ################
 
         # データベースの作成
         db = sqlite3.connect('main.db')
@@ -119,9 +117,11 @@ class ManagementWiFi:
 
         # SQLite3を操作するカーソルの作成
         c = db.cursor()
+
         # データ検索
         for i in range(len(CanConnectWiFiName)):
             c.execute('SELECT * FROM items WHERE (MeasurementTime >= ?) AND (WiFiName == ?)', (MeasurementTime, CanConnectWiFiName[i]))
+            
             # 直近一時間の計測データの探索
             for row in c:
                 print(row[0], row[1], row[2])
@@ -130,9 +130,11 @@ class ManagementWiFi:
                         SumAverageSpeed[j] = SumAverageSpeed[j] + row[1]
                         SumStability[j] = SumStability[j] + row[2]
                         count[j] = count[j] + 1
+                        
         for k in range(len(CanConnectWiFiName)):
             if count[k] != 0:
                 BestAverageSpeed[k] = SumAverageSpeed[k] / count[k]
                 BestStability[k] = SumStability[k] / count[k]
                 print(CanConnectWiFiName[k], BestAverageSpeed[k], BestStability[k])
+                
         c.close()
