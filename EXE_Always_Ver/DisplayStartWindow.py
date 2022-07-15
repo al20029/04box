@@ -21,8 +21,7 @@ import os
 
 """
 ******************************************************************
-***  File Name		: DisplayStartWindow.py
-***  Version		: V1.1
+***  Class Name		: DisplayStartWindow.py
 ***  Designer		: 池戸 陸
 ***  Date			: 2022.07.01
 ***  Purpose        : 計測開始画面を表示し、ユーザの入力を受け取り、
@@ -35,7 +34,6 @@ class DisplayStartWindow:
     """
     *******************************************************************
     ***  Function Name  : StartWindow
-    ***  Version        : V1.1
     ***  Designer       : 池戸 陸
     ***  Date           : 2022.6.21
     ***  Purpose       	: 計測開始画面を定義する.

@@ -1,7 +1,7 @@
 """
 *******************************************************************
 *** File Name       : DisplayRegularStartWindow.py
-*** Version         : V1.0
+*** Version         : V1.1
 *** Designer        : 佐藤 光
 *** Date            : 2022/06/14
 *** Purpose         : 定期計測中画面を表示し、
@@ -14,12 +14,13 @@ from InteractWithOS import InteractWithOS
 from ManagementDownload import ManagementDownload
 from MainMeasurement import MainMeasurement
 from CompareWiFi import CompareWiFi
+import subprocess
 from ssh import ssh
+import os
 
 """
 *******************************************************************
 *** Class Name      : DisplayRegularStartWindow
-*** Version         : V1.0
 *** Designer        : 佐藤 光
 *** Date            : 2022/06/14
 *** Purpose         : 定期計測中画面を表示し、
@@ -32,7 +33,6 @@ class DisplayRegularStartWindow:
     """
     *******************************************************************
     ***  Function Name  : RegularStartWindow
-    ***  Version        : V1.0
     ***  Designer       : 佐藤 光
     ***  Date           : 2022.6.21
     ***  Purpose       	: 定期計測中画面を定義する.
@@ -52,7 +52,7 @@ class DisplayRegularStartWindow:
 
         # click時のイベント
         def btn_click():
-            nonlocal Stop   
+            nonlocal Stop
             Stop = True
             tki.destroy()
 
@@ -72,7 +72,18 @@ class DisplayRegularStartWindow:
         #画像表示
         canvas = tkinter.Canvas(tki, width = 200, height = 200)
         canvas.place(x = 50, y = 60)
-        wi_fi = tkinter.PhotoImage(file = "wi-fi.png", width = 200, height = 200)
+
+        _env = os.environ
+        with open('out_UserName.txt', 'w') as nfp:
+            subprocess.run('echo %USERNAME%', stdout = nfp, env = _env, shell = True)
+        f = open("out_UserName.txt","r")
+        Result_echo = f.read().splitlines()
+        for s in Result_echo:
+            if len(s) != 0:
+                UserName = s.replace(' ', '').replace('  ', '')
+                break
+        print(UserName)
+        wi_fi = tkinter.PhotoImage(file = r"C:\Users\\" + UserName + "\MAIFI\\wi-fi.png", width = 200, height = 200)
         canvas.create_image(0, 20, image = wi_fi, anchor = tkinter.NW)
 
         # ボタンの作成
@@ -87,8 +98,9 @@ class DisplayRegularStartWindow:
             nonlocal BestWiFiName
             Stop = True
             count -= 1
-            MainMeasurement.Measurement(data)
-
+            if MainMeasurement.Measurement(data) == -1:
+                print("エラー通ってますよ")
+                WiFiError()
             if count > 0:
                 tki.after(1000, Repeat_Download)
             else:
@@ -101,24 +113,25 @@ class DisplayRegularStartWindow:
                 AverageSpeed = MainMeasurement.AverageSpeedMeasurement(data.ListInstantSpeed, len(data.ListInstantSpeed))
                 Stability = MainMeasurement.cmpstability(data.ListInstantSpeed, len(data.ListInstantSpeed))
                 WiFi = WiFiList.pop(0)
-
                 #現在接続していないWiFiの中で接続可能なWiFiがない場合は現在接続しているWiFiを最適とする
+
                 ssh.ParamikoReg(WiFi, AverageSpeed, Stability)
+
                 if len(WiFiList) == 0:
                     BestWiFiName = WiFi
                 else:
                     BestWiFiName = CompareWiFi.CompareWiFi(WiFiList, AverageSpeed*Stability)
                     if BestWiFiName == None:
                         BestWiFiName = WiFi
-
-                ##########仕様変更#######
-                #CompareWiFiの引数には計測したWiFiの評価値を入れる
-                #いったん評価値はAverageSpeed*Stabilityとする
-                #########################
-
                 tki.destroy()
 
-        # 繰り返しダウンロードする
+        def WiFiError():
+            nonlocal Stop
+            nonlocal tki
+            nonlocal BestWiFiName
+            tki.destroy()
+            Stop = True
+            BestWiFiName = InteractWithOS.GetWiFi().pop(0)
         tki.after(1000, Repeat_Download)
         
         # 画面をそのまま表示

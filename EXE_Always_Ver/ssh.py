@@ -9,10 +9,11 @@
 *******************************************************************/
 """
 
+import paramiko
+
 """
 *******************************************************************
 ***  Class Name     : ssh
-***  Version        : V1.1
 ***  Designer       : 荒川 塁唯
 ***  Date           : 2022.6.14
 ***  Purpose       	: Paramikoを利用し,サーバにsshで接続し,
@@ -20,14 +21,11 @@
 *******************************************************************/
 """
 
-import paramiko
-
 class ssh():
 
     """
     *******************************************************************
     ***  Function Name  : ParamikoReg
-    ***  Version        : V1.0
     ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
     ***  Purpose       	: サーバにあるファイルを実行し，計測データをサーバに登録する．
@@ -48,7 +46,6 @@ class ssh():
     """
     *******************************************************************
     ***  Function Name  : ParamikoGetPast
-    ***  Version        : V1.0
     ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
     ***  Purpose       	: サーバにあるファイルを実行し,Wi-Fi情報管理にあるデータから,
@@ -73,11 +70,9 @@ class ssh():
         client.close()
         return AverageSpeed, Stability
 
-
     """
     *******************************************************************
     ***  Function Name  : ParamikoGetReal
-    ***  Version        : V1.0
     ***  Designer       : 荒川 塁唯
     ***  Date           : 2022.6.21
     ***  Purpose       	: サーバにあるファイルを実行し,Wi-Fi情報管理にあるデータから, 
@@ -98,7 +93,6 @@ class ssh():
         stdin, stdout, stderr = client.exec_command("python3 MainManagementWiFi.py"+ " 3 " + argument)
         ReturnValue = stdout.read().decode('UTF-8').splitlines()
 
-        ######変更点######
         WiFiName = list()
         AverageSpeed = list()
         Stability = list()

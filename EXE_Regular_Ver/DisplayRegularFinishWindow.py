@@ -1,11 +1,11 @@
 """
 ******************************************************
 *** File Name       : DisplayRegularFinishWindow.py
-*** Version         : V1.0
+*** Version         : V1.1
 *** Designer        : 佐藤 光
 *** Date            : 2022/06/14
-*** Purpose         : 定期計測終了画面を表示し、ユーザの入力を受け取る
-*** 
+*** Purpose         : 定期計測終了画面を表示し，ユーザの入力を受け取り，
+                      UI 処理部に返す.
 ******************************************************
 """
 
@@ -13,16 +13,24 @@ import tkinter
 from tkinter import messagebox
 from InteractWithOS import InteractWithOS
 
+"""
+******************************************************
+*** Class Name      : DisplayRegularFinishWindow
+*** Designer        : 佐藤 光
+*** Date            : 2022/06/14
+*** Purpose         : 定期計測終了画面を表示し，ユーザの入力を受け取り，
+                      UI 処理部に返す.
+******************************************************
+"""
+
 class DisplayRegularFinishWindow:
 
     """
     *******************************************************************
-    ***  Function Name  : RegularFinishWindow
-    ***  Version        : V1.0
-    ***  Designer       : 
-    ***  Date           : 2022.6.21
-    ***  Purpose       	: 
-    ***
+    *** Function Name  : RegularFinishWindow
+    *** Designer       : 佐藤 光
+    *** Date           : 2022.6.21
+    *** Purpose        : 定期計測終了画面を定義する.
     *******************************************************************/
     """
 

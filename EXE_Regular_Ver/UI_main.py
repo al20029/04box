@@ -1,12 +1,11 @@
 """
-******************************************************
+*******************************************************************
 *** File Name       : UI_main.py
-*** Version         : V1.0
+*** Version         : V1.1
 *** Designer        : 佐藤 光
 *** Date            : 2022/06/14
-*** Purpose         : Windowを表示しその戻り値をもとに他のコンポーネント、OSとやり取りをする
-*** 
-******************************************************
+*** Purpose         : 通常計測，定期計測の二つに分けて，処理を行う．
+*******************************************************************
 """
 
 from DisplayStartWindow import DisplayStartWindow
@@ -17,18 +16,43 @@ from DisplayRegularFinishWindow import DisplayRegularFinishWindow
 from InteractWithOS import InteractWithOS
 from Data import Data
 
+"""
+*******************************************************************
+*** Class Name      : UIMainProcess
+*** Designer        : 佐藤 光
+*** Date            : 2022/06/14
+*** Purpose         : 通常計測，定期計測の二つに分けて，処理を行う．
+*******************************************************************
+"""
+
 class UIMainProcess:
+    
     def __init__(self):
         print("hello")
+
+    """
+    *******************************************************************
+    *** Function Name   : Always
+    *** Designer        : 佐藤 光
+    *** Date            : 2022/06/14
+    *** Purpose         : 通常計測で行う処理をする. Windowを表示し
+                          その戻り値をもとに他のコンポーネントやOSとやり取りをする.
+    *******************************************************************
+    """
+
     def Always():
+
         list = []
         DataList =[]
         while len(list) == 0:
             list = InteractWithOS.GetWiFi()
-        print(1)
         a = Data()
         DataList.append(a)
-        get,WiFiName = DisplayStartWindow.StartWindow(list)
+        get,WiFiName, WiFiList = DisplayStartWindow.StartWindow(list)
+        list = []
+        list.extend(WiFiList)
+        if get == False:
+            return
         a.WiFiName = WiFiName
         list.remove(WiFiName)
         list.insert(0, WiFiName)
@@ -38,14 +62,12 @@ class UIMainProcess:
             if get == True:
                 if '接続されていません'in list:
                     list.remove('接続されていません')
-                get,WiFiName = DisplayFinishWindow.FinishWindow(list, DataList)
+                get, WiFiName, WiFiList = DisplayFinishWindow.FinishWindow(list, DataList)
+                list = []
+                list.extend(WiFiList)
                 list.remove(WiFiName)
                 list.insert(0, WiFiName)
-                print(WiFiName)
                 a = Data()
-                print("P1")
-                for data in (DataList):
-                    print(data.WiFiName)
                 for data in (DataList):
                     if data.WiFiName == WiFiName:
                         a = data
@@ -55,19 +77,17 @@ class UIMainProcess:
                     elif data == DataList[-1]:
                         a.WiFiName = WiFiName
                         DataList.append(a)
-                print("P2")
                 for data in (DataList):
                     print(data.WiFiName)
 
     """
     *******************************************************************
-    ***  Function Name  : Regular
-    ***  Version        : V1.0
-    ***  Designer       : 
-    ***  Date           : 2022.6.21
-    ***  Purpose       	: 
-    ***
-    *******************************************************************/
+    *** Function Name   : Regular
+    *** Designer        : 佐藤 光
+    *** Date            : 2022/06/14
+    *** Purpose         : 定期計測で行う処理をする。Windowを表示し
+                          その戻り値をもとに他のコンポーネント、OSとやり取りをする.
+    *******************************************************************
     """
 
     def Regular():

@@ -1,28 +1,39 @@
 """
-******************************************************
-*** File Name       : UI_main.py
-*** Version         : V1.0
+*******************************************************************
+*** File Name       : InteractWithOS.py
+*** Version         : V1.1
 *** Designer        : 佐藤 光
 *** Date            : 2022/06/14
-*** Purpose         : Wi-Fiの変更を行う。接続可能なWi-Fi名をlistとして取得する
-*** 
-******************************************************
+*** Purpose         : Wi-Fiの変更を行う。
+                      接続可能なWi-Fi名をlistとして取得する
+*******************************************************************
 """
+
 
 import subprocess
 import os
+import time
+
+"""
+*******************************************************************
+*** Class Name      : InteractWithOS
+*** Designer        : 佐藤 光
+*** Date            : 2022/06/14
+*** Purpose         : Wi-Fiの変更を行う。
+                      接続可能なWi-Fi名をlistとして取得する
+*******************************************************************
+"""
 
 class InteractWithOS:
 
     """
     *******************************************************************
-    ***  Function Name  : GetWiFi
-    ***  Version        : V1.0
-    ***  Designer       : 佐藤 光
-    ***  Date           : 2022.6.21
-    ***  Purpose       	: 接続可能なWi-Fi情報を取得する
-    ***
-    *******************************************************************/
+    *** Fuunction Name  : GetWiFi
+    *** Designer        : 佐藤 光
+    *** Date            : 2022/06/14
+    *** Function        : 接続可能なWi-Fi情報を取得する
+    *** Return          : String CanConnectWiFiName  接続可能なWiFi名
+    *******************************************************************
     """
 
     def GetWiFi():
@@ -40,6 +51,7 @@ class InteractWithOS:
         f = open("out_network.txt", "r")
         Result_network = f.read().splitlines()
             ######パターン2
+
         for s in Result_network:
             if 'SSID' in s:
                 List_network.append(s[9:].replace(' ', '').replace('  ', ''))
@@ -52,7 +64,7 @@ class InteractWithOS:
         with open('out_profiles.txt', 'w') as pfp:
             subprocess.run('netsh wlan show profiles', stdout = pfp, env = _env, shell = True)
             ######パターン1
-        f = open("out_profiles.txt", "r")
+        f = open("out_profiles.txt","r")
         Result_profiles = f.read().splitlines()
             ######パターン2
         for s in Result_profiles:
@@ -81,15 +93,16 @@ class InteractWithOS:
             elif '    プロファイル           : ' in s:
                 ConnectingWiFiName = s[23:].replace(' ', '').replace('  ', '')
                 break
-        print("Connecting")
+        print("Connecting_InteractWithOS")
         print(ConnectingWiFiName)
-        print("CanConnect")
 
         #接続可能なネットワーク検索
         for lp in List_profiles:
             for ln in List_network:
                 if ln == lp:
                     CanConnectWiFiName.append(ln)
+        print("CanConnect_IntereactWithOS")
+        print(CanConnectWiFiName)
         if len(ConnectingWiFiName) == 0:
             print("選ばれたのは")
             print(CanConnectWiFiName)
@@ -103,12 +116,10 @@ class InteractWithOS:
 
     """
     *******************************************************************
-    ***  Function Name  : ChangeWiFi
-    ***  Version        : V1.0
+    ***  Function Name  : ChangeWiFiName
     ***  Designer       : 佐藤 光
     ***  Date           : 2022.6.21
     ***  Purpose       	: Wi-Fiの変更を行う
-    ***
     *******************************************************************/
     """
 
@@ -117,11 +128,12 @@ class InteractWithOS:
 
         ######テキストベースのやり方
         _env = os.environ
-        subprocess.run('chcp 437', env = _env, shell = True)
-
         command = 'netsh wlan connect name=' + ChangeWiFiName
         Result_change = subprocess.run(command, env = _env, shell = True)
         while Result_change == None:
             print("未接続")
             Result_change = subprocess.run('netsh wlan show interface', env = _env, shell = True)
+
+        time.sleep(10)
+        
         return Result_change

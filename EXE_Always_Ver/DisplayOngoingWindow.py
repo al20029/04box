@@ -1,7 +1,7 @@
 """
 *******************************************************************
 ***  File Name      : DisplayOngoingWindow.py
-***  Version        : V1.0
+***  Version        : V1.1
 ***  Designer       : 太田峻輔
 ***  Date           : 2022.6.14
 ***  Purpose       	: 計測中画面，グラフを表示する.
@@ -25,7 +25,6 @@ color_list = ["r", "b", "g", "y", "m", "c", "k"]
 """
 *******************************************************************
 ***  Class Name     : DisplayOngoingWindow
-***  Version        : V1.0
 ***  Designer       : 太田峻輔
 ***  Date           : 2022.6.14
 ***  Purpose       	: 計測中画面，グラフを表示する.
@@ -38,7 +37,6 @@ class DisplayOngoingWindow:
     """
     *******************************************************************
     ***  Function Name  : OngoingWindow
-    ***  Version        : V1.0
     ***  Designer       : 太田峻輔
     ***  Date           : 2022.6.21
     ***  Purpose       	: 計測中画面を定義する.

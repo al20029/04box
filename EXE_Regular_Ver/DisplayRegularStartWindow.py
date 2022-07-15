@@ -1,12 +1,12 @@
 """
-******************************************************
-*** File Name       :DisplayRegularStartWindow.py
-*** Version         :V1.0
-*** Designer        :佐藤 光
-*** Date            :2022/06/14
-*** Purpose         :定期計測中画面を表示し、ユーザの入力を受け取る
-*** 
-******************************************************
+*******************************************************************
+*** File Name       : DisplayRegularStartWindow.py
+*** Version         : V1.1
+*** Designer        : 佐藤 光
+*** Date            : 2022/06/14
+*** Purpose         : 定期計測中画面を表示し、
+                      ユーザの入力を受け取り、UI 処理部に返す. 
+*******************************************************************
 """
 
 import tkinter
@@ -18,16 +18,26 @@ import subprocess
 from ssh import ssh
 import os
 
+"""
+*******************************************************************
+*** Class Name      : DisplayRegularStartWindow
+*** Designer        : 佐藤 光
+*** Date            : 2022/06/14
+*** Purpose         : 定期計測中画面を表示し、
+                      ユーザの入力を受け取り、UI 処理部に返す. 
+*******************************************************************
+"""
+
 class DisplayRegularStartWindow:
 
     """
     *******************************************************************
     ***  Function Name  : RegularStartWindow
-    ***  Version        : V1.0
-    ***  Designer       : 
+    ***  Designer       : 佐藤 光
     ***  Date           : 2022.6.21
-    ***  Purpose       	: 
-    ***
+    ***  Purpose       	: 定期計測中画面を定義する.
+    ***  Return         : Bool Stop 計測中止かどうか
+                          String BestWiFiName 最適なWiFi名
     *******************************************************************/
     """
 

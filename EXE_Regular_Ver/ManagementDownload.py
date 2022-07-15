@@ -1,28 +1,35 @@
 """
 ******************************************************
-*** File Name       : ManagementDownload.py
-*** Version         : V1.0
-*** Designer        : 佐藤 光
-*** Date            : 2022/06/14
-*** Purpose         : MBのファイルをダウンロードする
-*** 
+*** File Name       :ManagementDownload.py
+*** Version         :V1.1
+*** Designer        :佐藤 光
+*** Date            :2022/06/14
+*** Purpose         :2MBのファイルをダウンロードする
 ******************************************************
 """
 
 import urllib.request
 
+"""
+******************************************************
+*** Class Name      :ManagementDownload
+*** Designer        :佐藤 光
+*** Date            :2022/06/14
+*** Purpose         :2MBのファイルをダウンロードする
+******************************************************
+"""
+
 class ManagementDownload:
 
     """
     *******************************************************************
-    ***  Function Name  : Download
-    ***  Version        : V1.0
-    ***  Designer       : 
-    ***  Date           : 2022.6.21
-    ***  Purpose       	: 
-    ***
-    *******************************************************************/
-    """
+    ***  Function Name      : Download
+    ***  Designer		    : 佐藤 光
+    ***  Date		        : 2022.07.01
+    ***  Function			: 2MBのファイルをダウンロードする
+    ***  Return      	    : Bool エラーのチェック
+    *******************************************************************
+    """ 
 
     def Donwload():
         try:

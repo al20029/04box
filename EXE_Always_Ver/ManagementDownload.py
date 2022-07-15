@@ -1,11 +1,10 @@
 """
 ******************************************************
 *** File Name       :ManagementDownload.py
-*** Version         :V1.0
+*** Version         :V1.1
 *** Designer        :佐藤 光
 *** Date            :2022/06/14
 *** Purpose         :2MBのファイルをダウンロードする
-*** 
 ******************************************************
 """
 
@@ -14,7 +13,6 @@ import urllib.request
 """
 ******************************************************
 *** Class Name      :ManagementDownload
-*** Version         :V1.0
 *** Designer        :佐藤 光
 *** Date            :2022/06/14
 *** Purpose         :2MBのファイルをダウンロードする
@@ -22,7 +20,6 @@ import urllib.request
 """
 
 class ManagementDownload:
-
 
     """
     *******************************************************************

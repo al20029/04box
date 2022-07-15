@@ -1,11 +1,11 @@
 """
 ******************************************************
 *** File Name       : DisplayRegularFinishWindow.py
-*** Version         : V1.0
+*** Version         : V1.1
 *** Designer        : 佐藤 光
 *** Date            : 2022/06/14
-*** Purpose         : 定期計測終了画面を表示し、ユーザの入力を受け取る
-*** 
+*** Purpose         : 定期計測終了画面を表示し，ユーザの入力を受け取り，
+                      UI 処理部に返す.
 ******************************************************
 """
 
@@ -15,12 +15,11 @@ from InteractWithOS import InteractWithOS
 
 """
 ******************************************************
-*** File Name       : DisplayRegularFinishWindow
-*** Version         : V1.0
+*** Class Name      : DisplayRegularFinishWindow
 *** Designer        : 佐藤 光
 *** Date            : 2022/06/14
-*** Purpose         : 定期計測終了画面を表示し、ユーザの入力を受け取る
-*** 
+*** Purpose         : 定期計測終了画面を表示し，ユーザの入力を受け取り，
+                      UI 処理部に返す.
 ******************************************************
 """
 
@@ -28,22 +27,18 @@ class DisplayRegularFinishWindow:
 
     """
     *******************************************************************
-    ***  Function Name  : RegularFinishWindow
-    ***  Version        : V1.0
-    ***  Designer       : 佐藤 光
-    ***  Date           : 2022.6.21
-    ***  Purpose       	: 
-    ***
+    *** Function Name  : RegularFinishWindow
+    *** Designer       : 佐藤 光
+    *** Date           : 2022.6.21
+    *** Purpose        : 定期計測終了画面を定義する.
     *******************************************************************/
     """
 
     def RegularFinishWindow(BestWiFiName):
         # click時のイベント
         def btn_click():
-            # messagebox.askyesno("wi-fi変更中", "停止しますか")
             InteractWithOS.ChangeWiFi(BestWiFiName)
             messagebox.showinfo("メッセージ", "Wi-Fi変更を終了しました")
-            # tki.quit()
             tki.destroy()
 
         # 画面作成
@@ -54,8 +49,8 @@ class DisplayRegularFinishWindow:
         tki.title('定期計測終了画面') # 画面タイトルの設定
 
         #題名表示
-        SystemName = tkinter.Label(text="計測終了", font=("MSゴシック", "30", "bold"))
-        SystemName.place(x=110, y=10)
+        SystemName = tkinter.Label(text = "計測終了", font = ("MSゴシック", "30", "bold"))
+        SystemName.place(x = 110, y = 10)
 
         #メッセージ表示
         SystemName = tkinter.Label(text = "最も最適なWi-Fiは", font = ("MSゴシック", "20"))
@@ -67,7 +62,7 @@ class DisplayRegularFinishWindow:
         msg = BestWiFiName
         SystemName = tkinter.Label(text = msg, font = ("MSゴシック", "30"))
         SystemName.place(x = 110, y = 130)
-        SystemName.pack(anchor = 'center',expand = 1)
+        SystemName.pack(anchor = 'center', expand = 1)
 
         # ボタンの作成
         btn = tkinter.Button(tki, text = 'Wi-Fi変更', width = 10, height = 2, command = btn_click, font = ("MSゴシック", "10"))

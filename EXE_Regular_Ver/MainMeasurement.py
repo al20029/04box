@@ -1,11 +1,10 @@
 """
 ******************************************************************
 ***  File Name		: MainMeasurement.py
-***  Version		: V1.0
+***  Version		: V1.1
 ***  Designer		: 池戸 陸
 ***  Date			: 2022.06.02
-***  Purpose        : 計測処理
-***
+***  Purpose        : 瞬間速度、平均速度、安定性を求め、UI処理部に返す.
 *******************************************************************
 *** Revision :
 *** V1.1 : 池戸陸, 2022.07.01
@@ -14,19 +13,26 @@
 import time
 from ManagementDownload import *
 from UpdateGraph import UpdateGraph
-from Data import Data
 import math
+
+"""
+*******************************************************************
+***  Class Name		    : MainMeasurement
+***  Designer		    : 池戸 陸
+***  Date		        : 2022.06.02
+***  Function			: 瞬間速度、平均速度、安定性を求め、UI処理部に返す.
+*******************************************************************
+"""
 
 class MainMeasurement:
 
     """
     *******************************************************************
-    ***  Function Name	    : InstantSpeed
+    ***  Function Name		: InstantSpeedMeasurement
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.06.12
     ***  Function			: 瞬間速度を計測する
-    ***  Return      	    : 瞬間速度
-    ***
+    ***  Return      	    : float 瞬間速度
     *******************************************************************
     """
 
@@ -35,28 +41,27 @@ class MainMeasurement:
 
     """
     *******************************************************************
-    ***  Function Name	    : AverageSpeed
+    ***  Function Name		: AverageSpeed
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.06.12
     ***  Function			: 平均速度を計測する
-    ***  Return      	    : 平均速度
-    ***
+    ***  Return      	    : float 平均速度
     *******************************************************************
     """
 
     def AverageSpeedMeasurement(InstantSpeed, FileGetNum):
         return sum(InstantSpeed) / FileGetNum
-
+  
     """
     *******************************************************************
-    ***  Function Name	    : StabilityEvaluation
+    ***  Function Name		: StabilityEvaluation
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.07.01
-    ***  Function			: 安定性の評価値を定める
-    ***  Return      	    : 評価値
-    ***
+    ***  Function			: 安定性指数を決定する．
+    ***  Return      	    : int 評価値
     *******************************************************************
     """
+
     def StabilityEvaluation(ev, stability):
         k = 0
         if(ev <= 4):
@@ -73,12 +78,11 @@ class MainMeasurement:
 
     """
     *******************************************************************
-    ***  Function Name	    : StabilityCalculation
+    ***  Function Name		: StabilityCalculation
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.07.01
-    ***  Function			: 安定性を計算する
-    ***  Return      	    : 安定性
-    ***
+    ***  Function			: 使用用途に応じた安定性を計算する.
+    ***  Return      	    : int 安定性
     *******************************************************************
     """ 
 
@@ -117,12 +121,12 @@ class MainMeasurement:
 
     """
     *******************************************************************
-    ***  Function Name	    : Measurement
+    ***  Function Name      : Measurement
     ***  Designer		    : 池戸 陸
     ***  Date		        : 2022.07.01
-    ***  Function			: メイン処理を行う
-    ***  Return      	    : 瞬間速度、平均速度、安定性
-    ***
+    ***  Function			: 計測時にダウンロード情報管理にファイルを要求し，
+                              瞬間速度を求める．
+    ***  Return      	    : float InstantSpeed 瞬間速度
     *******************************************************************
     """ 
 
@@ -139,22 +143,16 @@ class MainMeasurement:
         UpdateGraph.UpdateGraph(InstantSpeed[-1], data)
 
         return InstantSpeed
-
-#InstantSpeedが10個の瞬間速度のリスト
-#AverageSpeedが平均速度
-#Stabilityがメール、ネット、sns、動画視聴、オンラインゲームの5項目を1~5段階に数値化したリスト
-#ManagementDownloadとの結合テスト完了
-
+        
     """
     *******************************************************************
-    ***  Function Name  : cmpstability
-    ***  Version        : V1.0
-    ***  Designer       : 
-    ***  Date           : 2022.6.21
-    ***  Purpose       	: 
-    ***
-    *******************************************************************/
-    """
+    ***  Function Name      : CmpStability
+    ***  Designer		    : 池戸 陸
+    ***  Date		        : 2022.07.01
+    ***  Function			: 比較用の安定性を計算する．
+    ***  Return      	    : float stablevel 安定性のレベル
+    *******************************************************************
+    """  
 
     def cmpstability(InstantSpeed, FileGetNum):
         average = MainMeasurement.AverageSpeedMeasurement(InstantSpeed, FileGetNum)

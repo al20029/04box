@@ -1,7 +1,7 @@
 """
 ******************************************************************
 ***  File Name		: Tooltip.py
-***  Version		: V1.0
+***  Version		: V1.1
 ***  Designer		: 池戸 陸
 ***  Date			: 2022.06.21
 ***  Purpose        : ツールチップ処理
@@ -14,7 +14,7 @@ import tkinter as tk
 
 """
 *******************************************************************
-***  Class Name		: ToolTip
+***  Class Name		    : ToolTip
 ***  Designer		    : 池戸 陸
 ***  Date		        : 2022.06.21
 ***  Function			: ツールチップを表示する

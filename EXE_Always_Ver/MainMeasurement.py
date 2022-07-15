@@ -1,7 +1,7 @@
 """
 ******************************************************************
 ***  File Name		: MainMeasurement.py
-***  Version		: V1.0
+***  Version		: V1.1
 ***  Designer		: 池戸 陸
 ***  Date			: 2022.06.02
 ***  Purpose        : 瞬間速度、平均速度、安定性を求め、UI処理部に返す.
@@ -61,6 +61,7 @@ class MainMeasurement:
     ***  Return      	    : int 評価値
     *******************************************************************
     """
+
     def StabilityEvaluation(ev, stability):
         k = 0
         if(ev <= 4):
@@ -134,6 +135,7 @@ class MainMeasurement:
         FileGetNum = 1
         InstantSpeed = []
         InstantTime = time.time()
+        
         if ManagementDownload.Donwload() == False:
             return -1
         MeasurementTime = time.time() - InstantTime

@@ -1,7 +1,7 @@
 """
 *******************************************************************
 ***  File Name      : ManagementWiFi.py
-***  Version        : V1.0
+***  Version        : V1.1
 ***  Designer       : 荒川 塁唯
 ***  Date           : 2022.6.21
 ***  Purpose       	: 計測されたWi-Fi情報を管理する.
@@ -14,7 +14,6 @@ import datetime
 """
 *******************************************************************
 ***  Class Name     : ManagementWiFi
-***  Version        : V1.0
 ***  Designer       : 荒川 塁唯
 ***  Date           : 2022.6.21
 ***  Purpose       	: 計測されたWi-Fi情報を管理する.
@@ -122,9 +121,11 @@ class ManagementWiFi:
 
         # SQLite3を操作するカーソルの作成
         c = db.cursor()
+
         # データ検索
         for i in range(len(CanConnectWiFiName)):
             c.execute('SELECT * FROM items WHERE (MeasurementTime >= ?) AND (WiFiName == ?)', (MeasurementTime, CanConnectWiFiName[i]))
+            
             # 直近一時間の計測データの探索
             for row in c:
                 for j in range(len(CanConnectWiFiName)):
@@ -132,9 +133,11 @@ class ManagementWiFi:
                         SumAverageSpeed[j] = SumAverageSpeed[j] + row[1]
                         SumStability[j] = SumStability[j] + row[2]
                         count[j] = count[j] + 1
+       
         for k in range(len(CanConnectWiFiName)):
             if count[k] != 0:
                 BestAverageSpeed[k] = SumAverageSpeed[k] / count[k]
                 BestStability[k] = SumStability[k] / count[k]
                 print(CanConnectWiFiName[k], BestAverageSpeed[k], BestStability[k])
+     
         c.close()

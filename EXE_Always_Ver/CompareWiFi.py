@@ -26,7 +26,6 @@ class CompareWiFi():
     """
     *******************************************************************
     ***  Function Name  : CompareWiFi
-    ***  Version        : V1.1
     ***  Designer       : 太田 峻輔
     ***  Date           : 2022.6.21
     ***  Purpose       	: Wi-Fi情報管理から受け取った各Wi-Fiの代表値を比較し、
@@ -37,6 +36,7 @@ class CompareWiFi():
     """
 
     def CompareWiFi(WiFiList, MeasuredWiFiEval):
+        
         WiFiNames = list()
         AverageSpeeds = list()
         Stabilities = list()

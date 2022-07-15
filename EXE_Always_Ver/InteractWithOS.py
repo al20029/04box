@@ -17,7 +17,6 @@ import time
 """
 *******************************************************************
 *** Class Name      : InteractWithOS
-*** Version         : V1.1
 *** Designer        : 佐藤 光
 *** Date            : 2022/06/14
 *** Purpose         : Wi-Fiの変更を行う。
@@ -30,7 +29,6 @@ class InteractWithOS:
     """
     *******************************************************************
     *** Fuunction Name  : GetWiFi
-    *** Version         : V1.1
     *** Designer        : 佐藤 光
     *** Date            : 2022/06/14
     *** Function        : 接続可能なWi-Fi情報を取得する
@@ -119,11 +117,9 @@ class InteractWithOS:
     """
     *******************************************************************
     ***  Function Name  : ChangeWiFiName
-    ***  Version        : V1.1
     ***  Designer       : 佐藤 光
     ***  Date           : 2022.6.21
     ***  Purpose       	: Wi-Fiの変更を行う
-    ***
     *******************************************************************/
     """
 
